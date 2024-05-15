@@ -1,11 +1,11 @@
 'use client'
 
 import React, { useState } from 'react';
-import PricingToggle from "./_components/tab/tab"
+import PricingToggle from "../_components/tab/tab"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation';
-import PasswordInput from './_components/passwordInput/passInput';
+import PasswordInput from '../_components/passwordInput/passInput';
 
 export default function Login(){
 
@@ -47,7 +47,7 @@ export default function Login(){
   
       const userData = await response.json();
       setUserData(userData);
-      router.push('/home')
+      router.push('/tab')
     } catch (error) {
       console.error('Error logging in:', error);
     }
