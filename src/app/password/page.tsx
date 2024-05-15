@@ -70,7 +70,7 @@ export default function PinCode(){
       notify2();
 
       setTimeout(()=>{
-        router.push(`/home`)
+        router.push(`/tab`)
       }, 3000)
   
     } catch (error) {
