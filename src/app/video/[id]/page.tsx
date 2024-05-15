@@ -26,7 +26,13 @@ export default  function Video({ params }: { params: { id: string } }) {
 
   const fetchVideoData = async () => {
     try {
-      const response = await fetch(`https://90c6-2804-14c-7582-5093-4765-a75d-5a26-5e1a.ngrok-free.app/videos/${params.id}`);
+      const response = await fetch(`https://1ad6-2804-14c-7582-5093-4765-a75d-5a26-5e1a.ngrok-free.app/videos/${params.id}`,{
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          "ngrok-skip-browser-warning": "69420"
+        },
+      });
       if (!response.ok) {
         throw new Error('Failed to fetch video');
       }

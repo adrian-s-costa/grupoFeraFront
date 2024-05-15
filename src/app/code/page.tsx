@@ -44,10 +44,11 @@ export default function PinCode(){
 
   const verifyPinCode = async (e: string) => {    
     try {
-      const response = await fetch(`https://90c6-2804-14c-7582-5093-4765-a75d-5a26-5e1a.ngrok-free.app/auth/check-code`, {
+      const response = await fetch(`https://1ad6-2804-14c-7582-5093-4765-a75d-5a26-5e1a.ngrok-free.app/auth/check-code`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          "ngrok-skip-browser-warning": "69420"
         },
         body: JSON.stringify({ code: e, credential: email })
       });

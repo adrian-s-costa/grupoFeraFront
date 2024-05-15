@@ -32,10 +32,11 @@ export default function Login(){
   const postUser = async (e: any) => {
     e.preventDefault();
     try {
-      const response = await fetch(`https://90c6-2804-14c-7582-5093-4765-a75d-5a26-5e1a.ngrok-free.app/auth/login`, {
+      const response = await fetch(`https://1ad6-2804-14c-7582-5093-4765-a75d-5a26-5e1a.ngrok-free.app/auth/login`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          "ngrok-skip-browser-warning": "69420"
         },
         body: JSON.stringify(loginInfo)
       });
@@ -57,10 +58,11 @@ export default function Login(){
     e.preventDefault();
 
     try {
-      const response = await fetch(`https://90c6-2804-14c-7582-5093-4765-a75d-5a26-5e1a.ngrok-free.app/auth/forgot-password`, {
+      const response = await fetch(`https://1ad6-2804-14c-7582-5093-4765-a75d-5a26-5e1a.ngrok-free.app/auth/forgot-password`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          "ngrok-skip-browser-warning": "69420"
         },
         body: JSON.stringify(registerInfo)
       });
@@ -81,10 +83,11 @@ export default function Login(){
 
   const forgotPassword = async () => {
     try {
-      const response = await fetch(`https://90c6-2804-14c-7582-5093-4765-a75d-5a26-5e1a.ngrok-free.app/auth/forgot-password`, {
+      const response = await fetch(`https://1ad6-2804-14c-7582-5093-4765-a75d-5a26-5e1a.ngrok-free.app/auth/forgot-password`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          "ngrok-skip-browser-warning": "69420"
         },
         body: JSON.stringify({credential: loginInfo.credential, register: false})
       });
