@@ -14,7 +14,10 @@ export default function Thumbs({props}: any){
           alt={props.name}
           className="w-full bg-slate-300 h-[240px]"></Image>
         <div className="p-5 flex">
-          <div className="rounded-full w-[40px] h-[40px] bg-slate-300 mr-4"></div>
+          <div
+            className={`rounded-full w-[2.5rem] h-[2.5rem] bg-cover mr-4`}
+            style={{ backgroundImage: `url(https://res.cloudinary.com/dmo7nzytn/image/upload/v1715983820/felipe_fera_to4xne.jpg)` }}
+          />
           <div className="flex flex-col">
             <span>{props.name}</span>
             <span className="text-xs text-[#6C6C6C]">{props.views} views</span>

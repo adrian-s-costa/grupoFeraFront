@@ -7,12 +7,27 @@ import Profile from "../profile/page";
 import { LuAirplay, LuHeart } from "react-icons/lu";
 import { IoPersonOutline } from "react-icons/io5";
 import { RiHome5Line } from "react-icons/ri";
-
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useSearchParams } from 'next/navigation'
 
 
 export default function HomeTab(){
+
+  const router = useRouter();
+
+  const searchParams = useSearchParams()
+ 
+  const options = searchParams.get('options')
+
+  useEffect(()=>{
+    localStorage.theme = 'light'
+    if (!localStorage.getItem('token')) return router.push('/login')
+  }, [])
+
+
   return(
-    <Tabs>
+    <Tabs defaultIndex={options ? Number(options) : 0 }>
       <TabPanels>
         <TabPanel>
           <Home/>

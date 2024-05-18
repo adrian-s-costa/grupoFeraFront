@@ -1,11 +1,12 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PricingToggle from "../_components/tab/tab"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation';
 import PasswordInput from '../_components/passwordInput/passInput';
+import { config } from '../../../config';
 
 export default function Login(){
 
@@ -15,7 +16,11 @@ export default function Login(){
   const [userData, setUserData] = useState<any>(null)
   const [error, setError] = useState<boolean>(false)
 
-  const router = useRouter(); 
+  const router = useRouter();
+
+  useEffect(()=>{
+    localStorage.clear()
+  }, [])
 
   const notify = () => toast.error('Credenciais inválidas tente novamente', {
     position: "bottom-right",
@@ -32,7 +37,7 @@ export default function Login(){
   const postUser = async (e: any) => {
     e.preventDefault();
     try {
-      const response = await fetch(`https://1ad6-2804-14c-7582-5093-4765-a75d-5a26-5e1a.ngrok-free.app/auth/login`, {
+      const response = await fetch(`${config.API_URL}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -47,8 +52,17 @@ export default function Login(){
       }
   
       const userData = await response.json();
+
+      console.log(userData);
+
+      localStorage.setItem('user', userData.account.name)
+      localStorage.setItem('token', userData.token)
+      localStorage.setItem('id', userData.account.id)
+      localStorage.setItem('email', userData.account.email)
+
       setUserData(userData);
-      router.push('/tab')
+
+      router.push( userData.account.name == "Sem Nome" ? '/user-info' : '/tab')
     } catch (error) {
       console.error('Error logging in:', error);
     }
@@ -58,7 +72,7 @@ export default function Login(){
     e.preventDefault();
 
     try {
-      const response = await fetch(`https://1ad6-2804-14c-7582-5093-4765-a75d-5a26-5e1a.ngrok-free.app/auth/forgot-password`, {
+      const response = await fetch(`${config.API_URL}/auth/forgot-password`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -83,7 +97,7 @@ export default function Login(){
 
   const forgotPassword = async () => {
     try {
-      const response = await fetch(`https://1ad6-2804-14c-7582-5093-4765-a75d-5a26-5e1a.ngrok-free.app/auth/forgot-password`, {
+      const response = await fetch(`${config.API_URL}/auth/forgot-password`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

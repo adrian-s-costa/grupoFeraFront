@@ -3,10 +3,10 @@
 import React, { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { HStack, PinInput, PinInputField } from '@chakra-ui/react'
 import { MdArrowBackIos } from "react-icons/md";
 import { useRouter, useSearchParams } from 'next/navigation';
 import PasswordInput from '../_components/passwordInput/passInput';
+import { config } from '../../../config';
 
 
 
@@ -48,14 +48,12 @@ export default function PinCode(){
 
     e.preventDefault();
 
-    console.log(passwordInfo)
-
     if (passwordInfo.first !== passwordInfo.second){
       return notify('As senhas não coincidem')
     }
 
     try {
-      const response = await fetch(`https://1ad6-2804-14c-7582-5093-4765-a75d-5a26-5e1a.ngrok-free.app/auth/reset-password`, {
+      const response = await fetch(`${config.API_URL}/auth/reset-password`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -40,7 +40,10 @@ export default function Streaming(){
       <div className="flex gap-4">
         <GoBell className="text-2xl "/>
         <GoSearch className="text-2xl" />
-        <div className="rounded-full w-[30px] h-[30px] bg-slate-300"></div>
+        <div
+          className={`rounded-full w-[1.875rem] h-[1.875rem] bg-cover`}
+          style={{ backgroundImage: `url(https://res.cloudinary.com/dmo7nzytn/image/upload/v1715983820/felipe_fera_to4xne.jpg)` }}
+        ></div>
       </div>
     </div>
     <div className="h-[40px] bg-[#ECECEC] flex items-center px-2">

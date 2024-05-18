@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { HStack, PinInput, PinInputField } from '@chakra-ui/react'
 import { MdArrowBackIos } from "react-icons/md";
 import { useRouter, useSearchParams } from 'next/navigation';
+import { config } from '../../../config';
 
 
 
@@ -44,7 +45,7 @@ export default function PinCode(){
 
   const verifyPinCode = async (e: string) => {    
     try {
-      const response = await fetch(`https://1ad6-2804-14c-7582-5093-4765-a75d-5a26-5e1a.ngrok-free.app/auth/check-code`, {
+      const response = await fetch(`${config.API_URL}/auth/check-code`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -81,11 +82,11 @@ export default function PinCode(){
       <form>
         <HStack className='w-full flex justify-between mt-5'>
           <PinInput autoFocus onComplete={(e)=>{verifyPinCode(e)}}>
-            <PinInputField className='h-[4.5rem] w-[4.38rem] border-solid border-[#D8DADC] border-[1px] text-center items-center rounded-md text-4xl' />
-            <PinInputField className='h-[4.5rem] w-[4.38rem] border-solid border-[#D8DADC] border-[1px] text-center items-center rounded-md text-4xl' />
-            <PinInputField className='h-[4.5rem] w-[4.38rem] border-solid border-[#D8DADC] border-[1px] text-center items-center rounded-md text-4xl' />
-            <PinInputField className='h-[4.5rem] w-[4.38rem] border-solid border-[#D8DADC] border-[1px] text-center items-center rounded-md text-4xl' />
-            <PinInputField className='h-[4.5rem] w-[4.38rem] border-solid border-[#D8DADC] border-[1px] text-center items-center rounded-md text-4xl' />
+            <PinInputField className='h-[4.5rem] w-[4rem] border-solid border-[#D8DADC] border-[1px] text-center items-center rounded-md text-4xl' />
+            <PinInputField className='h-[4.5rem] w-[4rem] border-solid border-[#D8DADC] border-[1px] text-center items-center rounded-md text-4xl' />
+            <PinInputField className='h-[4.5rem] w-[4rem] border-solid border-[#D8DADC] border-[1px] text-center items-center rounded-md text-4xl' />
+            <PinInputField className='h-[4.5rem] w-[4rem] border-solid border-[#D8DADC] border-[1px] text-center items-center rounded-md text-4xl' />
+            <PinInputField className='h-[4.5rem] w-[4rem] border-solid border-[#D8DADC] border-[1px] text-center items-center rounded-md text-4xl' />
           </PinInput>
         </HStack>
       </form>
