@@ -146,8 +146,8 @@ export default  function Video({ params }: { params: { id: string } }) {
 
   return (
     <div className="w-full h-screen bg-white dark:bg-black relative overflow-y-hidden">
-      <video width={viewportWidth} height={(viewportWidth / 16) * 9} controls={true} autoPlay={true} muted={true}>
-        {video && <source src={`https://www.googleapis.com/drive/v3/files/${video.url}?alt=media&key=AIzaSyCxKxuTY52AIdq_Lni80Ja9bdTnwBQHfSg`} type="video/mp4"/>}
+      <video width={viewportWidth} height={(viewportWidth / 16) * 9} controls={true} autoPlay={true} muted={true} playsInline>
+        {video && <source src={video.url} type="video/mp4"/>}
         Seu navegador não suporta o vídeo
       </video>
       <div className="w-full p-5 min-h-full h-auto ">

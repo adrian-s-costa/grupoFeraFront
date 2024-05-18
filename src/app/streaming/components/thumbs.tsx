@@ -12,7 +12,7 @@ export default function Thumbs({props}: any){
           width={1000}
           height={700} 
           alt={props.name}
-          className="w-full bg-slate-300 h-[240px]"></Image>
+          className="w-full bg-slate-300 h-auto"></Image>
         <div className="p-5 flex">
           <div
             className={`rounded-full w-[2.5rem] h-[2.5rem] bg-cover mr-4`}

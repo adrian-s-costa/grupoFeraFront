@@ -28,7 +28,7 @@ export default function Home(){
       <h1 className="text-3xl font-bold dark:text-white">Fala, Nome</h1>
       <span className="dark:text-white">Ou devo te chamar de Fera?</span>
       <div className="my-5 h-auto relative">
-        <video className="rounded-lg" width={viewportWidth} autoPlay={true} muted={true} loop={true} controls={false} preload="true">
+        <video className="rounded-lg" width={viewportWidth} autoPlay={true} muted={true} loop={true} controls={false} playsInline>
           <source src={`https://res.cloudinary.com/dmo7nzytn/video/upload/v1715727314/fera_hv10wj.mp4`} type="video/mp4"/>  
         </video>
         <div className="absolute bg-gray-400/50 p-2 rounded-md bottom-4 left-4 z-10">
