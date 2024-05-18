@@ -7,8 +7,7 @@ import { MdArrowBackIos } from "react-icons/md";
 import { useRouter, useSearchParams } from 'next/navigation';
 import PasswordInput from '../_components/passwordInput/passInput';
 import { config } from '../../../config';
-
-
+import Loader from '../loader/page';
 
 export default function PinCode(){
 
@@ -17,6 +16,7 @@ export default function PinCode(){
   const searchParams = useSearchParams()
   const email = searchParams.get('email')
   const [passwordInfo, setPasswordInfo] = useState<any>({first: "", second: ""})
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     setRegisterInfo({...registerInfo, credential: email})
@@ -45,10 +45,12 @@ export default function PinCode(){
   });
 
   const verifyPassword = async (e: any) => {
+    setLoading(true);
 
     e.preventDefault();
 
     if (passwordInfo.first !== passwordInfo.second){
+      setLoading(false);
       return notify('As senhas não coincidem')
     }
 
@@ -63,35 +65,38 @@ export default function PinCode(){
       });
   
       if (!response.ok) {
+        setLoading(false);
         throw new Error('Failed to log in');
       }
 
       notify2();
 
       setTimeout(()=>{
+        setLoading(false);
         router.push(`/tab`)
-      }, 3000)
+      }, 1000)
   
     } catch (error) {
+      setLoading(false);
       console.error('Error logging in:', error);
     }
   };
   
   return (
-    <div className="w-full h-screen bg-white p-5">
+    <>{loading ? <Loader /> : null}<div className="w-full h-screen bg-white p-5">
 
-      <MdArrowBackIos className='text-2xl cursor-pointer' onClick={()=>{router.back()}}/>
+      <MdArrowBackIos className='text-2xl cursor-pointer' onClick={() => { router.back(); } } />
 
-      <h1 className="text-3xl font-bold mb-2 mt-[2.5rem]">Criar uma senha</h1>   
-      
+      <h1 className="text-3xl font-bold mb-2 mt-[2.5rem]">Criar uma senha</h1>
+
       <span className='text-sm text-[#838383]'>Para proteger melhor a segurança da sua conta, crie uma senha para {email}</span>
-      <form onSubmit={(e)=>{verifyPassword(e)}} className='mt-5'>
-        <div className="grid gap-6 md:grid-cols-2">  
+      <form onSubmit={(e) => { verifyPassword(e); } } className='mt-5'>
+        <div className="grid gap-6 md:grid-cols-2">
           <div>
-            <PasswordInput setPasswordInfo={setPasswordInfo} passwordInfo={passwordInfo} specificVar={'first'}/>
+            <PasswordInput setPasswordInfo={setPasswordInfo} passwordInfo={passwordInfo} specificVar={'first'} />
           </div>
           <div>
-            <PasswordInput setPasswordInfo={setPasswordInfo} passwordInfo={passwordInfo} specificVar={'second'}/>
+            <PasswordInput setPasswordInfo={setPasswordInfo} passwordInfo={passwordInfo} specificVar={'second'} />
           </div>
         </div>
         <button type="submit" className="text-white mt-5 h-10 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Entrar</button>
@@ -107,10 +112,8 @@ export default function PinCode(){
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="light"
-      />
-
-    </div>
+        theme="light" />
+    </div></>
   );
 }  
 

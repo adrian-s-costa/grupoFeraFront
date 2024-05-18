@@ -46,6 +46,28 @@ export default  function Video({ params }: { params: { id: string } }) {
 
   const userName = localStorage.getItem('user')
 
+  const handleContact = async () => {
+    if (contact) return null;
+    setContact(true);
+    try {
+      const response = await fetch(`${config.API_URL}/videos/${params.id}/contact`,{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          "ngrok-skip-browser-warning": "69420"
+        },
+        body: JSON.stringify({ name: userName, email: localStorage.getItem("email"), number: localStorage.getItem('number'), message: `${localStorage.getItem("user")} se interessou pelo vídeo: ${video?.name} Disponivel em: ${video?.url}` })
+      });
+      if (!response.ok) {
+        throw new Error('Failed to fetch video');
+      }
+      const responseData = await response.json();
+      notify();
+    } catch (error) {
+      console.error('Error fetching video:', error);
+    }
+  }
+
   const handleLike = async (action: string) => {
     try {
       const response = await fetch(`${config.API_URL}/videos/${params.id}/like/${action}`,{
@@ -176,7 +198,7 @@ export default  function Video({ params }: { params: { id: string } }) {
             <FiThumbsDown className="text-2xl mb-1 mt-5 cursor-pointer"/>
             <span>{video && video.dislikes}</span>
           </div>
-          <div className={`flex items-center flex-col ${contact ? 'text-green-500' : 'text-black'}`} onClick={()=>{setContact(true); if (!contact) notify()}}>
+          <div className={`flex items-center flex-col ${contact ? 'text-green-500' : 'text-black'}`} onClick={()=>{handleContact();}}>
             <FaWhatsapp  className="text-2xl mb-1 mt-5 cursor-pointer"/>
             <span>Tenho interesse</span>
           </div>

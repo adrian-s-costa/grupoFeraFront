@@ -7,14 +7,14 @@ import { HStack, PinInput, PinInputField } from '@chakra-ui/react'
 import { MdArrowBackIos } from "react-icons/md";
 import { useRouter, useSearchParams } from 'next/navigation';
 import { config } from '../../../config';
-
-
+import Loader from '../loader/page';
 
 export default function PinCode(){
 
   const [registerInfo, setRegisterInfo] = useState<any>({credential: "", code: "", password: "123456789", confirmPassword: "123456789"})
   const router = useRouter();
   const searchParams = useSearchParams()
+  const [loading, setLoading] = useState<boolean>(false)
   const email = searchParams.get('email')
 
   useEffect(() => {
@@ -43,7 +43,8 @@ export default function PinCode(){
     theme: "light",
   });
 
-  const verifyPinCode = async (e: string) => {    
+  const verifyPinCode = async (e: string) => {
+    setLoading(true) 
     try {
       const response = await fetch(`${config.API_URL}/auth/check-code`, {
         method: 'POST',
@@ -55,6 +56,7 @@ export default function PinCode(){
       });
   
       if (!response.ok) {
+        setLoading(false)
         notify()
         throw new Error('Failed to log in');
       }
@@ -62,26 +64,25 @@ export default function PinCode(){
       notify2();
 
       setTimeout(()=>{
+        setLoading(false)
         router.push(`/password?email=${email}`)
       }, 3000)
-      
+
     } catch (error) {
+      setLoading(false)
       console.error('Error logging in:', error);
     }
   };
   
   return (
-    <div className="w-full h-screen bg-white p-5">
-
-      <MdArrowBackIos className='text-2xl cursor-pointer' onClick={()=>{router.back()}}/>
-
-      <h1 className="text-3xl font-bold mb-2 mt-[2.5rem]">Código Validação</h1>   
-      
+    <>{loading ? <Loader /> : null }<div className="w-full h-screen bg-white p-5">
+      <MdArrowBackIos className='text-2xl cursor-pointer' onClick={() => { router.back(); } } />
+      <h1 className="text-3xl font-bold mb-2 mt-[2.5rem]">Código Validação</h1>
       <span className='text-sm text-[#838383]'>Enviamos um código de ativação para o seu email {email}</span>
-    
+
       <form>
         <HStack className='w-full flex justify-between mt-5'>
-          <PinInput autoFocus onComplete={(e)=>{verifyPinCode(e)}}>
+          <PinInput autoFocus onComplete={(e) => { verifyPinCode(e); } }>
             <PinInputField className='h-[4.5rem] w-[4rem] border-solid border-[#D8DADC] border-[1px] text-center items-center rounded-md text-4xl' />
             <PinInputField className='h-[4.5rem] w-[4rem] border-solid border-[#D8DADC] border-[1px] text-center items-center rounded-md text-4xl' />
             <PinInputField className='h-[4.5rem] w-[4rem] border-solid border-[#D8DADC] border-[1px] text-center items-center rounded-md text-4xl' />
@@ -101,9 +102,8 @@ export default function PinCode(){
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="light"
-      />
+        theme="light" />
 
-    </div>
+    </div></>
   );
 }  
