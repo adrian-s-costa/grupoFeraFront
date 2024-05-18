@@ -20,25 +20,24 @@ export default function Carousel() {
   const pages = [
     {
       id: 1,
-      imageUrl: <Image className="w-full" src={image1} alt={"intro"} width={428} height={545} ></Image>,
+      imageUrl: image3,
       title: 'Conecte-se com pessoas incriveis'
     },
     {
       id: 2,
-      imageUrl: <Image className="w-full" src={image2} alt={"intro"} width={428} height={545} ></Image>,
+      imageUrl: image2,
       title: 'Faça compras inteligentes'
     },
     {
       id: 3,
-      imageUrl: <Image className="w-full" src={image3} alt={"intro"} width={428} height={545} ></Image>,
+      imageUrl: image1,
       title: 'E aproveite benefícios exclusivos que só nossos membros tem acesso'
     }
   ]
   
-
   return (
     <div className="h-screen w-full bg-[#202226] relative">
-      {pages[counter].imageUrl}
+      <Image className="w-full" src={pages[counter].imageUrl} alt={"intro"} width={428} height={545} ></Image>
       <p className="text-white text-[1.8rem] font-bold mt-10 ml-5">{pages[counter].title}</p>
       
       <div className="flex ml-5 gap-2 mt-5">
