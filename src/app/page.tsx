@@ -37,7 +37,7 @@ export default function Carousel() {
   
   return (
     <div className="h-screen w-full bg-[#202226] relative">
-      <Image className="w-full" src={pages[counter].imageUrl} alt={"intro"} width={428} height={545} ></Image>
+      {counter == 0 ? <Image priority={true} className="w-full" src={image3} alt={"intro"} width={428} height={545}></Image> : counter == 1 ? <Image className="w-full" priority={true} src={image2} alt={"intro"} width={428} height={545}></Image> : <Image priority={true} className="w-full" src={image1} alt={"intro"} width={428} height={545}></Image>}
       <p className="text-white text-[1.8rem] font-bold mt-10 ml-5">{pages[counter].title}</p>
       
       <div className="flex ml-5 gap-2 mt-5">
