@@ -4,6 +4,9 @@ import { IoIosArrowForward } from "react-icons/io";
 import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import image1 from "../assets/intro1.png"
+import image2 from "../assets/intro2.png"
+import image3 from "../assets/intro3.png"
 
 export default function Carousel() {
 
@@ -17,17 +20,17 @@ export default function Carousel() {
   const pages = [
     {
       id: 1,
-      imageUrl: <Image className="w-full" src={"https://res.cloudinary.com/dmo7nzytn/image/upload/v1715983918/intro3_o1hr9c.png"} alt={"intro"} width={428} height={545} ></Image>,
+      imageUrl: <Image className="w-full" src={image1} alt={"intro"} width={428} height={545} ></Image>,
       title: 'Conecte-se com pessoas incriveis'
     },
     {
       id: 2,
-      imageUrl: <Image className="w-full" src={"https://res.cloudinary.com/dmo7nzytn/image/upload/v1715983918/intro2_cr0hhy.png"} alt={"intro"} width={428} height={545} ></Image>,
+      imageUrl: <Image className="w-full" src={image2} alt={"intro"} width={428} height={545} ></Image>,
       title: 'Faça compras inteligentes'
     },
     {
       id: 3,
-      imageUrl: <Image className="w-full" src={ "https://res.cloudinary.com/dmo7nzytn/image/upload/v1715983918/intro1_lfezp0.png"} alt={"intro"} width={428} height={545} ></Image>,
+      imageUrl: <Image className="w-full" src={image3} alt={"intro"} width={428} height={545} ></Image>,
       title: 'E aproveite benefícios exclusivos que só nossos membros tem acesso'
     }
   ]
