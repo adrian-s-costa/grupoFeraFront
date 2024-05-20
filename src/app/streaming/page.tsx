@@ -38,8 +38,8 @@ export default function Streaming(){
       ></Image>
 
       <div className="flex gap-4">
-        <GoBell className="text-2xl "/>
-        <GoSearch className="text-2xl" />
+        <GoBell className="text-2xl dark:text-black"/>
+        <GoSearch className="text-2xl dark:text-black" />
         <div
           className={`rounded-full w-[1.875rem] h-[1.875rem] bg-cover`}
           style={{ backgroundImage: `url(https://res.cloudinary.com/dmo7nzytn/image/upload/v1715983820/felipe_fera_to4xne.jpg)` }}
@@ -48,17 +48,15 @@ export default function Streaming(){
     </div>
     <div className="h-[40px] bg-[#ECECEC] flex items-center px-2">
       <div className="flex items-center overflow-x-scroll w-auto">
-        <IoCompassOutline className="text-6xl"></IoCompassOutline>
-        <span className="ml-2 font-semibold">Explorar</span>
+        <IoCompassOutline className="text-6xl dark:text-black"></IoCompassOutline>
+        <span className="ml-2 font-semibold dark:text-black">Explorar</span>
 
         <div className="border-r-2 border-[#CECECE] mx-2"/>
 
         <div className="overflow-x-scroll flex gap-4 w-auto items-center">
-          <button className="border-2 border-[#CECECE] rounded-full w-auto whitespace-nowrap px-5">Todos</button>
-          <button className="border-2 border-[#CECECE] rounded-full w-auto whitespace-nowrap px-5">Baterias</button>
-          <button className="border-2 border-[#CECECE] rounded-full w-auto whitespace-nowrap px-5">Peças reposição</button>
-          <button className="border-2 border-[#CECECE] rounded-full w-auto whitespace-nowrap px-5">Peças reposição</button>
-          <button className="border-2 border-[#CECECE] rounded-full w-auto whitespace-nowrap px-5">Peças reposição</button>
+          <button className="border-2 border-[#CECECE] rounded-full w-auto whitespace-nowrap px-5 dark:text-black">Todos</button>
+          <button className="border-2 border-[#CECECE] rounded-full w-auto whitespace-nowrap px-5 dark:text-black">Baterias</button>
+          <button className="border-2 border-[#CECECE] rounded-full w-auto whitespace-nowrap px-5 dark:text-black">Peças reposição</button>
         </div>
       </div>
     </div>

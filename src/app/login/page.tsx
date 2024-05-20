@@ -57,6 +57,8 @@ export default function Login(){
   
       const userData = await response.json();
 
+      console.log(userData);
+
       localStorage.setItem('user', userData.account.name)
       localStorage.setItem('token', userData.token)
       localStorage.setItem('id', userData.account.id)
@@ -134,7 +136,7 @@ export default function Login(){
   
   return (
     <>{ loading ? <Loader/> : null }<div className="w-full h-screen bg-white p-5">
-      <h1 className="text-3xl font-bold mb-4">{isAnnual ? "Entrar" : "Registrar"}</h1>
+      <h1 className="text-3xl font-bold mb-4 dark:text-black">{isAnnual ? "Entrar" : "Registrar"}</h1>
       <PricingToggle isAnnual={isAnnual} setIsAnnual={setIsAnnual} />
       {isAnnual ? (
         <form onSubmit={(e) => { postUser(e); } }>
@@ -149,7 +151,7 @@ export default function Login(){
             </div>
           </div>
           <div className='w-full flex justify-end'>
-            <span className="pt-2 text-sm cursor-pointer font-medium" onClick={() => { forgotPassword(); } }>Esqueceu a senha?</span>
+            <span className="pt-2 text-sm cursor-pointer font-medium dark:text-black" onClick={() => { forgotPassword(); } }>Esqueceu a senha?</span>
           </div>
           <button type="submit" className="text-white mt-5 h-10 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Entrar</button>
         </form>

@@ -87,7 +87,7 @@ export default function PinCode(){
 
       <MdArrowBackIos className='text-2xl cursor-pointer' onClick={() => { router.back(); } } />
 
-      <h1 className="text-3xl font-bold mb-2 mt-[2.5rem]">Criar uma senha</h1>
+      <h1 className="text-3xl font-bold mb-2 mt-[2.5rem] dark:text-black">Criar uma senha</h1>
 
       <span className='text-sm text-[#838383]'>Para proteger melhor a segurança da sua conta, crie uma senha para {email}</span>
       <form onSubmit={(e) => { verifyPassword(e); } } className='mt-5'>

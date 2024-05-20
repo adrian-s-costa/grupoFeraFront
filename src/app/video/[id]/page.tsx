@@ -174,9 +174,9 @@ export default  function Video({ params }: { params: { id: string } }) {
       </video>
       <div className="w-full p-5 min-h-full h-auto ">
         <div className="flex flex-col">
-          {video && <span className="font-semibold text-lg">{video.name}</span>}
+          {video && <span className="font-semibold text-lg dark:text-black">{video.name}</span>}
           <span className="text-xs text-[#6C6C6C]">{video && video.views} views</span>
-          <span className="text-xs text-black mt-4">{video && video.description}</span>
+          <span className="text-xs text-black mt-4 dark:text-black">{video && video.description}</span>
         </div>
         <div className="w-full flex justify-around">
           <div className="flex items-center flex-col">
@@ -187,16 +187,16 @@ export default  function Video({ params }: { params: { id: string } }) {
               }}
             /> 
             :
-            <IoMdThumbsUp className={`text-[1.60rem] mb-1 mt-5 cursor-pointer`} 
+            <IoMdThumbsUp className={`text-[1.60rem] mb-1 mt-5 cursor-pointer dark:text-black`} 
               onClick={()=>{
                 handleLike('remove')
               }}
             />}
-            <span>{video && video.likes + (like ? 1 : 0)}</span>
+            <span className="dark:text-black">{video && video.likes + (like ? 1 : 0)}</span>
           </div>
           <div className="flex items-center flex-col">
-            <FiThumbsDown className="text-2xl mb-1 mt-5 cursor-pointer"/>
-            <span>{video && video.dislikes}</span>
+            <FiThumbsDown className="text-2xl mb-1 mt-5 cursor-pointer dark:text-black"/>
+            <span className="dark:text-black">{video && video.dislikes}</span>
           </div>
           <div className={`flex items-center flex-col ${contact ? 'text-green-500' : 'text-black'}`} onClick={()=>{handleContact();}}>
             <FaWhatsapp  className="text-2xl mb-1 mt-5 cursor-pointer"/>
@@ -204,8 +204,8 @@ export default  function Video({ params }: { params: { id: string } }) {
           </div>
           <Link href={'/tab?options=1'}>
             <div className="flex items-center flex-col">
-              <IoArrowUndoOutline  className="text-2xl mb-1 mt-5 cursor-pointer"/>
-              <span>Voltar</span>
+              <IoArrowUndoOutline  className="text-2xl mb-1 mt-5 cursor-pointer dark:text-black"/>
+              <span className="dark:text-black">Voltar</span>
             </div>
           </Link>
         </div>
@@ -214,26 +214,26 @@ export default  function Video({ params }: { params: { id: string } }) {
             className={`rounded-full w-[2.5rem] h-[2.5rem] bg-cover mr-4`}
             style={{ backgroundImage: `url(https://res.cloudinary.com/dmo7nzytn/image/upload/v1715983820/felipe_fera_to4xne.jpg)` }}
           ></div>
-          <span className="font-semibold text-lg">Felipe Fera</span>
+          <span className="font-semibold text-lg dark:text-black">Felipe Fera</span>
         </div>
         <div className=" h-[17rem] pl-2 overflow-y-scroll">
           {video && video.comments && video.comments.map((comment: any, indice: number)=>{
             return <div className="mb-5" key={indice}>
             <div className="flex items-center">
               <FaUserCircle className="text-gray-400 mr-2"/>
-              <span className="text-xs mr-1">{comment.name}</span>
-              <span className="text-xs"> • </span>
+              <span className="text-xs mr-1 dark:text-black">{comment.name}</span>
+              <span className="text-xsv text-[#6C6C6C]"> • </span>
               <span className="text-xs ml-1 text-[#6C6C6C]">{comment.time}</span>
             </div>
-            <span className="text-sm">{comment.comment}</span>
+            <span className="text-sm dark:text-black">{comment.comment}</span>
           </div>
           })}
         </div>
       </div>
       <div className="fixed z-1 bottom-0 flex px-4 h-20 w-full items-center bg-white">
         <FaUserCircle className="text-gray-400 mr-4 text-4xl"/>
-        <input type="text" className=" bg-[#CECECE] rounded-full h-[2.15rem] pl-4 pr-10 w-full" value={ comment! } placeholder="Adicione um comentário..." onChange={(e)=>{setComment(e.target.value)}}/>
-        <IoSend className="text-2xl z-2 absolute right-[1.7rem] cursor-pointer" onClick={()=>{postComment(); setComment('')}}/>
+        <input type="text" className=" bg-[#CECECE] rounded-full h-[2.15rem] pl-4 pr-10 w-full text-black" value={ comment! } placeholder="Adicione um comentário..." onChange={(e)=>{setComment(e.target.value)}}/>
+        <IoSend className="text-2xl z-2 absolute right-[1.7rem] cursor-pointer dark:text-black" onClick={()=>{postComment(); setComment('')}}/>
       </div>
       <ToastContainer
         position="top-center"

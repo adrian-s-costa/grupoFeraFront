@@ -38,15 +38,15 @@ export default function Profile (){
       <div className="flex items-center">
         <FaUserCircle className="text-gray-400 mr-4 text-6xl"/>
         <div className="flex flex-col">
-          <p className=" font-bold">{userName}</p>
-          <p className=" text-xs font">{userMail}</p>
+          <p className="dark:text-black font-bold">{userName}</p>
+          <p className="dark:text-black text-xs font">{userMail}</p>
         </div>
       </div>
       <div className=" border-[1px] w-full h-36 mt-5 rounded-lg px-2 flex flex-col justify-around">
         <div className="flex items-center h-10 w-full justify-between cursor-pointer" onClick={()=>{localStorage.clear(); router.push('/login')}}>
           <div className="flex items-center ">
             <IoExit className="text-2xl text-slate-400 mr-2"/>
-            <span>Sair</span>
+            <span className="dark:text-black">Sair</span>
           </div>
           <IoIosArrowForward className="text-2xl"/>
         </div>

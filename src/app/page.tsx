@@ -46,9 +46,9 @@ export default function Carousel() {
         <div className={`${counter == 2 ? 'w-14' : 'w-2'} h-2 ${counter == 2 ? 'bg-white' : 'bg-slate-600'} rounded-full`}></div>
       </div>
 
-      <button onClick={()=>{ handleChange() }} className={`absolute ${counter == 2 ? 'hidden' : null} right-5 bottom-5 w-[3.5rem] h-[3.5rem] bg-white rounded-full flex justify-center items-center`}><IoIosArrowForward className="text-3xl"/></button>
+      <button onClick={()=>{ handleChange() }} className={`absolute ${counter == 2 ? 'hidden' : null} right-5 bottom-5 w-[3.5rem] h-[3.5rem] bg-white rounded-full flex justify-center items-center`}><IoIosArrowForward className="text-3xl dark:text-black"/></button>
 
-      {counter == 2 ? <div className="absolute bottom-5 w-full h-[2.80rem] flex justify-center px-8"><button onClick={()=>{router.push('/login')}} className="bg-white rounded-3xl w-full">Vamos?</button></div> : null}
+      {counter == 2 ? <div className="absolute bottom-5 w-full h-[2.80rem] flex justify-center px-8"><button onClick={()=>{router.push('/login')}} className="bg-white rounded-3xl w-full dark:text-black">Vamos?</button></div> : null}
     </div>
 
   );
