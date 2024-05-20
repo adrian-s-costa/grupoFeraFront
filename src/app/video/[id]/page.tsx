@@ -45,18 +45,27 @@ export default  function Video({ params }: { params: { id: string } }) {
   });
 
   const userName = localStorage.getItem('user')
+  const userId = localStorage.getItem('id')
 
   const handleContact = async () => {
     if (contact) return null;
     setContact(true);
     try {
-      const response = await fetch(`${config.API_URL}/videos/${params.id}/contact`,{
+      const response = await fetch(`https://acesso.meets.com.br/oportunidade/salvar`,{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          "ngrok-skip-browser-warning": "69420"
+          'Authorization': '8F0E1C73-859A-3602-FCAE-89A4FB2F9BA7'
         },
-        body: JSON.stringify({ name: userName, email: localStorage.getItem("email"), number: localStorage.getItem('number'), message: `${localStorage.getItem("user")} se interessou pelo vídeo: ${video?.name} Disponivel em: ${video?.url}` })
+        body: JSON.stringify({
+          id_usuario: "34949",
+          id_origem: userId,
+          razao_cliente: userName,
+          fantasia: userName,
+          email_cliente: localStorage.getItem('email'), 
+          celular_cliente: localStorage.getItem('number'), 
+          descricao: `${localStorage.getItem("user")} se interessou pelo vídeo: ${video?.name} Disponivel em: ${video?.url}` 
+        })
       });
       if (!response.ok) {
         throw new Error('Failed to fetch video');

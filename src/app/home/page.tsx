@@ -1,6 +1,7 @@
 "use client"
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 
@@ -92,30 +93,45 @@ export default function Home(){
       <div className="mt-10">
         <h1 className="text-xl font-bold mb-4">Compre seu BYD com o Felipe Fera</h1>
         <div className="flex overflow-x-scroll gap-3">
-          <div>
+          <Link
+            href={{
+              pathname: '/offer',
+              query: { title: 'BYD SEAL', desc: "BYD SEAL 2024: Desbloqueie a adrenalina", price: "296.800,00", imageSrc: 'https://res.cloudinary.com/dmo7nzytn/image/upload/v1715732181/IMG_0195_mbuwuz.jpg'},
+            }}
+          >
             <Image quality={100} className="w-[232px] h-[147px] rounded-lg mb-2 min-w-[232px] min-h-[147px] bg-cover" src={"https://res.cloudinary.com/dmo7nzytn/image/upload/v1715732181/IMG_0195_mbuwuz.jpg"} alt={""} width={230} height={125}/>
             <div className="flex flex-col gap-1">
               <span className="font-semibold">BYD SEAL</span>
               <span className="text-sm">BYD SEAL 2024: Desbloqueie a adrenalina</span>
-              <span className="text-[#838383] text-black dark:text-black">R$ 296.800,00</span>
+              <span className="text-[#838383] dark:text-black">R$ 296.800,00</span>
             </div>
-          </div>
-          <div>
+          </Link>
+          <Link
+            href={{
+              pathname: '/offer',
+              query: { title: 'BYD Yuan Plus', desc: "BYD Yuan Plus: O SUV elétrico", price: "30.000,00", imageSrc: 'https://res.cloudinary.com/dmo7nzytn/image/upload/v1715727136/cc_t8pro-hybrid_design_4_2_immwzg.png'},
+            }}
+          >
             <Image quality={100} className="w-[232px] h-[147px] rounded-lg mb-2 min-w-[232px] min-h-[147px] bg-cover" src={"https://res.cloudinary.com/dmo7nzytn/image/upload/v1715727136/cc_t8pro-hybrid_design_4_2_immwzg.png"} alt={""} width={230} height={125}/>
             <div className="flex flex-col gap-1">
               <span className="font-semibold">BYD Yuan Plus</span>
               <span className="text-sm">BYD Yuan Plus: O SUV elétrico</span>
-              <span className="text-[#838383] text-black dark:text-black">R$ 30.000,00</span>
+              <span className="text-[#838383] dark:text-black">R$ 30.000,00</span>
             </div>
-          </div>
-          <div>
+          </Link>
+          <Link
+            href={{
+              pathname: '/offer',
+              query: { title: 'BYD Song Plus', desc: "BYD se supera mais uma vez e apresenta", price: "40.000,00", imageSrc: 'https://res.cloudinary.com/dmo7nzytn/image/upload/v1715726432/home_xkpl2q.png'},
+            }}
+          >
             <Image quality={100} className="w-[232px] h-[147px] rounded-lg mb-2 min-w-[232px] min-h-[147px] bg-cover " src={"https://res.cloudinary.com/dmo7nzytn/image/upload/v1715726432/home_xkpl2q.png"} alt={""} width={230} height={125}/>
             <div className="flex flex-col gap-1">
-              <span className="font-semibold">Song Plus</span>
+              <span className="font-semibold">BYD Song Plus</span>
               <span className="text-sm">BYD se supera mais uma vez e apresenta</span>
-              <span className="text-[#838383] text-black dark:text-black">R$ 40.000,00</span>
+              <span className="text-[#838383] dark:text-black">R$ 40.000,00</span>
             </div>
-          </div>
+          </Link>
         </div>
       </div>
     </div>

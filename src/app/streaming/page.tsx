@@ -33,8 +33,10 @@ export default function Streaming(){
     <div className=" flex px-1 h-16 justify-between items-center">
       <Image 
         className="mt-[]"
-        src={logo}
+        src={'https://res.cloudinary.com/dmo7nzytn/image/upload/v1716220481/playlist_aemh69.png'}
         alt="Logo"
+        width={160}
+        height={40}
       ></Image>
 
       <div className="flex gap-4">

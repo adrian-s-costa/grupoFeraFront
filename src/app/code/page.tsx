@@ -13,9 +13,9 @@ export default function PinCode(){
 
   const [registerInfo, setRegisterInfo] = useState<any>({credential: "", code: "", password: "123456789", confirmPassword: "123456789"})
   const router = useRouter();
-  const searchParams = useSearchParams()
-  const [loading, setLoading] = useState<boolean>(false)
-  const email = searchParams.get('email')
+  const searchParams = useSearchParams();
+  const [loading, setLoading] = useState<boolean>(false);
+  const email = searchParams.get('email');
 
   useEffect(() => {
     setRegisterInfo({...registerInfo, credential: email})
@@ -76,7 +76,7 @@ export default function PinCode(){
   
   return (
     <>{loading ? <Loader /> : null }<div className="w-full h-screen bg-white p-5">
-      <MdArrowBackIos className='text-2xl cursor-pointer' onClick={() => { router.back(); } } />
+      <MdArrowBackIos className='text-2xl cursor-pointer text-black' onClick={() => { router.back(); } } />
       <h1 className="text-3xl font-bold mb-2 mt-[2.5rem] text-black dark:text-black">Código Validação</h1>
       <span className='text-sm text-[#838383]'>Enviamos um código de ativação para o seu email {email}</span>
 

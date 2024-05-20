@@ -99,7 +99,7 @@ export default function UserInfo(){
             <input type="tel" id="tel" onChange={(event) => { setAdditionalInfo({ ...additionalInfo, tel: event.target.value }); } } className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="(99) 9 9999-9999" minLength={9} required />
           </div>
           <div>
-            <label htmlFor="date" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">Data de nascimento</label>
+            <label htmlFor="date" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 placeholder:text-black">Data de nascimento</label>
             <input type="date" id="date" onChange={(event) => { setAdditionalInfo({ ...additionalInfo, bornDate: event.target.value }); } } className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="DD/MM/AAAA" required />
           </div>
         </div>
