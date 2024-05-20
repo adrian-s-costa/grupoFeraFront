@@ -22,7 +22,7 @@ export default function Profile (){
         throw new Error('Failed to log in');
       }
 
-      router.push('/carousel')
+      router.push('/')
     } catch (error) {
       console.error('Error logging in:', error);
     }

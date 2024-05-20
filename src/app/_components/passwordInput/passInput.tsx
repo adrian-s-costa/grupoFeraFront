@@ -19,7 +19,7 @@ export default function PasswordInput({ setPasswordInfo, passwordInfo, specificV
       />
       <InputRightElement width='3rem' className="h-full">
         <Button h='1.75rem' size='sm' onClick={handleClick}>
-          {show ? <IoEyeOffOutline className="text-xl"/> : <IoEyeOutline className="text-xl"/>}
+          {show ? <IoEyeOffOutline className="text-xl text-black dark:text-black"/> : <IoEyeOutline className="text-xl text-black dark:text-black"/>}
         </Button>
       </InputRightElement>
     </InputGroup>
