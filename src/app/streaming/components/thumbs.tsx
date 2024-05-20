@@ -19,7 +19,7 @@ export default function Thumbs({props}: any){
             style={{ backgroundImage: `url(https://res.cloudinary.com/dmo7nzytn/image/upload/v1715983820/felipe_fera_to4xne.jpg)` }}
           />
           <div className="flex flex-col">
-            <span>{props.name}</span>
+            <span className="text-black">{props.name}</span>
             <span className="text-xs text-[#6C6C6C]">{props.views} views</span>
           </div>
         </div>

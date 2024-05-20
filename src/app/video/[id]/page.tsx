@@ -181,7 +181,7 @@ export default  function Video({ params }: { params: { id: string } }) {
         <div className="w-full flex justify-around">
           <div className="flex items-center flex-col">
             { !like ? <FiThumbsUp
-              className={`text-2xl mb-1 mt-5 cursor-pointer`}
+              className={`text-2xl mb-1 mt-5 cursor-pointer text-black`}
               onClick={()=>{
                 handleLike('add')
               }}
@@ -204,8 +204,8 @@ export default  function Video({ params }: { params: { id: string } }) {
           </div>
           <Link href={'/tab?options=1'}>
             <div className="flex items-center flex-col">
-              <IoArrowUndoOutline  className="text-2xl mb-1 mt-5 cursor-pointer dark:text-black"/>
-              <span className="dark:text-black">Voltar</span>
+              <IoArrowUndoOutline  className="text-2xl mb-1 mt-5 cursor-pointer text-black dark:text-black"/>
+              <span className="text-black dark:text-black">Voltar</span>
             </div>
           </Link>
         </div>
