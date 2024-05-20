@@ -24,7 +24,7 @@ export default function Home(){
 
 
   return(
-    <div className="w-full min-h-screen h-auto bg-white p-5 mb-10 dark:text-black">
+    <div className="w-full min-h-screen h-auto bg-white p-5 mb-10 text-black dark:text-black">
       <h1 className="text-3xl font-bold ">Fala, Nome</h1>
       <span className="">Ou devo te chamar de Fera?</span>
       <div className="my-5 h-auto relative">
@@ -97,7 +97,7 @@ export default function Home(){
             <div className="flex flex-col gap-1">
               <span className="font-semibold">BYD SEAL</span>
               <span className="text-sm">BYD SEAL 2024: Desbloqueie a adrenalina</span>
-              <span className="text-[#838383] dark:text-black">R$ 296.800,00</span>
+              <span className="text-[#838383] text-black dark:text-black">R$ 296.800,00</span>
             </div>
           </div>
           <div>
@@ -105,7 +105,7 @@ export default function Home(){
             <div className="flex flex-col gap-1">
               <span className="font-semibold">BYD Yuan Plus</span>
               <span className="text-sm">BYD Yuan Plus: O SUV elétrico</span>
-              <span className="text-[#838383] dark:text-black">R$ 30.000,00</span>
+              <span className="text-[#838383] text-black dark:text-black">R$ 30.000,00</span>
             </div>
           </div>
           <div>
@@ -113,7 +113,7 @@ export default function Home(){
             <div className="flex flex-col gap-1">
               <span className="font-semibold">Song Plus</span>
               <span className="text-sm">BYD se supera mais uma vez e apresenta</span>
-              <span className="text-[#838383] dark:text-black">R$ 40.000,00</span>
+              <span className="text-[#838383] text-black dark:text-black">R$ 40.000,00</span>
             </div>
           </div>
         </div>

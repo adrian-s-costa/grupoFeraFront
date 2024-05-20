@@ -81,7 +81,7 @@ export default function UserInfo(){
 
       <MdArrowBackIos className='text-2xl cursor-pointer' onClick={() => { router.back(); } } />
 
-      <h1 className="text-3xl font-bold mb-2 mt-[2.5rem] dark:text-gray-900">Estamos quase lá!</h1>
+      <h1 className="text-3xl font-bold mb-2 mt-[2.5rem] text-black dark:text-gray-900">Estamos quase lá!</h1>
 
       <span className='text-sm text-[#838383]'>Para podermos nos comunicar melhor informe nome e sobrenome</span>
       <form onSubmit={(e) => { verifyUserData(e); } } className='mt-5'>
