@@ -14,8 +14,16 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  if(typeof navigator.serviceWorker !== 'undefined') {
+    navigator.serviceWorker.register('pwabuilder-sw.js')
+  }
+
   return (
     <html lang="en">
+      <head>
+        <link rel="manifest" href="%PUBLIC_URL%/manifest.json"></link>
+      </head>
       <body className={inter.className}>{children}</body>
     </html>
   );

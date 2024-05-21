@@ -1,0 +1,24 @@
+{
+  "background_color": "#0b0ee6",
+  "description": "Teste",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "Grupo Fera",
+  "orientation": "natural",
+  "scope": "/",
+  "short_name": "Grupo Fera",
+  "start_url": "/",
+  "theme_color": "#0b0ee6",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "type": "image/x-icon",
+      "sizes": "16x16"
+    },
+    {
+      "src": "/favicon.ico",
+      "type": "image/x-icon"
+    }
+  ],
+  "lang": "pt"
+}
