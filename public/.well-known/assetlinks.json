@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "app.vercel.grupo_fera_front.twa",
+        "sha256_cert_fingerprints": ["11:AE:32:88:55:71:DC:F1:6C:65:08:A1:8B:38:0B:64:4F:67:FC:77:E1:2C:39:E6:CE:24:A7:CE:21:AF:12:EA"]
+      }
+    }]
