@@ -62,7 +62,11 @@ export default function UserInfo(){
 
       const newUser = await response.json()
 
-      localStorage.setItem('user', newUser.name)
+      localStorage.setItem('user', newUser.name);
+      localStorage.setItem('id', newUser.id);
+      localStorage.setItem('email', newUser.email);
+      localStorage.setItem('bornDate', newUser.bornDate);
+      localStorage.setItem('number', newUser.cellphone);
 
       notify2();
 
