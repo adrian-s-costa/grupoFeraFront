@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import { useState } from "react";
+import { useState, Suspense } from "react";
 
 export default function SpecificOffer(){
 
@@ -61,49 +61,51 @@ export default function SpecificOffer(){
   }
 
   return (
-    <div className="w-full h-screen bg-white p-5">
-      <div className="w-full flex justify-center relative">
-        <MdArrowBackIos className='text-2xl left-0 cursor-pointer absolute text-black' onClick={() => {router.back(); } } />
+    <Suspense>
+      <div className="w-full h-screen bg-white p-5">
+        <div className="w-full flex justify-center relative">
+          <MdArrowBackIos className='text-2xl left-0 cursor-pointer absolute text-black' onClick={() => {router.back(); } } />
+          
+          <Image 
+            src={"https://res.cloudinary.com/dmo7nzytn/image/upload/v1716225168/lferabck_i6wp0c.png"} 
+            alt={""}
+            width={70}
+            height={1160}          
+          />  
+          
+        </div>
         
-        <Image 
-          src={"https://res.cloudinary.com/dmo7nzytn/image/upload/v1716225168/lferabck_i6wp0c.png"} 
+        <Image
+          quality={100}
+          className="rounded-md mt-5"
+          src={imageSrc!}
           alt={""}
-          width={70}
-          height={1160}          
-        />  
-        
-      </div>
+          width={1920}
+          height={1}
+        ></Image>
+
+        <h1 className="text-2xl font-bold mt-[1rem] text-black dark:text-black">{title!}</h1>
+        <span className='text-sm text-[#838383]'>{desc!}</span>
+
+        <div className="absolute left-0 bottom-0 w-full flex justify-around p-5">
+          <h1 className="text-lg font-bold text-black dark:text-black">R${price!}</h1>
+          <button className="rounded-full bg-blue-600 font-bold text-white text-sm py-[0.3rem] px-[0.5rem]" onClick={()=>{handleContact()}}>Comece uma negociação</button>
+        </div>
+
+        <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
       
-      <Image
-        quality={100}
-        className="rounded-md mt-5"
-        src={imageSrc!}
-        alt={""}
-        width={1920}
-        height={1}
-      ></Image>
-
-      <h1 className="text-2xl font-bold mt-[1rem] text-black dark:text-black">{title!}</h1>
-      <span className='text-sm text-[#838383]'>{desc!}</span>
-
-      <div className="absolute left-0 bottom-0 w-full flex justify-around p-5">
-        <h1 className="text-lg font-bold text-black dark:text-black">R${price!}</h1>
-        <button className="rounded-full bg-blue-600 font-bold text-white text-sm py-[0.3rem] px-[0.5rem]" onClick={()=>{handleContact()}}>Comece uma negociação</button>
       </div>
-
-      <ToastContainer
-        position="top-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
-    
-    </div>)
-    
+    </Suspense>
+  )   
 }
