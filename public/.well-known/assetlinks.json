@@ -2,7 +2,7 @@
       "relation": ["delegate_permission/common.handle_all_urls"],
       "target": {
         "namespace": "android_app",
-        "package_name": "app.vercel.grupo_fera_front.twa",
-        "sha256_cert_fingerprints": ["11:AE:32:88:55:71:DC:F1:6C:65:08:A1:8B:38:0B:64:4F:67:FC:77:E1:2C:39:E6:CE:24:A7:CE:21:AF:12:EA"]
+        "package_name": "com.somosaagencia.grupofera",
+        "sha256_cert_fingerprints": ["CA:9A:28:5B:E4:8E:75:48:03:F5:C7:02:C1:91:0A:3E:DF:48:97:BA:BD:1B:46:18:34:8E:10:86:E2:29:F1:E2"]
       }
     }]
