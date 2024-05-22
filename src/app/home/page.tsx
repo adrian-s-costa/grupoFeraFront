@@ -24,9 +24,12 @@ export default function Home(){
   }, []); 
 
 
+  const fullName = localStorage.getItem('user');
+  const firstName = fullName ? fullName.split(' ')[0] : '';
+
   return(
     <div className="w-full min-h-screen h-auto bg-white p-5 mb-10 text-black dark:text-black">
-      <h1 className="text-3xl font-bold ">Fala, Nome</h1>
+      <h1 className="text-3xl font-bold ">Fala, {firstName}</h1>
       <span className="">Ou devo te chamar de Fera?</span>
       <div className="my-5 h-auto relative">
         <video className="rounded-lg" width={viewportWidth} autoPlay={true} muted={true} loop={true} controls={false} playsInline>
