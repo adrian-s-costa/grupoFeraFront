@@ -1,6 +1,6 @@
 {
-  "id": 1,
-  "background_color": "#0b0ee6",
+  "id": 2,
+  "background_color": "#23306d",
   "description": "Teste",
   "dir": "ltr",
   "display": "standalone",
@@ -9,7 +9,7 @@
   "scope": "/",
   "short_name": "Grupo Fera",
   "start_url": "/",
-  "theme_color": "#0b0ee6",
+  "theme_color": "#23306d",
   "icons": [
     {
       "src": "/icon.png",
