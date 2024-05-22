@@ -24,7 +24,7 @@ export default function Home(){
   }, []); 
 
 
-  const fullName = localStorage.getItem('user');
+  const fullName =  typeof window !== "undefined" ? window.localStorage.getItem('user') : false;
   const firstName = fullName ? fullName.split(' ')[0] : '';
 
   return(
