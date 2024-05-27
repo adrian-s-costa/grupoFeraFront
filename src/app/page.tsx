@@ -13,6 +13,12 @@ export default function Carousel() {
   const [counter, setCounter] = useState<number>(0)
   const router = useRouter();
 
+  const localStorageLength = typeof window !== "undefined" ? window.localStorage.length : 0
+
+  if(localStorageLength > 0){
+    router.push('/tab');
+  }
+
   const handleChange = () =>{
     if (counter < 2 ) setCounter(counter + 1)
   }

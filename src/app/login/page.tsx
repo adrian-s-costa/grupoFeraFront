@@ -19,9 +19,11 @@ export default function Login(){
 
   const router = useRouter();
 
-  useEffect(()=>{
-    localStorage.clear();
-  }, [])
+  const localStorageLength = typeof window !== "undefined" ? window.localStorage.length : 0
+
+  if(localStorageLength > 0){
+    router.push('/tab');
+  }
 
   const notify = () => toast.error('Credenciais inválidas tente novamente', {
     position: "bottom-right",
@@ -65,7 +67,7 @@ export default function Login(){
 
       setUserData(userData);
       setLoading(false);
-      router.push( userData.account.name == "Sem Nome" ? '/user-info' : '/tab')
+      router.push(userData.account.name == "Sem Nome" ? '/user-info' : '/tab')
     } catch (error) {
       setLoading(false);
       console.error('Error logging in:', error);
@@ -133,7 +135,7 @@ export default function Login(){
   };
   
   return (
-    <>{ loading ? <Loader/> : null }<div className="w-full h-screen bg-white p-5">
+    <>{ loading || typeof window == "undefined" ? <Loader/> : null }<div className="w-full h-screen bg-white p-5">
       <h1 className="text-3xl font-bold mb-4 text-black">{isAnnual ? "Entrar" : "Registrar"}</h1>
       <PricingToggle isAnnual={isAnnual} setIsAnnual={setIsAnnual} />
       {isAnnual ? (

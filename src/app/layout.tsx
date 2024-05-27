@@ -45,7 +45,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#FFFFFF",
+  themeColor: "#23306d",
 };
 
 
@@ -56,10 +56,7 @@ export default function RootLayout({
 }>) {
 
   return (
-    <html lang="en">
-      <head>
-        <link rel="manifest" href="%PUBLIC_URL%/manifest.json"></link>
-      </head>
+    <html lang="pt-br">
       <body className={inter.className}>{children}</body>
     </html>
   );
