@@ -19,6 +19,10 @@ export default withPWA({
       {
         protocol: 'https',
         hostname: 'res.cloudinary.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'api.grupofera.app.br',
       }
     ],
   },
