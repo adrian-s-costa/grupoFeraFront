@@ -84,12 +84,12 @@ export default function SpecificOffer(){
           height={1}
         ></Image>
 
-        <h1 className="text-2xl font-bold mt-[1rem] text-black dark:text-black">{title!}</h1>
+        <h1 className="text-2xl xxs:text-md font-bold mt-[1rem] text-black dark:text-black">{title!}</h1>
         <span className='text-sm text-[#838383]'>{desc!}</span>
 
-        <div className="absolute left-0 bottom-0 w-full flex justify-around p-5">
-          <h1 className="text-lg font-bold text-black dark:text-black">R${price!}</h1>
-          <button className="rounded-full bg-blue-600 font-bold text-white text-sm py-[0.3rem] px-[0.5rem]" onClick={()=>{handleContact()}}>Comece uma negociação</button>
+        <div className="absolute left-0 bottom-0 w-full flex justify-between p-5">
+          <h1 className="xs:text-lg font-bold text-black dark:text-black flex items-center xxs:text-sm">R${price!}</h1>
+          <button className="rounded-full xxs:text-[0.6rem] bg-blue-600 font-bold text-white xs:text-sm xs:py-[0.3rem] xs:px-[0.5rem] xxs:px-[0.5rem]" onClick={()=>{handleContact()}}>Comece uma negociação</button>
         </div>
 
         <ToastContainer

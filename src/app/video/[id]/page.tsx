@@ -1,12 +1,10 @@
 'use client'
 
-import Pfp from "@/app/_components/pfp/pfp";
 import { useState, useEffect } from "react";
 import { FiThumbsUp, FiThumbsDown } from "react-icons/fi";
 import { FaWhatsapp, FaUserCircle } from "react-icons/fa";
 import { IoArrowUndoOutline, IoSend } from "react-icons/io5";
 import { IoMdThumbsUp } from "react-icons/io";
-import { getVideoById } from "../../../../api/service";
 import { config } from "../../../../config";
 import Link from "next/link";
 import { ToastContainer, toast } from "react-toastify";
@@ -25,7 +23,7 @@ type Video = {
   thumbnailUrl: string;
 };
 
-export default  function Video({ params }: { params: { id: string } }) {
+export default function Video({ params }: { params: { id: string } }) {
   
   const [viewportWidth, setViewportWidth] = useState<number>(0);
   const [video, setVideo] = useState<Video | null>(null);
@@ -177,7 +175,7 @@ export default  function Video({ params }: { params: { id: string } }) {
 
   return (
     <div className="w-full h-screen bg-white dark:bg-black relative overflow-y-hidden">
-      <video width={viewportWidth} height={(viewportWidth / 16) * 9} controls={true} autoPlay={true} muted={true} playsInline>
+      <video width={viewportWidth} height={(viewportWidth / 16) * 9} controls={true} autoPlay={true} muted={true} playsInline poster={video?.thumbnailUrl}>
         {video && <source src={video.url} type="video/mp4"/>}
         Seu navegador não suporta o vídeo
       </video>
@@ -201,27 +199,27 @@ export default  function Video({ params }: { params: { id: string } }) {
                 handleLike('remove')
               }}
             />}
-            <span className="dark:text-black text-black">{video && video.likes + (like ? 1 : 0)}</span>
+            <span className="dark:text-black text-black xxs:text-sm xs:text-base">{video && video.likes + (like ? 1 : 0)}</span>
           </div>
           <div className="flex items-center flex-col">
             <FiThumbsDown className="text-2xl mb-1 mt-5 cursor-pointer dark:text-black text-black"/>
-            <span className="dark:text-black text-black">{video && video.dislikes}</span>
+            <span className="dark:text-black text-black xxs:text-sm xs:text-base">{video && video.dislikes}</span>
           </div>
           <div className={`flex items-center flex-col ${contact ? 'text-green-500' : 'text-black'}`} onClick={()=>{handleContact();}}>
             <FaWhatsapp  className="text-2xl mb-1 mt-5 cursor-pointer"/>
-            <span>Tenho interesse</span>
+            <span className="xxs:text-sm xs:text-base">Tenho interesse</span>
           </div>
           <Link href={'/tab?options=1'}>
             <div className="flex items-center flex-col">
               <IoArrowUndoOutline  className="text-2xl mb-1 mt-5 cursor-pointer text-black dark:text-black"/>
-              <span className="text-black dark:text-black">Voltar</span>
+              <span className="text-black dark:text-black xxs:text-sm xs:text-base">Voltar</span>
             </div>
           </Link>
         </div>
         <div className="flex items-center pt-5 mb-5">
           <div
             className={`rounded-full w-[2.5rem] h-[2.5rem] bg-cover mr-4`}
-            style={{ backgroundImage: `url(https://res.cloudinary.com/dmo7nzytn/image/upload/v1715983820/felipe_fera_to4xne.jpg)` }}
+            style={{ backgroundImage: `url(https://res.cloudinary.com/dmo7nzytn/image/upload/v1715983820/grupo-fera/images/felipe_fera_to4xne.jpg)` }}
           ></div>
           <span className="font-semibold text-lg dark:text-black text-black">Felipe Fera</span>
         </div>
@@ -239,7 +237,7 @@ export default  function Video({ params }: { params: { id: string } }) {
           })}
         </div>
       </div>
-      <div className="fixed z-1 bottom-0 flex px-4 h-20 w-full items-center bg-white">
+      <div className="fixed z-1 bottom-0 flex px-4 xxs:h-10 h-20 w-full items-center bg-white">
         <FaUserCircle className="text-gray-400 mr-4 text-4xl"/>
         <input type="text" className=" bg-[#CECECE] rounded-full h-[2.15rem] pl-4 pr-10 w-full text-black" value={ comment! } placeholder="Adicione um comentário..." onChange={(e)=>{setComment(e.target.value)}}/>
         <IoSend className="text-2xl z-2 absolute right-[1.7rem] cursor-pointer dark:text-black text-black" onClick={()=>{postComment(); setComment('')}}/>

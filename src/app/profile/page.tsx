@@ -21,8 +21,8 @@ export default function Profile (){
       if (!response.ok) {
         throw new Error('Failed to log in');
       }
-
-      router.push('/')
+      localStorage.clear();
+      router.push('/');
     } catch (error) {
       console.error('Error logging in:', error);
     }

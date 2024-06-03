@@ -71,11 +71,36 @@ export default function PinCode(){
 
       notify2();
 
-      setTimeout(()=>{
-        setLoading(false);
-        router.push(`/tab`)
-      }, 1000)
+      try {
+        const response = await fetch(`${config.API_URL}/auth/login`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            "ngrok-skip-browser-warning": "69420"
+          },
+          body: JSON.stringify({credential: email, password: passwordInfo.first})
+        });
+    
+        if (!response.ok) {
+          setLoading(false);
+          notify("Erro no login");
+          throw new Error('Failed to log in');
+        }
+    
+        const userData = await response.json();
   
+        localStorage.setItem('user', userData.account.name)
+        localStorage.setItem('token', userData.token)
+        localStorage.setItem('id', userData.account.id)
+        localStorage.setItem('email', userData.account.email)
+        localStorage.setItem('number', userData.account.cellphone)
+  
+        setLoading(false);
+        router.push(userData.account.name == "Sem Nome" ? '/user-info' : '/tab')
+      } catch (error) {
+        setLoading(false);
+        console.error('Error logging in:', error);
+      }
     } catch (error) {
       setLoading(false);
       console.error('Error logging in:', error);

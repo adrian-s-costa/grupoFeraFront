@@ -16,10 +16,10 @@ export default function Thumbs({props}: any){
         <div className="p-5 flex">
           <div
             className={`rounded-full w-[2.5rem] h-[2.5rem] bg-cover mr-4`}
-            style={{ backgroundImage: `url(https://res.cloudinary.com/dmo7nzytn/image/upload/v1715983820/felipe_fera_to4xne.jpg)` }}
+            style={{ backgroundImage: `url(https://res.cloudinary.com/dmo7nzytn/image/upload/v1715983820/grupo-fera/images/felipe_fera_to4xne.jpg)` }}
           />
-          <div className="flex flex-col">
-            <span className="text-black">{props.name}</span>
+          <div className="flex flex-col w-[90%]">
+            <span className="text-black xs:text-base xxs:text-sm">{props.name}</span>
             <span className="text-xs text-[#6C6C6C]">{props.views} views</span>
           </div>
         </div>

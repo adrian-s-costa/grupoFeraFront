@@ -77,17 +77,17 @@ export default function PinCode(){
   return (
     <>{loading ? <Loader /> : null }<div className="w-full h-screen bg-white p-5">
       <MdArrowBackIos className='text-2xl cursor-pointer text-black' onClick={() => { router.back(); } } />
-      <h1 className="text-3xl font-bold mb-2 mt-[2.5rem] text-black dark:text-black">Código Validação</h1>
-      <span className='text-sm text-[#838383]'>Enviamos um código de ativação para o seu email {email}</span>
+      <h1 className="xs:text-3xl xxs:text-lg font-bold mb-2 mt-[2.5rem] text-black dark:text-black">Código Validação</h1>
+      <span className='xs:text-sm xxs:text-xs text-[#838383]'>Enviamos um código de ativação para o seu email {email}</span>
 
       <form>
         <HStack className='w-full flex justify-between mt-5'>
           <PinInput autoFocus onComplete={(e) => { verifyPinCode(e); } }>
-            <PinInputField className='h-[4.5rem] w-[4rem] border-solid border-[#D8DADC] border-[1px] text-center text-black dark:text-black items-center rounded-md text-4xl' />
-            <PinInputField className='h-[4.5rem] w-[4rem] border-solid border-[#D8DADC] border-[1px] text-center text-black dark:text-black items-center rounded-md text-4xl' />
-            <PinInputField className='h-[4.5rem] w-[4rem] border-solid border-[#D8DADC] border-[1px] text-center text-black dark:text-black items-center rounded-md text-4xl' />
-            <PinInputField className='h-[4.5rem] w-[4rem] border-solid border-[#D8DADC] border-[1px] text-center text-black dark:text-black items-center rounded-md text-4xl' />
-            <PinInputField className='h-[4.5rem] w-[4rem] border-solid border-[#D8DADC] border-[1px] text-center text-black dark:text-black items-center rounded-md text-4xl' />
+            <PinInputField className='xs:h-[4.5rem] xs:w-[4rem] xxs:w-[2.5rem] xxs:h-[2.5rem] border-solid border-[#D8DADC] border-[1px] text-center text-black dark:text-black items-center rounded-md xs:text-4xl xxs:text-xl' />
+            <PinInputField className='xs:h-[4.5rem] xs:w-[4rem] xxs:w-[2.5rem] xxs:h-[2.5rem] border-solid border-[#D8DADC] border-[1px] text-center text-black dark:text-black items-center rounded-md xs:text-4xl xxs:text-xl' />
+            <PinInputField className='xs:h-[4.5rem] xs:w-[4rem] xxs:w-[2.5rem] xxs:h-[2.5rem] border-solid border-[#D8DADC] border-[1px] text-center text-black dark:text-black items-center rounded-md xs:text-4xl xxs:text-xl' />
+            <PinInputField className='xs:h-[4.5rem] xs:w-[4rem] xxs:w-[2.5rem] xxs:h-[2.5rem] border-solid border-[#D8DADC] border-[1px] text-center text-black dark:text-black items-center rounded-md xs:text-4xl xxs:text-xl' />
+            <PinInputField className='xs:h-[4.5rem] xs:w-[4rem] xxs:w-[2.5rem] xxs:h-[2.5rem] border-solid border-[#D8DADC] border-[1px] text-center text-black dark:text-black items-center rounded-md xs:text-4xl xxs:text-xl' />
           </PinInput>
         </HStack>
       </form>

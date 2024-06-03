@@ -13,16 +13,12 @@ import { useSearchParams } from 'next/navigation'
 
 
 export default function HomeTab(){
-
   const router = useRouter();
-
   const searchParams = useSearchParams()
- 
   const options = searchParams.get('options')
 
   useEffect(()=>{
-    localStorage.theme = 'light'
-    if (!localStorage.getItem('token')) return router.push('/login')
+
   }, [])
 
 
