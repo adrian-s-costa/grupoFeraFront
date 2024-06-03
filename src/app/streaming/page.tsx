@@ -69,13 +69,17 @@ export default function Streaming(){
           <button className="border-2 xs:text-base xxs:text-sm border-[#CECECE] rounded-full w-auto whitespace-nowrap px-5 text-black dark:text-black" onClick={()=>{setActiveTag("Todos")}}>Todos</button>
           <button className="border-2 xs:text-base xxs:text-sm border-[#CECECE] rounded-full w-auto whitespace-nowrap px-5 text-black dark:text-black" onClick={()=>{setActiveTag("Bateria")}}>Baterias</button>
           <button className="border-2 xs:text-base xxs:text-sm border-[#CECECE] rounded-full w-auto whitespace-nowrap px-5 text-black dark:text-black" onClick={()=>{setActiveTag("Reposição")}}>Peças reposição</button>
+          <button className="border-2 xs:text-base xxs:text-sm border-[#CECECE] rounded-full w-auto whitespace-nowrap px-5 text-black dark:text-black" onClick={()=>{setActiveTag("Modelos")}}>Modelos BYD</button>
+          <button className="border-2 xs:text-base xxs:text-sm border-[#CECECE] rounded-full w-auto whitespace-nowrap px-5 text-black dark:text-black" onClick={()=>{setActiveTag("BYD")}}>BYD</button>
+          <button className="border-2 xs:text-base xxs:text-sm border-[#CECECE] rounded-full w-auto whitespace-nowrap px-5 text-black dark:text-black" onClick={()=>{setActiveTag("Carregadores")}}>Carregadores</button>
+          <button className="border-2 xs:text-base xxs:text-sm border-[#CECECE] rounded-full w-auto whitespace-nowrap px-5 text-black dark:text-black" onClick={()=>{setActiveTag("Blindagem")}}>Blindagem</button>
         </div>
       </div>
     </div>
 
     <div className="w-full flex flex-col">
     {videos && videos
-    .filter((video: any) => searchBar == '' ? video.tags.includes(activeTag) : video.name.toLowerCase().includes(searchBar))
+    .filter((video: any) => searchBar == '' ? video.tags.includes(activeTag) : video.name.toLowerCase().includes(searchBar.toLowerCase()))
     .map((video: any, indice: number) => {
       return <Thumbs props={video} key={indice} />;
     })}
