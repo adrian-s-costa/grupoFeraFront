@@ -8,6 +8,7 @@ export default function Thumbs({props}: any){
     <Link href={`/video/${props.id}`}>
       <div className="flex flex-col cursor-pointer">
         <Image
+          priority={true}
           src={props.thumbnailUrl}
           width={1000}
           height={700} 

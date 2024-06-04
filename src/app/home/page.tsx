@@ -49,6 +49,7 @@ export default function Home(){
           <div className="xs:w-20 xxs:w-[3.5rem] xxs:h-[3.5rem] xs:h-20 flex justify-center items-center max-w-20 bg-[#F3F5F7] rounded-lg">
             <Image
             src={"https://res.cloudinary.com/dmo7nzytn/image/upload/v1715726211/eletric_p4x05f.png"}
+            priority={true}
             width={50}
             height={50}
             className="xxs:w-[2rem] xxs:h-[2rem] xs:w-[3.125rem] xs:h-[3.125rem]"
@@ -63,6 +64,7 @@ export default function Home(){
           <div className="xs:w-20 xxs:w-[3.5rem] xxs:h-[3.5rem] xs:h-20 flex justify-center items-center  bg-[#F3F5F7] rounded-lg">
             <Image
             src={"https://res.cloudinary.com/dmo7nzytn/image/upload/v1715726211/gasoline_bauvwp.png"}
+            priority={true}
             width={50}
             height={50}
             className="xxs:w-[2rem] xxs:h-[2rem] xs:w-[3.125rem] xs:h-[3.125rem]"
@@ -76,6 +78,7 @@ export default function Home(){
           <div className="xs:w-20 xxs:w-[3.5rem] xxs:h-[3.5rem] xs:h-20 flex justify-center items-center bg-[#F3F5F7] rounded-lg">
             <Image
             src={"https://res.cloudinary.com/dmo7nzytn/image/upload/v1715726210/acessory_hyzyjb.png"}
+            priority={true}
             width={50}
             height={50}
             className="xxs:w-[2rem] xxs:h-[2rem] xs:w-[3.125rem] xs:h-[3.125rem]"
@@ -89,6 +92,7 @@ export default function Home(){
           <div className="xs:w-20 xxs:w-[3.5rem] xxs:h-[3.5rem] xs:h-20 flex justify-center items-center bg-[#F3F5F7] rounded-lg">
             <Image
             src={"https://res.cloudinary.com/dmo7nzytn/image/upload/v1715726211/service_e6kz4v.png"}
+            priority={true}
             width={50}
             height={50}
             className="xxs:w-[2rem] xxs:h-[2rem] xs:w-[3.125rem] xs:h-[3.125rem]"

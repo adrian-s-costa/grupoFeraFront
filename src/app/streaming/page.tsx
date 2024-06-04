@@ -44,6 +44,7 @@ export default function Streaming(){
         alt="Logo"
         width={160}
         height={40}
+        priority={true}
       ></Image>
 
       <div className="flex gap-4 items-center">
