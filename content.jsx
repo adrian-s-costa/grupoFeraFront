@@ -4,13 +4,13 @@ export const carrosInfo = [
   {
     texto: <>
     <br />
-    BYD TAN EV será comercializado na versão única. Todas as especificações técnicas, comparativos, fotos, etc, estarão disponíveis com nosso time de marketing (henrique.ohori@byd.com).
-    <br /><br />
     • Preço Público Sugerido Promocional (PPS) 22/23: 449.800,00 (Quatrocentos e Quarenta e Nove Mil e Oitocentos Reais).				
     <br /><br />
     • Bônus Trade-in TOTAL R$ 20.000,00 (R$ 10.000,00 BYD + R$ 10.000,00 Rede) OU Taxa 0% OU Seguro Grátis 1 ano Porto Seguro, somente para os modelos 22/23;
     <br /><br />
-    • Preço Público Sugerido (PPS) 24/25: R$ 536.800,00 (Quinhentos e Trinta e Seis Mil e Oitocentos Reais); • Margem de 12% sobre o PPS
+    • Preço Público Sugerido (PPS) 24/25: R$ 536.800,00 (Quinhentos e Trinta e Seis Mil e Oitocentos Reais); 
+    <br /><br />
+    • Margem de 12% sobre o PPS
     <br /><br />
     • Test drive com desconto de 30% no valor do PPS, com pagamento à vista
     <br /><br />
@@ -29,14 +29,14 @@ export const carrosInfo = [
   },
   {
     texto: <>
-    <br/>
-    BYD TAN EV será comercializado na versão única. Todas as especificações técnicas, comparativos, fotos, etc, estarão disponíveis com nosso time de marketing (henrique.ohori@byd.com).			
-    <br /><br />
+    <br />
     • Preço Público Sugerido Promocional (PPS) 22/23: 449.800,00 (Quatrocentos e Quarenta e Nove Mil e Oitocentos Reais).				
     <br /><br />
     • Bônus Trade-in TOTAL R$ 20.000,00 (R$ 10.000,00 BYD + R$ 10.000,00 Rede) OU Taxa 0% OU Seguro Grátis 1 ano Porto Seguro, somente para os modelos 22/23;
     <br /><br />
-    • Preço Público Sugerido (PPS) 24/25: R$ 536.800,00 (Quinhentos e Trinta e Seis Mil e Oitocentos Reais); • Margem de 12% sobre o PPS
+    • Preço Público Sugerido (PPS) 24/25: R$ 536.800,00 (Quinhentos e Trinta e Seis Mil e Oitocentos Reais);
+    <br /><br />
+    • Margem de 12% sobre o PPS
     <br /><br />
     • Test drive com desconto de 30% no valor do PPS, com pagamento à vista
     <br /><br />
@@ -56,8 +56,6 @@ export const carrosInfo = [
   {
     texto: <>
     <br/>
-    BYD HAN EV será comercializado na versão única. Todas as especificações técnicas, comparativos, fotos, etc, estarão disponíveis com nosso time de marketing (henrique.ohori@byd.com).					
-    <br/><br/>
     • Preço Público Sugerido (PPS) 23/24: R$ 539.990,00 (Quinhentos e Trinta e Nove Mil Novecentos e Noventa Reais);
     <br/><br/>
     • Margem de 12% sobre o PPS 
@@ -88,8 +86,6 @@ export const carrosInfo = [
   {
     texto: <>
     <br/>
-    BYD Song Plus DM-i será comercializado na versão única. Todas as especificações técnicas, comparativos, fotos, etc, estarão disponíveis com nosso time de marketing (henrique.ohori@byd.com).				
-    <br/><br/>
     • Preço Público Sugerido (PPS) 23/24 e 24/24: R$ 229.800,00 (Duzentos e Vinte e Nove Mil e Oitocentos Reais);				
     <br/><br/>
     • Margem de 6% sobre o PPS (Margem reduzida temporariamente conforme acordo com a ASSOBYD)					
@@ -112,8 +108,6 @@ export const carrosInfo = [
   {
     texto: <>
     <br/>
-    BYD Song Plus DM-i será comercializado na versão única. Todas as especificações técnicas, comparativos, fotos, etc, estarão disponíveis com nosso time de marketing (henrique.ohori@byd.com).				
-    <br/><br/>
     • Preço Público Sugerido (PPS) 23/24 e 24/24: R$ 229.800,00 (Duzentos e Vinte e Nove Mil e Oitocentos Reais);				
     <br/><br/>
     • Margem de 6% sobre o PPS (Margem reduzida temporariamente conforme acordo com a ASSOBYD)					
@@ -134,8 +128,6 @@ export const carrosInfo = [
   {
     texto: <>
     <br/>
-    BYD Yuan EV será comercializado na versão única. Todas as especificações técnicas, comparativos, fotos, etc, estarão disponíveis com nosso time de marketing (henrique.ohori@byd.com).	
-    <br/><br/>
     • Preço Público Sugerido (PPS )23/24: R$229.800,00 (Duzentose Vinte e Nove Mil e Oitocentos Reais);				
     <br/><br/>
     • Margem de 6% sobre o PPS (Margem reduzida temporariamente conforme acordo com a ASSOBYD)					
