@@ -277,7 +277,9 @@ export const carrosInfo = [
   {
     texto: <>
     <br/>
-    • Preço Público Sugerido (PPS) 23/24 e 24/25: R$ 115.800,00 (Cento e Quinze Mil e Oitocentos Reais); • Margem de 6% sobre o PPS
+    • Preço Público Sugerido (PPS) 23/24 e 24/25: R$ 115.800,00 (Cento e Quinze Mil e Oitocentos Reais);
+    <br/><br/>
+    • Margem de 6% sobre o PPS
     <br/><br/>
     • Test Drive Dolphin Mini EV desconto de 6% no valor do PPS, com pagamento a vista.				
     <br/><br/>
