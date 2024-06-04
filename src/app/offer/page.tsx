@@ -63,7 +63,7 @@ export default function SpecificOffer(){
 
   return (
     <Suspense>
-      <div className="w-full h-screen bg-white p-5 overflow-y-auto pb-20">
+      <div className="w-full min-h-screen h-full bg-white p-5 pb-20">
         <div className="w-full flex justify-center relative">
           <MdArrowBackIos className='text-2xl left-0 cursor-pointer absolute text-black' onClick={() => {router.push("/tab")} } />
           
@@ -78,6 +78,7 @@ export default function SpecificOffer(){
         
         <Image
           quality={100}
+          priority={true}
           className="rounded-md mt-5"
           src={carrosInfo[index].imageScr}
           alt={""}
@@ -86,8 +87,10 @@ export default function SpecificOffer(){
         ></Image>
 
         <h1 className="text-2xl xxs:text-md font-bold mt-[1rem] text-black dark:text-black">{carrosInfo[index].title}</h1>
-        {carrosInfo[index].texto}
-        <div className="absolute left-0 bottom-0 w-full flex justify-between p-5 h-20 bg-white">
+        <pre className='text-sm text-black whitespace-pre-wrap break-words'>
+          {carrosInfo[index].texto}
+        </pre>
+        <div className="fixed left-0 bottom-0 w-full flex justify-between p-5 h-20 bg-white">
           <h1 className="xs:text-lg font-bold text-black dark:text-black flex items-center xxs:text-sm">{carrosInfo[index].price}</h1>
           <button className="rounded-full xxs:text-[0.6rem] bg-blue-600 font-bold text-white xs:text-sm xs:py-[0.3rem] xs:px-[0.5rem] xxs:px-[0.5rem]" onClick={()=>{handleContact()}}>Comece uma negociação</button>
         </div>
