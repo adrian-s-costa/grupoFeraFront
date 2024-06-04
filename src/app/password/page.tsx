@@ -63,9 +63,13 @@ export default function PinCode(){
         },
         body: JSON.stringify({ credential: email, password: passwordInfo.first, confirmPassword: passwordInfo.second })
       });
-  
+      
       if (!response.ok) {
         setLoading(false);
+        const resp = await response.json()
+        if (await resp.error.length !== 0 ) {
+          throw new Error("Sua senha deve ter no mínimo 8 caracteres");
+        }
         throw new Error('Failed to log in');
       }
 
@@ -101,9 +105,9 @@ export default function PinCode(){
         setLoading(false);
         console.error('Error logging in:', error);
       }
-    } catch (error) {
+    } catch (error: any) {
       setLoading(false);
-      console.error('Error logging in:', error);
+      notify(error.message)
     }
   };
   

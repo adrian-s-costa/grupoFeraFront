@@ -6,6 +6,7 @@ import Image from "next/image";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { useState, Suspense } from "react";
+import { carrosInfo } from "../../../content";
 
 export default function SpecificOffer(){
 
@@ -13,7 +14,7 @@ export default function SpecificOffer(){
   const title = searchParams.get('title') || '';
   const price = searchParams.get('price') || '';
   const imageSrc = searchParams.get('imageSrc') || '';
-  const desc = searchParams.get('desc') || '' ;
+  const index = Number(searchParams.get('index'))
   const [contact, setContact] = useState<Boolean>(false)
   
   const router = useRouter();
@@ -46,7 +47,7 @@ export default function SpecificOffer(){
           fantasia: localStorage.getItem('user'),
           email_cliente: localStorage.getItem('email'), 
           celular_cliente: localStorage.getItem('number'), 
-          descricao: `${localStorage.getItem("user")} quer iniciar uma negociação do produto: ${title}`,
+          descricao: `${localStorage.getItem("user")} quer iniciar uma negociação do produto: ${carrosInfo[index].title}`,
           valor: price,
         })
       });
@@ -62,9 +63,9 @@ export default function SpecificOffer(){
 
   return (
     <Suspense>
-      <div className="w-full h-screen bg-white p-5">
+      <div className="w-full h-screen bg-white p-5 overflow-y-auto pb-20">
         <div className="w-full flex justify-center relative">
-          <MdArrowBackIos className='text-2xl left-0 cursor-pointer absolute text-black' onClick={() => {router.back(); } } />
+          <MdArrowBackIos className='text-2xl left-0 cursor-pointer absolute text-black' onClick={() => {router.push("/tab")} } />
           
           <Image 
             src={"https://res.cloudinary.com/dmo7nzytn/image/upload/v1716225168/lferabck_i6wp0c.png"} 
@@ -78,17 +79,16 @@ export default function SpecificOffer(){
         <Image
           quality={100}
           className="rounded-md mt-5"
-          src={imageSrc!}
+          src={carrosInfo[index].imageScr}
           alt={""}
           width={1920}
           height={1}
         ></Image>
 
-        <h1 className="text-2xl xxs:text-md font-bold mt-[1rem] text-black dark:text-black">{title!}</h1>
-        <span className='text-sm text-[#838383]'>{desc!}</span>
-
-        <div className="absolute left-0 bottom-0 w-full flex justify-between p-5">
-          <h1 className="xs:text-lg font-bold text-black dark:text-black flex items-center xxs:text-sm">R${price!}</h1>
+        <h1 className="text-2xl xxs:text-md font-bold mt-[1rem] text-black dark:text-black">{carrosInfo[index].title}</h1>
+        {carrosInfo[index].texto}
+        <div className="absolute left-0 bottom-0 w-full flex justify-between p-5 h-20 bg-white">
+          <h1 className="xs:text-lg font-bold text-black dark:text-black flex items-center xxs:text-sm">{carrosInfo[index].price}</h1>
           <button className="rounded-full xxs:text-[0.6rem] bg-blue-600 font-bold text-white xs:text-sm xs:py-[0.3rem] xs:px-[0.5rem] xxs:px-[0.5rem]" onClick={()=>{handleContact()}}>Comece uma negociação</button>
         </div>
 
