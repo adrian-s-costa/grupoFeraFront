@@ -38,11 +38,11 @@ export default function SpecificOffer(){
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': '8F0E1C73-859A-3602-FCAE-89A4FB2F9BA7'
+          'Authorization': '2047EFFE-4A85-BD7D-A918-E28C2AC780A8'
         },
         body: JSON.stringify({
-          id_usuario: "34949",
-          id_origem: localStorage.getItem('id'),
+          id_usuario: 35185,
+          id_origem: 313,
           razao_cliente: localStorage.getItem('user'),
           fantasia: localStorage.getItem('user'),
           email_cliente: localStorage.getItem('email'), 

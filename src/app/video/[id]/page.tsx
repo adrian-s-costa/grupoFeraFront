@@ -42,38 +42,47 @@ export default function Video({ params }: { params: { id: string } }) {
     theme: "light",
   });
 
-  const userName = localStorage.getItem('user')
-  const userId = localStorage.getItem('id')
+  const userName = typeof window !== "undefined" ? window.localStorage.getItem('user') : false;
+  const userId = typeof window !== "undefined" ? window.localStorage.getItem('id') : false;
+
 
   const handleContact = async () => {
     if (contact) return null;
     setContact(true);
     try {
-      const response = await fetch(`https://acesso.meets.com.br/oportunidade/salvar`,{
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': '8F0E1C73-859A-3602-FCAE-89A4FB2F9BA7'
-        },
-        body: JSON.stringify({
-          id_usuario: "34949",
-          id_origem: userId,
-          razao_cliente: userName,
-          fantasia: userName,
-          email_cliente: localStorage.getItem('email'), 
-          celular_cliente: localStorage.getItem('number'), 
-          descricao: `${localStorage.getItem("user")} se interessou pelo vídeo: ${video?.name} Disponivel em: ${video?.url}` 
-        })
-      });
-      if (!response.ok) {
-        throw new Error('Failed to fetch video');
-      }
-      const responseData = await response.json();
-      notify();
+        const response = await fetch(`https://acesso.meets.com.br/oportunidade/salvar`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': '2047EFFE-4A85-BD7D-A918-E28C2AC780A8'
+            },
+            body: JSON.stringify({
+                id_usuario: 35185,
+                id_origem: 313,
+                razao_cliente: userName,
+                fantasia: userName,
+                email_cliente: localStorage.getItem('email'), 
+                celular_cliente: localStorage.getItem('number'), 
+                produtos: `Streaming - ${video?.name}`,
+                valor: "0,00",
+                descricao: `Streaming - ${video?.name} - 
+                ${localStorage.getItem("user")} se interessou pelo vídeo: ${video?.name} Disponivel em: ${video?.url}`,
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to fetch: ${response.statusText}`);
+        }
+
+        const responseData = await response.json();
+        notify();  // Notifica o usuário em caso de sucesso
     } catch (error) {
-      console.error('Error fetching video:', error);
-    }
-  }
+        console.error('Error fetching video:', error);
+    } finally {
+        setContact(false);  
+      }
+  };
+
 
   const handleLike = async (action: string) => {
     try {
