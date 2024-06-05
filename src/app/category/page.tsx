@@ -6,15 +6,10 @@ import Image from "next/image";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { useState, Suspense } from "react";
-import { carrosInfo } from "../../../content";
 
-export default function SpecificOffer(){
-
+export default function CategoryPage(){
   const searchParams = useSearchParams();
-  const title = searchParams.get('title') || '';
-  const price = searchParams.get('price') || '';
-  const imageSrc = searchParams.get('imageSrc') || '';
-  const index = Number(searchParams.get('index'))
+  const name = searchParams.get('name') || '';
   const [contact, setContact] = useState<Boolean>(false)
   
   const router = useRouter();
@@ -47,8 +42,8 @@ export default function SpecificOffer(){
           fantasia: localStorage.getItem('user'),
           email_cliente: localStorage.getItem('email'), 
           celular_cliente: localStorage.getItem('number'), 
-          descricao: `${localStorage.getItem("user")} quer iniciar uma negociação do produto: ${carrosInfo[index].title}`,
-          valor: price,
+          descricao: `${localStorage.getItem("user")} quer iniciar uma negociação do produto: `,
+          valor: ''
         })
       });
       if (!response.ok) {
@@ -75,23 +70,10 @@ export default function SpecificOffer(){
           
         </div>
         
-        <Image
-          quality={100}
-          priority={true}
-          className="rounded-md mt-5"
-          src={carrosInfo[index].imageScr}
-          alt={""}
-          width={1920}
-          height={1}
-        ></Image>
-
-        <h1 className="text-2xl xxs:text-md font-bold mt-[1rem] text-black dark:text-black">{carrosInfo[index].title}</h1>
-        <pre className='text-sm text-black whitespace-pre-wrap break-words font-inter'>
-          {carrosInfo[index].texto}
-        </pre>
+        <h1 className="text-2xl xxs:text-md font-bold mt-[1rem] text-black dark:text-black">{name}</h1>
         <div className="fixed left-0 bottom-0 w-full flex justify-between p-5 h-20 bg-white">
-          <h1 className="xs:text-lg font-bold text-black dark:text-black flex items-center xxs:text-sm">{carrosInfo[index].price}</h1>
-          <button className="rounded-full xxs:text-[0.6rem] bg-blue-600 font-bold text-white xs:text-sm xs:py-[0.3rem] xs:px-[0.5rem] xxs:px-[0.5rem]" onClick={()=>{handleContact()}}>Comece uma negociação</button>
+          <h1 className="xs:text-lg font-bold text-black dark:text-black flex items-center xxs:text-sm">Teste</h1>
+          <button className="rounded-full xxs:text-[0.6rem] bg-blue-600 font-bold text-white xs:text-sm xs:py-[0.3rem] xs:px-[0.5rem] xxs:px-[0.5rem]" onClick={()=>{}}>Teste</button>
         </div>
 
         <ToastContainer
@@ -106,7 +88,6 @@ export default function SpecificOffer(){
           pauseOnHover
           theme="light"
         />
-      
       </div>
   )   
 }

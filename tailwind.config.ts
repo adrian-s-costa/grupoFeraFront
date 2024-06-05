@@ -19,6 +19,9 @@ const config: Config = {
         'xxs': '100px',
         'xs': '380px'
       },
+      fontFamily: {
+        'inter': ['__Inter_aaf875']
+      }
     },
   },
   plugins: [
