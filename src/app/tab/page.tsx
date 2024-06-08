@@ -36,7 +36,7 @@ export default function HomeTab(){
         </TabPanel>
       </TabPanels>
 
-      <TabList className="fixed z-10 h-10 bg-white bottom-0 w-full justify-around">
+      <TabList className="fixed z-10 h-20 bg-white bottom-0 w-full justify-around">
         <Tab><RiHome5Line className="text-2xl text-black dark:text-black"/></Tab>
         <Tab><LuAirplay className="text-2xl text-black dark:text-black"/></Tab>
         <Tab><IoPersonOutline className="text-2xl text-black dark:text-black"/></Tab>

@@ -22,22 +22,9 @@ async function getVideoById(videoId: string) {
   return res.json()
 }
 
-function getMobileOperatingSystem() {
-  const userAgent = navigator.userAgent || navigator.vendor;
 
-  if (/iPad|iPhone|iPod/.test(userAgent) && !/android/i.test(userAgent)) {
-      return 'iOS';
-  }
-
-  if (/android/i.test(userAgent)) {
-      return 'Android';
-  }
-
-  return 'unknown';
-}
 
 export {
   getVideos,
   getVideoById,
-  getMobileOperatingSystem
 }

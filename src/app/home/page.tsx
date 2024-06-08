@@ -6,14 +6,10 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { carrosInfo } from "../../../content";
 import { Badge } from "flowbite-react";
-import { getMobileOperatingSystem } from "../../../api/service";
 
 export default function Home(){
   const [viewportWidth, setViewportWidth] = useState<number>(0);
   const router = useRouter()
-  const os = getMobileOperatingSystem();
-
-  localStorage.setItem('os', os);
 
   const categories = [
     {
@@ -50,7 +46,7 @@ export default function Home(){
 
   return(
     <div className="w-full min-h-screen h-auto bg-white p-5 text-black dark:text-black xxs:mb-0 xs:mb-10">
-      <h1 className="xs:text-3xl xxs:text-2xl font-bold ">Fala, {os}</h1>
+      <h1 className="xs:text-3xl xxs:text-2xl font-bold ">Fala, {firstName}</h1>
       <span className="xxs:text-sm xs:text-base">ou devo te chamar de Fera?</span>
       <div className="my-5 h-auto relative">
         <video className="rounded-lg" width={viewportWidth} autoPlay={true} muted={true} loop={true} controls={true} playsInline>
