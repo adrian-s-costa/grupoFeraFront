@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import PasswordInput from '../_components/passwordInput/passInput';
 import { config } from '../../../config';
 import Loader from '../loader/page';
+import { getMobileOperatingSystem } from '../../../api/service';
 
 export default function Login(){
 

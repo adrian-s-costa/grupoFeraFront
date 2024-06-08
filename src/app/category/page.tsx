@@ -6,6 +6,7 @@ import Image from "next/image";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { useState, Suspense } from "react";
+import { Carousel } from "flowbite-react";
 
 export default function CategoryPage(){
   const searchParams = useSearchParams();
@@ -70,7 +71,18 @@ export default function CategoryPage(){
           
         </div>
         
-        <h1 className="text-2xl xxs:text-md font-bold mt-[1rem] text-black dark:text-black">{name}</h1>
+        <h1 className="xs:text-2xl xxs:text-md font-bold my-[1rem] text-black dark:text-black">{name}</h1>
+
+        <div className="xs:h-72 xxs:h-52">
+          <Carousel>
+            <img src="https://flowbite.com/docs/images/carousel/carousel-1.svg" alt="..." />
+            <img src="https://flowbite.com/docs/images/carousel/carousel-2.svg" alt="..." />
+            <img src="https://flowbite.com/docs/images/carousel/carousel-3.svg" alt="..." />
+            <img src="https://flowbite.com/docs/images/carousel/carousel-4.svg" alt="..." />
+            <img src="https://flowbite.com/docs/images/carousel/carousel-5.svg" alt="..." />
+          </Carousel>
+        </div>
+
         <div className="fixed left-0 bottom-0 w-full flex justify-between p-5 h-20 bg-white">
           <h1 className="xs:text-lg font-bold text-black dark:text-black flex items-center xxs:text-sm">Teste</h1>
           <button className="rounded-full xxs:text-[0.6rem] bg-blue-600 font-bold text-white xs:text-sm xs:py-[0.3rem] xs:px-[0.5rem] xxs:px-[0.5rem]" onClick={()=>{}}>Teste</button>
