@@ -9,11 +9,11 @@ export const carrosInfo = [
     • 5 Revisões grátis  
     <br/><br/>
     • Test drive com desconto de 15% no valor do PPS, com pagamento à vista 	  
-    </>,
-    title: "BYD Dolphin Plus EV 2023",
-    desc: "Sem trade-in",
-    price: "R$ 179.800.00	",
-    imageScr: "https://res.cloudinary.com/dmo7nzytn/image/upload/v1717452819/grupo-fera/images/carros/10_i1mv5b.png"
+    </>, //TEXTO QUE APARECE DENTRO DA OFERTA
+    title: "BYD Dolphin Plus EV 2023", //TITULO DO CARD NA HOME
+    desc: "Sem trade-in", //DESCRIÇÃO DO CARD NA HOME
+    price: "R$ 179.800.00", //PREÇO DO CARRO
+    imageScr: "https://res.cloudinary.com/dmo7nzytn/image/upload/v1717452819/grupo-fera/images/carros/10_i1mv5b.png" //LINK DA IMAGEM DO CARRO
   },
   {
     texto: <>
