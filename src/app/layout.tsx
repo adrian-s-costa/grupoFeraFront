@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 const APP_NAME = "Grupo Fera";
@@ -56,7 +57,11 @@ export default function RootLayout({
 }>) {
 
   return (
+    
     <html lang="pt-br">
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+      </Head>
       <body className={inter.className}>{children}</body>
     </html>
   );
