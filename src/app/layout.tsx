@@ -46,7 +46,11 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#23306d",
+  themeColor: "#ffffff",
+  width: 'device-width',
+  initialScale: 1.0,
+  maximumScale: 1.0,
+  userScalable: false
 };
 
 
@@ -58,10 +62,7 @@ export default function RootLayout({
 
   return (
     
-    <html lang="pt-br">
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-      </Head>
+    <html lang="pt-br" className="touch-pan-y">
       <body className={inter.className}>{children}</body>
     </html>
   );
