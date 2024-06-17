@@ -12,7 +12,6 @@ import { Badge } from "flowbite-react";
 import ReadMore from "../_components/readMore/readMore";
 
 export default function SpecificOffer(){
-
   const searchParams = useSearchParams();
   const title = searchParams.get('title') || '';
   const price = searchParams.get('price') || '';

@@ -4,29 +4,36 @@ import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import Home from "../home/page";
 import Streaming from "../streaming/page";
 import Profile from "../profile/page";
-import { LuAirplay, LuHeart } from "react-icons/lu";
-import { IoPersonOutline } from "react-icons/io5";
-import { RiHome5Line } from "react-icons/ri";
-import { useEffect } from "react";
+import { LuAirplay } from "react-icons/lu";
+import { IoPersonOutline, IoPerson } from "react-icons/io5";
+import { RiHome5Fill, RiHome5Line } from "react-icons/ri";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from 'next/navigation'
+import { PiAirplayFill } from "react-icons/pi";
+
 
 
 export default function HomeTab(){
   const router = useRouter();
   const searchParams = useSearchParams()
   const options = searchParams.get('options')
+  const [tabIndex, setTabIndex] = useState(0)
 
   useEffect(()=>{
 
   }, [])
 
+  const handleTabsChange = (index: number) => {
+    setTabIndex(index)
+  }
+
 
   return(
-    <Tabs defaultIndex={options ? Number(options) : 0 }>
+    <Tabs defaultIndex={options ? Number(options) : 0 } index={tabIndex} onChange={handleTabsChange}>
       <TabPanels>
         <TabPanel>
-          <Home/>
+          <Home setTabIndex={setTabIndex} />
         </TabPanel>
         <TabPanel>
           <Streaming/>
@@ -37,9 +44,9 @@ export default function HomeTab(){
       </TabPanels>
 
       <TabList className="fixed z-10 h-10 bg-white bottom-0 w-full justify-around">
-        <Tab><RiHome5Line className="text-2xl text-black dark:text-black"/></Tab>
-        <Tab><LuAirplay className="text-2xl text-black dark:text-black"/></Tab>
-        <Tab><IoPersonOutline className="text-2xl text-black dark:text-black"/></Tab>
+        <Tab>{tabIndex == 0 ? <RiHome5Fill className="text-2xl text-black dark:text-black"/> : <RiHome5Line className="text-2xl text-black dark:text-black"/>}</Tab>
+        <Tab>{tabIndex == 1 ? <PiAirplayFill className="text-2xl text-black dark:text-black"/> : <LuAirplay className="text-2xl text-black dark:text-black"/>}</Tab>
+        <Tab>{tabIndex == 2 ? <IoPerson className="text-2xl text-black dark:text-black"/> : <IoPersonOutline className="text-2xl text-black dark:text-black"/>}</Tab>
       </TabList>
     </Tabs>
   )

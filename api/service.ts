@@ -11,6 +11,28 @@ async function getVideos() {
   return res.json()
 }
 
+async function getCategories() {
+  const res = await fetch(config.API_URL + `/texts/categories`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      "ngrok-skip-browser-warning": "69420"
+    },
+  })
+  return res.json()
+}
+
+async function getHomeCategories() {
+  const res = await fetch(config.API_URL + `/texts/home/categories`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      "ngrok-skip-browser-warning": "69420"
+    },
+  })
+  return res.json()
+}
+
 async function getVideoById(videoId: string) {
   const res = await fetch(config.API_URL + `/videos/${videoId}`, {
     method: 'GET',
@@ -23,8 +45,9 @@ async function getVideoById(videoId: string) {
 }
 
 
-
 export {
   getVideos,
   getVideoById,
+  getCategories,
+  getHomeCategories
 }

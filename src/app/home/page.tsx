@@ -7,27 +7,22 @@ import { useRouter } from "next/navigation";
 import { carrosInfo } from "../../../content";
 import { Badge } from "flowbite-react";
 import Loader from "../loader/page";
+import { getHomeCategories } from "../../../api/service";
 
-export default function Home(){
+export default function Home({setTabIndex}: any){
+  const [ homeCategories, setHomeCategories ] = useState<any>()
   const [viewportWidth, setViewportWidth] = useState<number>(0);
   const router = useRouter()
 
-  const categories = [
-    {
-      categoryName: "Acessórios Automotivos"
-    },
-    {
-      categoryName: "Blindagem"
-    },
-    {
-      categoryName: "BYD por Assinatura"
-    },
-    {
-      categoryName: "Proteção Veícular"
-    }
-  ]
-
   useEffect(() => {
+    try {
+      getHomeCategories().then((res)=>{
+        setHomeCategories(res);
+      })
+    } catch (error) {
+      console.error(error)
+    }
+
     const handleResize = () => {
       setViewportWidth(window.innerWidth);
     };
@@ -47,7 +42,7 @@ export default function Home(){
 
   return(
     <>
-    { !fullName || firstName == '' ? <Loader/> : null }
+    { !fullName || firstName == '' || !homeCategories ? <Loader/> : null }
     <div className="w-full min-h-screen h-auto bg-white p-5 text-black dark:text-black xxs:mb-0 xs:mb-10">
       <h1 className="xs:text-3xl xxs:text-2xl font-bold ">Fala, {!fullName ? '' : firstName}</h1>
       <span className="xxs:text-sm xs:text-base">ou devo te chamar de Fera?</span>
@@ -55,8 +50,8 @@ export default function Home(){
         <video className="rounded-lg" width={viewportWidth} autoPlay={true} muted={true} loop={true} controls={true} playsInline>
           <source src={`https://res.cloudinary.com/dmo7nzytn/video/upload/v1715727314/fera_hv10wj.mp4`} type="video/mp4"/>  
         </video>
-        <div className="absolute bg-gray-400/50 p-2 rounded-md bottom-4 left-4 z-10 cursor-pointer">
-          <span className="opacity-100 text-white" onClick={()=>{router.push('/tab?options=1')}}>Mais videos</span>
+        <div className="absolute bg-gray-400/50 p-2 rounded-md bottom-4 left-4 z-10 cursor-pointer" onClick={()=>{setTabIndex(1)}}>
+          <span className="opacity-100 text-white">Mais videos</span>
         </div>
       </div>
       <div className="flex justify-between mb-3">
@@ -64,10 +59,11 @@ export default function Home(){
         <h1 className="xs:text-xl xxs:text-base font-semibold text-red-600">Ver todas</h1>
       </div>
       <div className="flex justify-between">
-        <div className="max-w-20 flex flex-col gap-2 cursor-pointer" onClick={()=>{router.push(`/category?name=${categories[0].categoryName}`)}}>
+        {homeCategories && homeCategories.map((category: any, index: number)=>{
+          return <div className="max-w-20 flex flex-col gap-2 cursor-pointer" onClick={()=>{router.push(`/category?name=${category.name}`)}} key={index}>
           <div className="xs:w-20 xxs:w-[3.5rem] xxs:h-[3.5rem] xs:h-20 flex justify-center items-center max-w-20 bg-[#F3F5F7] rounded-lg">
             <Image
-            src={"https://res.cloudinary.com/dmo7nzytn/image/upload/v1715726211/grupo-fera/icons/eletric_p4x05f.png"}
+            src={category.imgSrc}
             priority={true}
             width={50}
             height={50}
@@ -76,50 +72,9 @@ export default function Home(){
             alt="category"
             ></Image>
           </div>
-          <span className="xxs:text-[0.6rem] xs:max-w-20 xxs:max-w-10 xs:text-[0.9rem] ">Acessórios Automotivos</span>
+          <span className="xxs:text-[0.6rem] xs:max-w-20 xxs:max-w-10 xs:text-[0.9rem] ">{category.name}</span>
         </div>
-        
-        <div className="max-w-20 flex flex-col gap-2 cursor-pointer" onClick={()=>{router.push(`/category?name=${categories[1].categoryName}`)}}>
-          <div className="xs:w-20 xxs:w-[3.5rem] xxs:h-[3.5rem] xs:h-20 flex justify-center items-center  bg-[#F3F5F7] rounded-lg">
-            <Image
-            src={"https://res.cloudinary.com/dmo7nzytn/image/upload/v1715726211/grupo-fera/icons/gasoline_bauvwp.png"}
-            priority={true}
-            width={50}
-            height={50}
-            className="xxs:w-[2rem] xxs:h-[2rem] xs:w-[3.125rem] xs:h-[3.125rem]"
-            alt="category"
-            ></Image>
-          </div>
-          <span className="xxs:text-[0.6rem] xs:max-w-20 xxs:max-w-10 xs:text-[0.9rem]">Blindagem</span>
-        </div>
-        
-        <div className="max-w-20 flex flex-col gap-2 cursor-pointer" onClick={()=>{router.push(`/category?name=${categories[2].categoryName}`)}}>
-          <div className="xs:w-20 xxs:w-[3.5rem] xxs:h-[3.5rem] xs:h-20 flex justify-center items-center bg-[#F3F5F7] rounded-lg">
-            <Image
-            src={"https://res.cloudinary.com/dmo7nzytn/image/upload/v1715726210/grupo-fera/icons/acessory_hyzyjb.png"}
-            priority={true}
-            width={50}
-            height={50}
-            className="xxs:w-[2rem] xxs:h-[2rem] xs:w-[3.125rem] xs:h-[3.125rem]"
-            alt="category"
-            ></Image>
-          </div>
-          <span className="xxs:text-[0.6rem] xs:max-w-20 xxs:max-w-10 xs:text-[0.9rem]">BYD por Assinatura</span>
-        </div>
-        
-        <div className="max-w-20 flex flex-col gap-2 cursor-pointer" onClick={()=>{router.push(`/category?name=${categories[3].categoryName}`)}}>
-          <div className="xs:w-20 xxs:w-[3.5rem] xxs:h-[3.5rem] xs:h-20 flex justify-center items-center bg-[#F3F5F7] rounded-lg">
-            <Image
-            src={"https://res.cloudinary.com/dmo7nzytn/image/upload/v1715726211/grupo-fera/icons/service_e6kz4v.png"}
-            priority={true}
-            width={50}
-            height={50}
-            className="xxs:w-[2rem] xxs:h-[2rem] xs:w-[3.125rem] xs:h-[3.125rem]"
-            alt="category"
-            ></Image>
-          </div>
-          <span className="xxs:text-[0.6rem] xs:max-w-20 xxs:max-w-10 xs:text-[0.9rem]">Proteção Veícular</span>
-        </div>      
+        })}     
       </div>
       
       <div className="xs:mt-8 xxs:mt-5">

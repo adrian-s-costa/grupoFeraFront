@@ -4,7 +4,7 @@ import Image from "next/image"
 import logo from './Logo.png'
 import { GoBell, GoSearch } from "react-icons/go";
 import { IoCompassOutline } from "react-icons/io5";
-import { getVideos, getVideoById } from "../../../api/service";
+import { getVideos, getVideoById, getCategories } from "../../../api/service";
 import Thumbs from "./components/thumbs";
 import { useEffect, useState } from "react";
 
@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 export default function Streaming(){
 
   const [videos, setVideos] = useState<any>()
+  const [categories, setCategories] = useState<any>()
   const [activeTag, setActiveTag] = useState<string>('Todos')
   const [searchBar, setSearchBar] = useState<string>('')
   const [searchBarState, setSearchBarState] = useState<number>(1)
@@ -20,13 +21,17 @@ export default function Streaming(){
     return setSearchBarState( searchBarState * -1);
   }
 
-  async function getVideosFunc() {
-    return await getVideos();
-  }
-
   useEffect(()=>{
     try {
-      getVideosFunc().then((res)=>{
+      getCategories().then((res)=>{
+        setCategories(res)
+      })
+    } catch (error){
+      console.log(error)
+    }
+
+    try {
+      getVideos().then((res)=>{
         setVideos(res)
       })
     } catch (error){
@@ -67,13 +72,9 @@ export default function Streaming(){
         <div className="border-r-2 border-[#CECECE] mx-2"/>
 
         <div className="overflow-x-scroll flex gap-4 w-auto items-center">
-          <button className="border-2 xs:text-base xxs:text-sm border-[#CECECE] rounded-full w-auto whitespace-nowrap px-5 text-black dark:text-black" onClick={()=>{setActiveTag("Todos")}}>Todos</button>
-          <button className="border-2 xs:text-base xxs:text-sm border-[#CECECE] rounded-full w-auto whitespace-nowrap px-5 text-black dark:text-black" onClick={()=>{setActiveTag("Bateria")}}>Baterias</button>
-          <button className="border-2 xs:text-base xxs:text-sm border-[#CECECE] rounded-full w-auto whitespace-nowrap px-5 text-black dark:text-black" onClick={()=>{setActiveTag("Reposição")}}>Peças reposição</button>
-          <button className="border-2 xs:text-base xxs:text-sm border-[#CECECE] rounded-full w-auto whitespace-nowrap px-5 text-black dark:text-black" onClick={()=>{setActiveTag("Modelos")}}>Modelos BYD</button>
-          <button className="border-2 xs:text-base xxs:text-sm border-[#CECECE] rounded-full w-auto whitespace-nowrap px-5 text-black dark:text-black" onClick={()=>{setActiveTag("BYD")}}>BYD</button>
-          <button className="border-2 xs:text-base xxs:text-sm border-[#CECECE] rounded-full w-auto whitespace-nowrap px-5 text-black dark:text-black" onClick={()=>{setActiveTag("Carregadores")}}>Carregadores</button>
-          <button className="border-2 xs:text-base xxs:text-sm border-[#CECECE] rounded-full w-auto whitespace-nowrap px-5 text-black dark:text-black" onClick={()=>{setActiveTag("Blindagem")}}>Blindagem</button>
+          {categories && categories.map((category: any, index: number)=>{
+            return <button key={index} className="border-2 xs:text-base xxs:text-sm border-[#CECECE] rounded-full w-auto whitespace-nowrap px-5 text-black dark:text-black" onClick={()=>{setActiveTag(category.value)}}>{category.name}</button>          
+          })}
         </div>
       </div>
     </div>
