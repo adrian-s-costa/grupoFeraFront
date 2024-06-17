@@ -7,6 +7,9 @@ import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { useState, Suspense } from "react";
 import { carrosInfo } from "../../../content";
+import Link from "next/link";
+import { Badge } from "flowbite-react";
+import ReadMore from "../_components/readMore/readMore";
 
 export default function SpecificOffer(){
 
@@ -86,9 +89,26 @@ export default function SpecificOffer(){
         ></Image>
 
         <h1 className="text-2xl xxs:text-md font-bold mt-[1rem] text-black dark:text-black">{carrosInfo[index].title}</h1>
-        <pre className='text-sm text-black whitespace-pre-wrap break-words font-inter'>
-          {carrosInfo[index].texto}
-        </pre>
+        <ReadMore text={carrosInfo[index].texto} maxLength={100} />
+
+        <div className="xs:mt-8 xxs:mt-5">
+          <div className="flex overflow-x-scroll gap-3">
+            {carrosInfo.map((carro, index)=>{
+              return <Link
+                href={{
+                  pathname: '/offer',
+                  query: { index },
+                }}
+                key={index}
+                className="relative"
+              >
+                <Badge color="warning" size="sm" className={ carro.title.includes('Dolphin') ? `block absolute right-2 top-2` : `hidden`}>Dolphin Day!</Badge>
+                <Image quality={100} priority={true} className="xxs:w-[202px] xxs:h-[117px] xs:w-[232px] xs:h-[147px] rounded-lg mb-2 xs:min-w-[232px] xs:min-h-[147px] xxs:min-w-[202px] xxs:min-h-[117px] bg-cover" src={carro.imageScr!} alt={""} width={230} height={125}/>
+              </Link>
+            })}
+          </div>
+        </div>
+
         <div className="fixed left-0 bottom-0 w-full flex justify-between p-5 h-20 bg-white">
           <h1 className="xs:text-lg font-bold text-black dark:text-black flex items-center xxs:text-sm">{carrosInfo[index].price}</h1>
           <button className="rounded-full xxs:text-[0.6rem] bg-blue-600 font-bold text-white xs:text-sm xs:py-[0.3rem] xs:px-[0.5rem] xxs:px-[0.5rem]" onClick={()=>{handleContact()}}>Comece uma negociação</button>

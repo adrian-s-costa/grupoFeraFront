@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { carrosInfo } from "../../../content";
 import { Badge } from "flowbite-react";
+import Loader from "../loader/page";
 
 export default function Home(){
   const [viewportWidth, setViewportWidth] = useState<number>(0);
@@ -45,8 +46,10 @@ export default function Home(){
   const firstName = fullName ? fullName.split(' ')[0] : '';
 
   return(
+    <>
+    { !fullName || firstName == '' ? <Loader/> : null }
     <div className="w-full min-h-screen h-auto bg-white p-5 text-black dark:text-black xxs:mb-0 xs:mb-10">
-      <h1 className="xs:text-3xl xxs:text-2xl font-bold ">Fala, {firstName}</h1>
+      <h1 className="xs:text-3xl xxs:text-2xl font-bold ">Fala, {!fullName ? '' : firstName}</h1>
       <span className="xxs:text-sm xs:text-base">ou devo te chamar de Fera?</span>
       <div className="my-5 h-auto relative">
         <video className="rounded-lg" width={viewportWidth} autoPlay={true} muted={true} loop={true} controls={true} playsInline>
@@ -64,7 +67,7 @@ export default function Home(){
         <div className="max-w-20 flex flex-col gap-2 cursor-pointer" onClick={()=>{router.push(`/category?name=${categories[0].categoryName}`)}}>
           <div className="xs:w-20 xxs:w-[3.5rem] xxs:h-[3.5rem] xs:h-20 flex justify-center items-center max-w-20 bg-[#F3F5F7] rounded-lg">
             <Image
-            src={"https://res.cloudinary.com/dmo7nzytn/image/upload/v1715726211/eletric_p4x05f.png"}
+            src={"https://res.cloudinary.com/dmo7nzytn/image/upload/v1715726211/grupo-fera/icons/eletric_p4x05f.png"}
             priority={true}
             width={50}
             height={50}
@@ -79,7 +82,7 @@ export default function Home(){
         <div className="max-w-20 flex flex-col gap-2 cursor-pointer" onClick={()=>{router.push(`/category?name=${categories[1].categoryName}`)}}>
           <div className="xs:w-20 xxs:w-[3.5rem] xxs:h-[3.5rem] xs:h-20 flex justify-center items-center  bg-[#F3F5F7] rounded-lg">
             <Image
-            src={"https://res.cloudinary.com/dmo7nzytn/image/upload/v1715726211/gasoline_bauvwp.png"}
+            src={"https://res.cloudinary.com/dmo7nzytn/image/upload/v1715726211/grupo-fera/icons/gasoline_bauvwp.png"}
             priority={true}
             width={50}
             height={50}
@@ -93,7 +96,7 @@ export default function Home(){
         <div className="max-w-20 flex flex-col gap-2 cursor-pointer" onClick={()=>{router.push(`/category?name=${categories[2].categoryName}`)}}>
           <div className="xs:w-20 xxs:w-[3.5rem] xxs:h-[3.5rem] xs:h-20 flex justify-center items-center bg-[#F3F5F7] rounded-lg">
             <Image
-            src={"https://res.cloudinary.com/dmo7nzytn/image/upload/v1715726210/acessory_hyzyjb.png"}
+            src={"https://res.cloudinary.com/dmo7nzytn/image/upload/v1715726210/grupo-fera/icons/acessory_hyzyjb.png"}
             priority={true}
             width={50}
             height={50}
@@ -107,7 +110,7 @@ export default function Home(){
         <div className="max-w-20 flex flex-col gap-2 cursor-pointer" onClick={()=>{router.push(`/category?name=${categories[3].categoryName}`)}}>
           <div className="xs:w-20 xxs:w-[3.5rem] xxs:h-[3.5rem] xs:h-20 flex justify-center items-center bg-[#F3F5F7] rounded-lg">
             <Image
-            src={"https://res.cloudinary.com/dmo7nzytn/image/upload/v1715726211/service_e6kz4v.png"}
+            src={"https://res.cloudinary.com/dmo7nzytn/image/upload/v1715726211/grupo-fera/icons/service_e6kz4v.png"}
             priority={true}
             width={50}
             height={50}
@@ -143,5 +146,6 @@ export default function Home(){
         </div>
       </div>
     </div>
+    </>
   )
 }

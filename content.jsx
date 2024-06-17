@@ -1,15 +1,13 @@
 //CARROS EM OFERTA
 
 export const carrosInfo = [
-    {
-    texto: <>
-    <br/>
+  {
+    texto:`
     • Taxa 0% em 24x + Seguro Grátis 1 ano Porto Seguro;    
-    <br/><br/>
+    
     • 5 Revisões grátis  
-    <br/><br/>
-    • Test drive com desconto de 15% no valor do PPS, com pagamento à vista 	  
-    </>, //TEXTO QUE APARECE DENTRO DA OFERTA
+    
+    • Test drive com desconto de 15% no valor do PPS, com pagamento à vista`, //TEXTO QUE APARECE DENTRO DA OFERTA
     title: "BYD Dolphin Plus EV 2023", //TITULO DO CARD NA HOME
     desc: "Sem trade-in", //DESCRIÇÃO DO CARD NA HOME
     price: "R$ 179.800.00", //PREÇO DO CARRO
