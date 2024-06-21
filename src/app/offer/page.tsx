@@ -5,19 +5,28 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import { useState, Suspense } from "react";
+import { useState, Suspense, useEffect } from "react";
 import { carrosInfo } from "../../../content";
 import Link from "next/link";
 import { Badge } from "flowbite-react";
 import ReadMore from "../_components/readMore/readMore";
+import { getOneCampaign } from "../../../api/service";
 
 export default function SpecificOffer(){
   const searchParams = useSearchParams();
-  const title = searchParams.get('title') || '';
-  const price = searchParams.get('price') || '';
-  const imageSrc = searchParams.get('imageSrc') || '';
-  const index = Number(searchParams.get('index'))
-  const [contact, setContact] = useState<Boolean>(false)
+  const id = searchParams.get('id');
+  const [contact, setContact] = useState<Boolean>(false);
+  const [carOffer, setCarOffer] = useState<any>();
+
+  useEffect(() => {
+    try {
+      getOneCampaign(id).then((res)=>{
+        setCarOffer(res);
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  }, [])
   
   const router = useRouter();
 
@@ -49,8 +58,8 @@ export default function SpecificOffer(){
           fantasia: localStorage.getItem('user'),
           email_cliente: localStorage.getItem('email'), 
           celular_cliente: localStorage.getItem('number'), 
-          descricao: `${localStorage.getItem("user")} quer iniciar uma negociação do produto: ${carrosInfo[index].title}`,
-          valor: price,
+          descricao: `${localStorage.getItem("user")} quer iniciar uma negociação do produto: ${carOffer.title}`,
+          valor: carOffer.price,
         })
       });
       if (!response.ok) {
@@ -81,35 +90,31 @@ export default function SpecificOffer(){
           quality={100}
           priority={true}
           className="rounded-md mt-5"
-          src={carrosInfo[index].imageScr}
+          src={carOffer && carOffer.imgSrc}
           alt={""}
           width={1920}
           height={1}
         ></Image>
 
-        <h1 className="text-2xl xxs:text-md font-bold mt-[1rem] text-black dark:text-black">{carrosInfo[index].title}</h1>
-        <ReadMore text={carrosInfo[index].texto} maxLength={100} />
+        <h1 className="text-2xl xxs:text-md font-bold mt-[1rem] text-black dark:text-black">{carOffer && carOffer.title}</h1>
+        {!carOffer ? null : <ReadMore text={carOffer && carOffer.texto!} maxLength={100} />}
 
         <div className="xs:mt-8 xxs:mt-5">
           <div className="flex overflow-x-scroll gap-3">
-            {carrosInfo.map((carro, index)=>{
-              return <Link
-                href={{
-                  pathname: '/offer',
-                  query: { index },
-                }}
-                key={index}
+            {carOffer && carOffer.secondaryImgs.map((carro: any, index: any)=>{
+              return <div
                 className="relative"
+                key={carro.id}
               >
-                <Badge color="warning" size="sm" className={ carro.title.includes('Dolphin') ? `block absolute right-2 top-2` : `hidden`}>Dolphin Day!</Badge>
-                <Image quality={100} priority={true} className="xxs:w-[202px] xxs:h-[117px] xs:w-[232px] xs:h-[147px] rounded-lg mb-2 xs:min-w-[232px] xs:min-h-[147px] xxs:min-w-[202px] xxs:min-h-[117px] bg-cover" src={carro.imageScr!} alt={""} width={230} height={125}/>
-              </Link>
+                {/* <Badge color="warning" size="sm">Dolphin Day!</Badge> */}
+                <Image quality={100} priority={true} className="xxs:w-[202px] xxs:h-[117px] xs:w-[232px] xs:h-[147px] rounded-lg mb-2 xs:min-w-[232px] xs:min-h-[147px] xxs:min-w-[202px] xxs:min-h-[117px] bg-cover" src={carro.imgSrc!} alt={""} width={230} height={125}/>
+              </div>
             })}
           </div>
         </div>
 
         <div className="fixed left-0 bottom-0 w-full flex justify-between p-5 h-20 bg-white">
-          <h1 className="xs:text-lg font-bold text-black dark:text-black flex items-center xxs:text-sm">{carrosInfo[index].price}</h1>
+          <h1 className="xs:text-lg font-bold text-black dark:text-black flex items-center xxs:text-sm">{carOffer && carOffer.price}</h1>
           <button className="rounded-full xxs:text-[0.6rem] bg-blue-600 font-bold text-white xs:text-sm xs:py-[0.3rem] xs:px-[0.5rem] xxs:px-[0.5rem]" onClick={()=>{handleContact()}}>Comece uma negociação</button>
         </div>
 

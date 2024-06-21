@@ -29,7 +29,18 @@ export default function Video({ params }: { params: { id: string } }) {
   const [video, setVideo] = useState<Video | null>(null);
   const [comment, setComment] = useState<string | null>(null);
   const [like, setLike] = useState<Boolean>(false);
-  const [contact, setContact] = useState<Boolean>(false)
+  const [contact, setContact] = useState<Boolean>(false);
+  const [activeCommentId, setActiveCommentId] = useState<any>(null);
+  const [answer, setAnswer] = useState<string | null>(null);
+
+
+  const handleReplyClick = (id: any) => {
+    if (activeCommentId === id) {
+      setActiveCommentId(null); // Fechar se já estiver aberto
+    } else {
+      setActiveCommentId(id);
+    }
+  };
 
   const notify = () => toast.success('Recebemos o seu contato e em breve um vendedor entrará em contato!', {
     position: "top-center",
@@ -157,8 +168,27 @@ export default function Video({ params }: { params: { id: string } }) {
       if (!response.ok) {
         throw new Error('Failed to fetch video');
       }
-      const videoData = await response.json();
-      setVideo(videoData);
+      fetchVideoData();
+    } catch (error) {
+      console.error('Error fetching video:', error);
+    }
+  };
+
+  const postAnswer = async (commentId: any) => {
+    try {
+      const response = await fetch(`${config.API_URL}/videos/${params.id}/comment/${commentId}`,{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          "ngrok-skip-browser-warning": "69420"
+        },
+        body: JSON.stringify({name: "Felipe Fera", time: 'notNull', answer})
+      });
+      if (!response.ok) {
+        throw new Error('Failed to fetch video');
+      }
+      setActiveCommentId(null);
+      fetchVideoData();
     } catch (error) {
       console.error('Error fetching video:', error);
     }
@@ -242,6 +272,30 @@ export default function Video({ params }: { params: { id: string } }) {
               <span className="text-xs ml-1 text-[#6C6C6C]">{comment.time}</span>
             </div>
             <span className="text-sm dark:text-black text-black">{comment.comment}</span>
+            <br/>
+            <a className="text-xs mr-1 dark:text-black text-black hover:underline" onClick={() => handleReplyClick(comment.id)}>reponder</a>
+            {activeCommentId === comment.id && (
+            <div className="flex relative items-center">
+              <input type="text" className="bg-[#CECECE] rounded-full pl-4 pr-10 h-8 w-full text-black" value={ answer! } placeholder="Adicione um comentário..." onChange={(e)=>{setAnswer(e.target.value)}}/>
+              <IoSend className="text-2xl z-2 absolute right-[1rem]  cursor-pointer dark:text-black text-black" onClick={()=>{postAnswer(comment.id); setAnswer('')}}/>
+            </div>
+          )}
+            {comment.answers.map((answer: any, index: number)=>{
+              if (answer.commentId == comment.id) {
+                return <div className="mb-5 ml-5" key={indice}>
+                <div className="flex items-center mt-2">
+                  <div
+                    className={`rounded-full w-[1rem] h-[1rem] bg-cover mr-2`}
+                    style={{ backgroundImage: `url(https://res.cloudinary.com/dmo7nzytn/image/upload/v1715983820/grupo-fera/images/felipe_fera_to4xne.jpg)` }}
+                    ></div>
+                  <span className="text-xs mr-1 dark:text-black text-black">{answer.name}</span>
+                  <span className="text-xsv text-[#6C6C6C]"> • </span>
+                  <span className="text-xs ml-1 text-[#6C6C6C]">{answer.time}</span>
+                </div>
+                <span className="text-sm dark:text-black text-black">{answer.answer}</span>
+                </div>
+              }
+            })}
           </div>
           })}
         </div>
