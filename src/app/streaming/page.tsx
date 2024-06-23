@@ -45,7 +45,7 @@ export default function Streaming(){
     <div className=" flex px-1 h-16 justify-between items-center">
       <Image 
         className="xxs:w-[150px] xxs:h-[32.5px]"
-        src={'https://res.cloudinary.com/dmo7nzytn/image/upload/v1716220481/playlist_aemh69.png'}
+        src={'https://api.grupofera.app.br/profile/logo-2.png'}
         alt="Logo"
         width={160}
         height={40}
