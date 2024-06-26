@@ -8,6 +8,22 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useState, Suspense } from "react";
 import { Carousel } from "flowbite-react";
 
+
+const links = [
+  {
+    imgSrc: "https://flowbite.com/docs/images/carousel/carousel-1.svg"
+  },
+  {
+    imgSrc: "https://flowbite.com/docs/images/carousel/carousel-2.svg"
+  },
+  {
+    imgSrc: "https://flowbite.com/docs/images/carousel/carousel-3.svg"
+  },
+  {
+    imgSrc: "https://flowbite.com/docs/images/carousel/carousel-4.svg"
+  },
+]
+
 export default function CategoryPage(){
   const searchParams = useSearchParams();
   const name = searchParams.get('name') || '';
@@ -75,11 +91,11 @@ export default function CategoryPage(){
 
         <div className="xs:h-72 xxs:h-52">
           <Carousel>
-            <img src="https://flowbite.com/docs/images/carousel/carousel-1.svg" alt="..." />
-            <img src="https://flowbite.com/docs/images/carousel/carousel-2.svg" alt="..." />
-            <img src="https://flowbite.com/docs/images/carousel/carousel-3.svg" alt="..." />
-            <img src="https://flowbite.com/docs/images/carousel/carousel-4.svg" alt="..." />
-            <img src="https://flowbite.com/docs/images/carousel/carousel-5.svg" alt="..." />
+            {
+              links.map((img, index)=>{
+                return <img src={img.imgSrc} alt="..." key={index} />
+              })
+            }
           </Carousel>
         </div>
 

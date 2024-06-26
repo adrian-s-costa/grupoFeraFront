@@ -43,7 +43,7 @@ export default function HomeTab(){
         </TabPanel>
       </TabPanels>
 
-      <TabList className="fixed z-10 h-10 bg-white bottom-0 w-full justify-around">
+      <TabList className="fixed z-10 h-14 bg-white bottom-0 w-full justify-around">
         <Tab>{tabIndex == 0 ? <RiHome5Fill className="text-2xl text-black dark:text-black"/> : <RiHome5Line className="text-2xl text-black dark:text-black"/>}</Tab>
         <Tab>{tabIndex == 1 ? <PiAirplayFill className="text-2xl text-black dark:text-black"/> : <LuAirplay className="text-2xl text-black dark:text-black"/>}</Tab>
         <Tab>{tabIndex == 2 ? <IoPerson className="text-2xl text-black dark:text-black"/> : <IoPersonOutline className="text-2xl text-black dark:text-black"/>}</Tab>

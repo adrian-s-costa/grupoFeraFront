@@ -1,9 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Montserrat } from "next/font/google";
 import "./globals.css";
-import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
+const mont = Montserrat({ subsets: ["latin"] });
 const APP_NAME = "Grupo Fera";
 const APP_DEFAULT_TITLE = "Grupo Fera";
 const APP_TITLE_TEMPLATE = "%s - Grupo Fera";

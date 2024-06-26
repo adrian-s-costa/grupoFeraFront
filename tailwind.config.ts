@@ -20,7 +20,8 @@ const config: Config = {
         'xs': '380px'
       },
       fontFamily: {
-        'inter': ['__Inter_aaf875']
+        'inter': ['__Inter_aaf875'],
+        'montserrat': ['__Montserrat_b1da2a']
       }
     },
   },
