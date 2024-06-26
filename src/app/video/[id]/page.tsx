@@ -255,7 +255,7 @@ export default function Video({ params }: { params: { id: string } }) {
             </div>
           </Link>
         </div>
-        <div className="flex items-center pt-5 mb-10">
+        <div className="flex items-center pt-5 mb-5">
           <div
             className={`rounded-full w-[2.5rem] h-[2.5rem] bg-cover mr-4`}
             style={{ backgroundImage: `url(https://res.cloudinary.com/dmo7nzytn/image/upload/v1715983820/grupo-fera/images/felipe_fera_to4xne.jpg)` }}
@@ -282,7 +282,7 @@ export default function Video({ params }: { params: { id: string } }) {
           )}
             {comment.answers.map((answer: any, index: number)=>{
               if (answer.commentId == comment.id) {
-                return <div className="mb-6 ml-5" key={indice}>
+                return <div className="mb-14 ml-5" key={indice}>
                 <div className="flex items-center mt-2">
                   <div
                     className={`rounded-full w-[1rem] h-[1rem] bg-cover mr-2`}
