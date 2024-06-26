@@ -262,7 +262,7 @@ export default function Video({ params }: { params: { id: string } }) {
           ></div>
           <span className="font-semibold text-lg dark:text-black text-black">Felipe Fera</span>
         </div>
-        <div className=" h-[17rem] pl-2 overflow-y-scroll">
+        <div className=" h-[17rem] pb-14 pl-2 overflow-y-scroll">
           {video && video.comments && video.comments.map((comment: any, indice: number)=>{
             return <div className="mb-5" key={indice}>
             <div className="flex items-center">
@@ -282,7 +282,7 @@ export default function Video({ params }: { params: { id: string } }) {
           )}
             {comment.answers.map((answer: any, index: number)=>{
               if (answer.commentId == comment.id) {
-                return <div className="mb-14 ml-5" key={indice}>
+                return <div className="mb-5 ml-5" key={indice}>
                 <div className="flex items-center mt-2">
                   <div
                     className={`rounded-full w-[1rem] h-[1rem] bg-cover mr-2`}
