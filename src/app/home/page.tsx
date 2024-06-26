@@ -51,7 +51,7 @@ export default function Home({setTabIndex}: any){
   return(
     <>
     { !fullName || firstName == '' || !homeCategories || !campaigns ? <Loader/> : null }
-    <div className="w-full min-h-screen h-auto bg-white p-5 text-black dark:text-black xxs:mb-0 xs:mb-10">
+    <div className="w-full min-h-screen h-auto bg-white p-5 text-black dark:text-black xxs:mb-0 xs:mb-14">
       <h1 className="xs:text-3xl xxs:text-2xl font-bold ">Fala, {!fullName ? '' : firstName}</h1>
       <span className="xxs:text-sm xs:text-base">ou devo te chamar de Fera?</span>
       <div className="my-5 h-auto relative">

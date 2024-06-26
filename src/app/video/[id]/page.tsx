@@ -300,7 +300,7 @@ export default function Video({ params }: { params: { id: string } }) {
           })}
         </div>
       </div>
-      <div className="fixed z-1 bottom-0 flex px-4 xxs:h-10 h-20 w-full items-center bg-white">
+      <div className="fixed z-1 bottom-0 flex px-4 xxs:h-10 xs:h-16 w-full items-center bg-white">
         <FaUserCircle className="text-gray-400 mr-4 text-4xl"/>
         <input type="text" className=" bg-[#CECECE] rounded-full h-[2.15rem] pl-4 pr-10 w-full text-black" value={ comment! } placeholder="Adicione um comentário..." onChange={(e)=>{setComment(e.target.value)}}/>
         <IoSend className="text-2xl z-2 absolute right-[1.7rem] cursor-pointer dark:text-black text-black" onClick={()=>{postComment(); setComment('')}}/>
