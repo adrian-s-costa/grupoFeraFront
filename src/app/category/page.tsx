@@ -113,7 +113,7 @@ export default function CategoryPage(){
         {!content ? null : <ReadMore text={content && content.texto!} maxLength={100} />}
 
         <div className="fixed left-0 bottom-0 w-full flex justify-end p-5 h-20 bg-white">
-          <button className="rounded-full xxs:text-[0.6rem] bg-blue-600 font-bold text-white xs:text-sm xs:py-[0.3rem] xs:px-[0.5rem] xxs:px-[0.5rem]" onClick={()=>{}}>Teste</button>
+          <button className="rounded-full xxs:text-[0.6rem] bg-blue-600 font-bold text-white xs:text-sm xs:py-[0.3rem] xs:px-[0.5rem] xxs:px-[0.5rem]" onClick={()=>{}}>{content && content.btnText == "" ? "Teste" : content.btnText}</button>
         </div>
 
         <ToastContainer
