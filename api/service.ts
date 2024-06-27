@@ -55,6 +55,28 @@ async function getOneCampaign(id: any) {
   return res.json()
 }
 
+async function getCategoryContent(filter: string) {
+  const res = await fetch(config.API_URL + `/texts/home/category/${filter}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      "ngrok-skip-browser-warning": "69420"
+    },
+  })
+  return res.json()
+}
+
+async function getOneCategoryContent(id: any) {
+  const res = await fetch(config.API_URL + `/texts/home/category/content/${id}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      "ngrok-skip-browser-warning": "69420"
+    },
+  })
+  return res.json()
+}
+
 async function getVideoById(videoId: string) {
   const res = await fetch(config.API_URL + `/videos/${videoId}`, {
     method: 'GET',
@@ -73,5 +95,7 @@ export {
   getCategories,
   getHomeCategories,
   getCampaigns,
-  getOneCampaign
+  getOneCampaign,
+  getCategoryContent,
+  getOneCategoryContent
 }

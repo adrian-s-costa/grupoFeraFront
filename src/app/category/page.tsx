@@ -5,8 +5,10 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import { useState, Suspense } from "react";
+import { useState, Suspense, useEffect } from "react";
 import { Carousel } from "flowbite-react";
+import { getOneCategoryContent } from "../../../api/service";
+import ReadMore from "../_components/readMore/readMore";
 
 
 const links = [
@@ -26,10 +28,21 @@ const links = [
 
 export default function CategoryPage(){
   const searchParams = useSearchParams();
-  const name = searchParams.get('name') || '';
+  const id = searchParams.get('id') || '';
   const [contact, setContact] = useState<Boolean>(false)
+  const [content, setContent] = useState<any>()
   
   const router = useRouter();
+
+  useEffect(() => {
+    try {
+      getOneCategoryContent(id!).then((res)=>{
+        setContent(res);
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  }, [])
 
   const notify = () => toast.success('Recebemos o seu contato e em breve um vendedor entrará em contato!', {
     position: "top-center",
@@ -76,7 +89,7 @@ export default function CategoryPage(){
   return (
       <div className="w-full min-h-screen h-full bg-white p-5 pb-20">
         <div className="w-full flex justify-center relative">
-          <MdArrowBackIos className='text-2xl left-0 cursor-pointer absolute text-black' onClick={() => {router.push("/tab")} } />
+          <MdArrowBackIos className='text-2xl left-0 cursor-pointer absolute text-black' onClick={() => {router.back()} } />
           
           <Image 
             src={"https://api.grupofera.app.br/profile/logo-1.png"} 
@@ -87,20 +100,19 @@ export default function CategoryPage(){
           
         </div>
         
-        <h1 className="xs:text-2xl xxs:text-md font-bold my-[1rem] text-black dark:text-black">{name}</h1>
-
         <div className="xs:h-72 xxs:h-52">
           <Carousel>
             {
-              links.map((img, index)=>{
+              content && content.secondaryImgs.map((img: any, index: any)=>{
                 return <img src={img.imgSrc} alt="..." key={index} />
               })
             }
           </Carousel>
         </div>
 
-        <div className="fixed left-0 bottom-0 w-full flex justify-between p-5 h-20 bg-white">
-          <h1 className="xs:text-lg font-bold text-black dark:text-black flex items-center xxs:text-sm">Teste</h1>
+        {!content ? null : <ReadMore text={content && content.texto!} maxLength={100} />}
+
+        <div className="fixed left-0 bottom-0 w-full flex justify-end p-5 h-20 bg-white">
           <button className="rounded-full xxs:text-[0.6rem] bg-blue-600 font-bold text-white xs:text-sm xs:py-[0.3rem] xs:px-[0.5rem] xxs:px-[0.5rem]" onClick={()=>{}}>Teste</button>
         </div>
 

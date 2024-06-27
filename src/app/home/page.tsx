@@ -68,7 +68,7 @@ export default function Home({setTabIndex}: any){
       </div>
       <div className="flex justify-between">
         {homeCategories && homeCategories.map((category: any, index: number)=>{
-          return <div className="max-w-20 flex flex-col gap-2 cursor-pointer" onClick={()=>{router.push(`/category?name=${category.name}`)}} key={index}>
+          return <div className="max-w-20 flex flex-col gap-2 cursor-pointer" onClick={()=>{router.push(`/categoryList?name=${category.name}`)}} key={index}>
           <div className="xs:w-20 xxs:w-[3.5rem] xxs:h-[3.5rem] xs:h-20 flex justify-center items-center max-w-20 bg-[#F3F5F7] rounded-lg">
             <Image
             src={category.imgSrc}

@@ -6,9 +6,6 @@ import Image from "next/image";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { useState, Suspense, useEffect } from "react";
-import { carrosInfo } from "../../../content";
-import Link from "next/link";
-import { Badge } from "flowbite-react";
 import ReadMore from "../_components/readMore/readMore";
 import { getOneCampaign } from "../../../api/service";
 
@@ -107,7 +104,7 @@ export default function SpecificOffer(){
                 key={carro.id}
               >
                 {/* <Badge color="warning" size="sm">Dolphin Day!</Badge> */}
-                <Image quality={100} priority={true} className="xxs:w-[202px] xxs:h-[117px] xs:w-[232px] xs:h-[147px] rounded-lg mb-2 xs:min-w-[232px] xs:min-h-[147px] xxs:min-w-[202px] xxs:min-h-[117px] bg-cover" src={carro.imgSrc!} alt={""} width={230} height={125}/>
+                <Image quality={100} priority={true} className="xxs:w-[202px] xxs:h-[117px] xs:w-[232px] xs:h-[147px]  xs:min-w-[232px] xs:min-h-[147px] xxs:min-w-[202px] xxs:min-h-[117px] rounded-lg mb-2 bg-cover" src={carro.imgSrc!} alt={""} width={230} height={125}/>
               </div>
             })}
           </div>
