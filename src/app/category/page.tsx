@@ -100,8 +100,8 @@ export default function CategoryPage(){
           
         </div>
         
-        <div className="xs:h-72 xxs:h-52">
-          <Carousel>
+        <div className="xxs:h-[15rem] my-5">
+          <Carousel draggable={true}>
             {
               content && content.secondaryImgs.map((img: any, index: any)=>{
                 return <img src={img.imgSrc} alt="..." key={index} />
