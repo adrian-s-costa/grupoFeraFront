@@ -273,7 +273,11 @@ export default function Video({ params }: { params: { id: string } }) {
             </div>
             <span className="text-sm dark:text-black text-black">{comment.comment}</span>
             <br/>
-            <a className="text-xs mr-1 dark:text-black text-black hover:underline" onClick={() => handleReplyClick(comment.id)}>reponder</a>
+            {
+              userId == '6664b1fda42a8fbb236c3d4a' ? 
+              <a className="text-xs mr-1 dark:text-black text-black hover:underline" onClick={() => handleReplyClick(comment.id)}>reponder</a>
+              : null
+            }
             {activeCommentId === comment.id && (
             <div className="flex relative items-center">
               <input type="text" className="bg-[#CECECE] rounded-full pl-4 pr-10 h-8 w-full text-black" value={ answer! } placeholder="Adicione um comentário..." onChange={(e)=>{setAnswer(e.target.value)}}/>
