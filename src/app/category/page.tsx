@@ -73,7 +73,7 @@ export default function CategoryPage(){
           fantasia: localStorage.getItem('user'),
           email_cliente: localStorage.getItem('email'), 
           celular_cliente: localStorage.getItem('number'), 
-          descricao: `${localStorage.getItem("user")} quer iniciar uma negociação do produto: `,
+          descricao: `${localStorage.getItem("user")} se interessou e clicou em ${content.title} `,
           valor: ''
         })
       });
