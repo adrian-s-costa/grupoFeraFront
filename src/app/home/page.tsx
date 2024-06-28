@@ -64,7 +64,7 @@ export default function Home({setTabIndex}: any){
       </div>
       <div className="flex justify-between mb-3">
         <h1 className="xs:text-xl xxs:text-base font-bold">Categorias</h1>
-        <h1 className="xs:text-xl xxs:text-base font-semibold text-red-600">Ver todas</h1>
+        <h1 className="xs:text-xl xxs:text-base font-semibold text-red-600" onClick={()=>{router.push(`/allCategoryList`)}}>Ver todas</h1>
       </div>
       <div className="flex overflow-x-scroll gap-2 pb-3">
         {homeCategories && homeCategories.map((category: any, index: number)=>{
