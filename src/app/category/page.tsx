@@ -1,7 +1,7 @@
 "use client"
 
 import { MdArrowBackIos } from "react-icons/md";
-import { useRouter, useSearchParams } from "next/navigation";
+import { redirect, useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
@@ -117,7 +117,7 @@ export default function CategoryPage(){
         {!content ? null : 
         
         <div className="fixed left-0 bottom-0 w-full flex justify-end p-5 h-20 bg-white">
-          <button className="rounded-full xxs:text-[0.6rem] bg-blue-600 font-bold text-white xs:text-sm xs:py-[0.3rem] xs:px-[0.5rem] xxs:px-[0.5rem]" onClick={()=>{}}>{content.btnText == "" ? "Teste" : content.btnText }</button>
+          <button className="rounded-full xxs:text-[0.6rem] bg-blue-600 font-bold text-white xs:text-sm xs:py-[0.3rem] xs:px-[0.5rem] xxs:px-[0.5rem]" onClick={()=>{redirect("https://www.google.com/")}}>{content.btnText == "" ? "Teste" : content.btnText }</button>
         </div>
 
         }
