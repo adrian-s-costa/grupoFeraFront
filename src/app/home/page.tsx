@@ -66,7 +66,7 @@ export default function Home({setTabIndex}: any){
         <h1 className="xs:text-xl xxs:text-base font-bold">Categorias</h1>
         <h1 className="xs:text-xl xxs:text-base font-semibold text-red-600">Ver todas</h1>
       </div>
-      <div className="flex justify-between">
+      <div className="flex overflow-x-scroll gap-2 pb-3">
         {homeCategories && homeCategories.map((category: any, index: number)=>{
           return <div className="max-w-20 flex flex-col gap-2 cursor-pointer" onClick={()=>{router.push(`/categoryList?name=${category.name}`)}} key={index}>
           <div className="xs:w-20 xxs:w-[3.5rem] xxs:h-[3.5rem] xs:h-20 flex justify-center items-center max-w-20 bg-[#F3F5F7] rounded-lg">
@@ -85,7 +85,7 @@ export default function Home({setTabIndex}: any){
         })}     
       </div>
       
-      <div className="xs:mt-8 xxs:mt-5">
+      <div className="xs:mt-5 xxs:mt-2">
         <h1 className="xxs:text-sm xs:text-lg font-bold mb-4">Compre seu BYD com o Felipe Fera</h1>
         <div className="flex overflow-x-scroll gap-3">
           {campaigns && campaigns.map((carro: any, index: number)=>{
