@@ -9,6 +9,7 @@ import { useState, Suspense, useEffect } from "react";
 import { Carousel } from "flowbite-react";
 import { getOneCategoryContent } from "../../../api/service";
 import ReadMore from "../_components/readMore/readMore";
+import Loader from "../loader/page";
 
 
 const links = [
@@ -87,6 +88,7 @@ export default function CategoryPage(){
   }
 
   return (
+    <>
       <div className="w-full min-h-screen h-full bg-white p-5 pb-20">
         <div className="w-full flex justify-center relative">
           <MdArrowBackIos className='text-2xl left-0 cursor-pointer absolute text-black' onClick={() => {router.push('/tab')} } />
@@ -112,9 +114,14 @@ export default function CategoryPage(){
 
         {!content ? null : <ReadMore text={content && content.texto!} maxLength={100} />}
 
+        {!content ? null : 
+        
         <div className="fixed left-0 bottom-0 w-full flex justify-end p-5 h-20 bg-white">
-          <button className="rounded-full xxs:text-[0.6rem] bg-blue-600 font-bold text-white xs:text-sm xs:py-[0.3rem] xs:px-[0.5rem] xxs:px-[0.5rem]" onClick={()=>{}}>{content && content.btnText == "" ? "Teste" : content.btnText}</button>
+          <button className="rounded-full xxs:text-[0.6rem] bg-blue-600 font-bold text-white xs:text-sm xs:py-[0.3rem] xs:px-[0.5rem] xxs:px-[0.5rem]" onClick={()=>{}}>{content.btnText == "" ? "Teste" : content.btnText }</button>
         </div>
+
+        }
+
 
         <ToastContainer
           position="top-center"
@@ -129,5 +136,6 @@ export default function CategoryPage(){
           theme="light"
         />
       </div>
+      </>
   )   
 }
