@@ -79,13 +79,13 @@ export default function Home({setTabIndex}: any){
             alt="category"
             ></Image>
           </div>
-          <span className="xxs:text-[0.6rem] xs:max-w-20 xxs:max-w-10 xs:text-[0.9rem] ">{category.name}</span>
+          <span className="xxs:text-[0.6rem] xs:max-w-20 xxs:max-w-10 xs:text-[0.9rem] break-words">{category.name}</span>
         </div>
         })}     
       </div>
       
       <div className="xs:mt-5 xxs:mt-2">
-        <h1 className="xxs:text-sm xs:text-lg font-bold mb-4">Compre seu BYD com o Felipe Fera</h1>
+        <h1 className="xxs:text-sm xs:text-lg font-bold mb-4">Compre seu VE</h1>
         <div className="flex overflow-x-scroll gap-3">
           {campaigns && campaigns.map((carro: any, index: number)=>{
             return <Link
