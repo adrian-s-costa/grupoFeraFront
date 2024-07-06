@@ -51,8 +51,22 @@ export default function Home({setTabIndex}: any){
   return(
     <>
     <div className="w-full min-h-screen h-auto bg-white p-5 text-black dark:text-black xxs:mb-0 xs:mb-14">
-      <h1 className="xs:text-3xl xxs:text-2xl font-bold ">Fala, {!fullName ? '' : firstName}</h1>
-      <span className="xxs:text-sm xs:text-base">ou devo te chamar de Fera?</span>
+      
+      <div className="flex justify-between">
+        <div className="flex flex-col">
+          <h1 className="xs:text-3xl xxs:text-2xl font-bold ">Fala, {!fullName ? '' : firstName}</h1>
+          <span className="xxs:text-sm xs:text-base">ou devo te chamar de Fera?</span>
+        </div>
+
+        <Image 
+          src={"https://api.grupofera.app.br/profile/logo-1.png"}
+          className="xxs:w-[5rem] xs:w-[7rem]"
+          alt={""}
+          width={90}
+          height={1160}          
+        />
+      </div>  
+
       <div className="my-5 h-auto relative">
         <video className="rounded-lg" width={viewportWidth} autoPlay={true} muted={true} loop={true} controls={true} playsInline>
           <source src={`https://res.cloudinary.com/dmo7nzytn/video/upload/v1715727314/fera_hv10wj.mp4`} type="video/mp4"/>  
@@ -65,10 +79,10 @@ export default function Home({setTabIndex}: any){
         <h1 className="xs:text-xl xxs:text-base font-bold">Categorias</h1>
         <h1 className="xs:text-xl xxs:text-base font-semibold text-red-600" onClick={()=>{router.push(`/allCategoryList`)}}>Ver todas</h1>
       </div>
-      <div className="flex overflow-x-scroll gap-2 pb-3">
+      <div className="flex flex-wrap justify-between">
         {homeCategories && homeCategories.map((category: any, index: number)=>{
-          return <div className="max-w-20 flex flex-col gap-2 cursor-pointer" onClick={()=>{router.push(`/categoryList?name=${category.name}`)}} key={index}>
-          <div className="xs:w-20 xxs:w-[3.5rem] xxs:h-[3.5rem] xs:h-20 flex justify-center items-center max-w-20 bg-[#F3F5F7] rounded-lg">
+          return <div className="flex flex-col gap-2 cursor-pointer" onClick={()=>{router.push(`/categoryList?name=${category.name}`)}} key={index}>
+          <div className="xs:w-[29vw] xxs:w-[6.5rem] xxs:h-[3.5rem] xs:h-20 flex flex-col justify-center items-center bg-[#F3F5F7] rounded-lg mb-3">
             <Image
             src={category.imgSrc}
             priority={true}
@@ -78,13 +92,13 @@ export default function Home({setTabIndex}: any){
 
             alt="category"
             ></Image>
+            <span className="xxs:text-[0.5rem] xs:max-w-[29vw] xs:text-[0.6rem] break-words">{category.name}</span>
           </div>
-          <span className="xxs:text-[0.6rem] xs:max-w-20 xxs:max-w-10 xs:text-[0.9rem] break-words">{category.name}</span>
         </div>
         })}     
       </div>
       
-      <div className="xs:mt-5 xxs:mt-2">
+      <div className="xs:mt-4 xxs:mt-2">
         <h1 className="xxs:text-sm xs:text-lg font-bold mb-4">Compre seu VE</h1>
         <div className="flex overflow-x-scroll gap-3">
           {campaigns && campaigns.map((carro: any, index: number)=>{
