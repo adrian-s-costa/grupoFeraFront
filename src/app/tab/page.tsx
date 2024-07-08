@@ -47,10 +47,10 @@ export default function HomeTab(){
         <Tab className="flex flex-col">{tabIndex == 0 ? 
           <RiHome5Fill className="text-2xl text-black dark:text-black"/> 
           : <RiHome5Line className="text-2xl text-black dark:text-black"/>}
-          <p className="text-black text-[0.5rem] pt-1">HOME</p>
+          <p className="text-black text-[0.5rem]">HOME</p>
         </Tab>
-        <Tab className="flex flex-col">{tabIndex == 1 ? <PiAirplayFill className="text-2xl text-black dark:text-black"/> : <LuAirplay className="text-2xl text-black dark:text-black"/>} <p className="text-black text-[0.5rem] pt-1"> STREAMING </p> </Tab>
-        <Tab className="flex flex-col">{tabIndex == 2 ? <IoPerson className="text-2xl text-black dark:text-black"/> : <IoPersonOutline className="text-2xl text-black dark:text-black"/>} <p className="text-black text-[0.5rem] pt-1"> PERFIL </p> </Tab>
+        <Tab className="flex flex-col">{tabIndex == 1 ? <PiAirplayFill className="text-2xl text-black dark:text-black"/> : <LuAirplay className="text-2xl text-black dark:text-black"/>} <p className="text-black text-[0.5rem]"> STREAMING </p> </Tab>
+        <Tab className="flex flex-col">{tabIndex == 2 ? <IoPerson className="text-2xl text-black dark:text-black"/> : <IoPersonOutline className="text-2xl text-black dark:text-black"/>} <p className="text-black text-[0.5rem]"> PERFIL </p> </Tab>
       </TabList>
     </Tabs>
   )
