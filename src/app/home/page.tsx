@@ -81,7 +81,7 @@ export default function Home({setTabIndex}: any){
       </div>
       <div className="flex flex-wrap justify-between">
         {homeCategories && homeCategories.map((category: any, index: number)=>{
-          return <div className="flex flex-col gap-2 cursor-pointer" onClick={()=>{router.push(`/categoryList?name=${category.name}`)}} key={index}>
+          return category.show ? <div className="flex flex-col gap-2 cursor-pointer" onClick={()=>{router.push(`/categoryList?name=${category.name}`)}} key={index}>
           <div className="xs:w-[29vw] xxs:w-[6.5rem] xxs:h-[3.5rem] xs:h-20 flex flex-col justify-center items-center bg-[#F3F5F7] rounded-lg mb-3">
             <Image
             src={category.imgSrc}
@@ -89,12 +89,12 @@ export default function Home({setTabIndex}: any){
             width={50}
             height={50}
             className="xxs:w-[2rem] xxs:h-[2rem] xs:w-[3.125rem] xs:h-[3.125rem]"
-
             alt="category"
             ></Image>
             <span className="xxs:text-[0.5rem] xs:max-w-[29vw] xs:text-[0.6rem] break-words">{category.name}</span>
           </div>
-        </div>
+          </div>
+          : null
         })}     
       </div>
       

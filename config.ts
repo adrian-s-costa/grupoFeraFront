@@ -1,3 +1,3 @@
 export const config = {
-  API_URL: "https://delicate-sharing-fawn.ngrok-free.app"
+  API_URL: "http://35.194.46.16"
 }
