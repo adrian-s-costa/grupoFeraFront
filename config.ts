@@ -1,3 +1,3 @@
 export const config = {
-  API_URL: "http://35.194.46.16"
+  API_URL: "https://newapi.grupofera.app.br"
 }
