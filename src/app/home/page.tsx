@@ -53,13 +53,13 @@ export default function Home({setTabIndex}: any){
     <div className="w-full min-h-screen h-auto bg-white p-5 text-black dark:text-black xxs:mb-0 xs:mb-14">
       
       <div className="flex justify-between">
-        <div className="flex flex-col">
+        <div className="flex flex-col justify-center">
           <h1 className="xs:text-3xl xxs:text-2xl font-bold ">Fala, {!fullName ? '' : firstName}</h1>
           <span className="xxs:text-sm xs:text-base">ou devo te chamar de Fera?</span>
         </div>
 
         <Image 
-          src={"https://api.grupofera.app.br/profile/logo-1.png"}
+          src={"https://api.grupofera.app.br/PhotoAdditional/logo.png"}
           className="xxs:w-[5rem] xs:w-[7rem]"
           alt={""}
           width={90}
