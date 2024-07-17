@@ -64,6 +64,7 @@ export default function Login(){
       localStorage.setItem('id', userData.account.id)
       localStorage.setItem('email', userData.account.email)
       localStorage.setItem('number', userData.account.cellphone)
+      localStorage.setItem('cep', userData.account.cep)
 
       setUserData(userData);
       setLoading(false);
