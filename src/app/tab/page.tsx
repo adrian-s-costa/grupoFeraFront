@@ -30,6 +30,10 @@ export default function HomeTab(){
     setMuted(true)
   }
 
+  if (options) {
+    setTabIndex(Number(options))
+  }
+
 
   return(
     <Tabs defaultIndex={options ? Number(options) : 0 } index={tabIndex} onChange={handleTabsChange}>
@@ -38,7 +42,7 @@ export default function HomeTab(){
           <Home setTabIndex={setTabIndex} muted={muted} />
         </TabPanel>
         <TabPanel>
-          <Streaming/>
+          <Streaming setTabIndex={setTabIndex}/>
         </TabPanel>
         <TabPanel>
           <Profile/>

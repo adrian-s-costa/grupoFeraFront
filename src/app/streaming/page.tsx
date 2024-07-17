@@ -9,7 +9,7 @@ import Thumbs from "./components/thumbs";
 import { useEffect, useState } from "react";
 
 
-export default function Streaming(){
+export default function Streaming({setTabIndex}: any){
 
   const [videos, setVideos] = useState<any>()
   const [categories, setCategories] = useState<any>()

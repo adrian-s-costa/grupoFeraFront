@@ -137,7 +137,7 @@ export default function UserInfo(){
           </div>
           <div>
             <label htmlFor="cep" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">CEP</label>
-            <input type="text" minLength={8} maxLength={8} id="date" onChange={(event) => { setAdditionalInfo({ ...additionalInfo, cep: event.target.value }); } } className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="79300030" required />
+            <input type="text" minLength={8} maxLength={8} id="cep" onChange={(event) => { setAdditionalInfo({ ...additionalInfo, cep: event.target.value }); } } className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="79300030" required />
           </div>
           <div>
             <label htmlFor="date" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 placeholder:text-black">Data de nascimento</label>
