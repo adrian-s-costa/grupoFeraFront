@@ -6,13 +6,13 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Badge } from "flowbite-react";
 import Loader from "../loader/page";
-import { getHomeCategories, getCampaigns } from "../../../api/service";
+import { getHomeCategories, getCampaigns } from "../../../utils/api/service";
 
-export default function Home({setTabIndex}: any){
+export default function Home({setTabIndex, muted}: any){
   const [ homeCategories, setHomeCategories ] = useState<any>()
   const [ campaigns, setCampaigns ] = useState<any>()
-  const [viewportWidth, setViewportWidth] = useState<number>(0);
-  const router = useRouter()
+  const [ viewportWidth, setViewportWidth ] = useState<number>(0);
+  const router = useRouter();
 
   useEffect(() => {
     try {
@@ -54,7 +54,7 @@ export default function Home({setTabIndex}: any){
       
       <div className="flex justify-between">
         <div className="flex flex-col justify-center">
-          <h1 className="xs:text-3xl xxs:text-2xl font-bold ">Fala, {!fullName ? '' : firstName}</h1>
+          <h1 className="xs:text-3xl xxs:text-2xl font-bold ">Fala, {!fullName ? '' : firstName}!</h1>
           <span className="xxs:text-sm xs:text-base">ou devo te chamar de Fera?</span>
         </div>
 

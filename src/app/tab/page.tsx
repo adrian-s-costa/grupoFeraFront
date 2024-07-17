@@ -18,6 +18,7 @@ export default function HomeTab(){
   const router = useRouter();
   const searchParams = useSearchParams()
   const options = searchParams.get('options')
+  const [muted, setMuted] = useState<any>(null);
   const [tabIndex, setTabIndex] = useState(0)
 
   useEffect(()=>{
@@ -26,6 +27,7 @@ export default function HomeTab(){
 
   const handleTabsChange = (index: number) => {
     setTabIndex(index)
+    setMuted(true)
   }
 
 
@@ -33,7 +35,7 @@ export default function HomeTab(){
     <Tabs defaultIndex={options ? Number(options) : 0 } index={tabIndex} onChange={handleTabsChange}>
       <TabPanels>
         <TabPanel>
-          <Home setTabIndex={setTabIndex} />
+          <Home setTabIndex={setTabIndex} muted={muted} />
         </TabPanel>
         <TabPanel>
           <Streaming/>

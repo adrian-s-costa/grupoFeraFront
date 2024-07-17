@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import 'react-toastify/dist/ReactToastify.css';
 import { useState, useEffect } from "react";
-import { getHomeCategories  } from "../../../api/service";
+import { getHomeCategories  } from "../../../utils/api/service";
 
 export default function SpecificOffer(){
   const searchParams = useSearchParams();

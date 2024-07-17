@@ -30,6 +30,7 @@ export default function Profile (){
 
   const userName = typeof window !== "undefined" ? window.localStorage.getItem("user") : false;
   const userMail = typeof window !== "undefined" ? window.localStorage.getItem("email") : false;
+  const cep = typeof window !== "undefined" ? window.localStorage.getItem("cep") : false;
 
   const router = useRouter();
 
@@ -40,6 +41,7 @@ export default function Profile (){
         <div className="flex flex-col">
           <p className="text-black dark:text-black font-bold">{userName}</p>
           <p className="text-black dark:text-black text-xs font">{userMail}</p>
+          <p className="text-black dark:text-black text-xs font">{cep}</p>
         </div>
       </div>
       <div className=" border-[1px] w-full h-36 mt-5 rounded-lg px-2 flex flex-col justify-around">

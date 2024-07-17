@@ -7,7 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { useState, Suspense, useEffect } from "react";
 import { Carousel } from "flowbite-react";
-import { getOneCategoryContent } from "../../../api/service";
+import { getOneCategoryContent } from "../../../utils/api/service";
 import ReadMore from "../_components/readMore/readMore";
 
 export default function CategoryPage(){

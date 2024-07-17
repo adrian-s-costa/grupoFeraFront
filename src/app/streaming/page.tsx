@@ -4,7 +4,7 @@ import Image from "next/image"
 import logo from './Logo.png'
 import { GoBell, GoSearch } from "react-icons/go";
 import { IoCompassOutline } from "react-icons/io5";
-import { getVideos, getVideoById, getCategories } from "../../../api/service";
+import { getVideos, getVideoById, getCategories } from "../../../utils/api/service";
 import Thumbs from "./components/thumbs";
 import { useEffect, useState } from "react";
 

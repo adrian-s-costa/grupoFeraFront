@@ -7,7 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { useState, Suspense, useEffect } from "react";
 import ReadMore from "../_components/readMore/readMore";
-import { getOneCampaign } from "../../../api/service";
+import { getOneCampaign } from "../../../utils/api/service";
 
 export default function SpecificOffer(){
   const searchParams = useSearchParams();

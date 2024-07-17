@@ -7,16 +7,43 @@ import { MdArrowBackIos } from "react-icons/md";
 import { useRouter, useSearchParams } from 'next/navigation';
 import { config } from '../../../config';
 import Loader from '../loader/page';
+import {useForm} from 'react-hook-form'
+import { normalizeCepNumber, normalizePhoneNumber } from '../../../utils/api/masks/masks';
+import InputMask from 'react-input-mask';
+import { Formik, Form, Field, useFormik } from 'formik';
+import * as Yup from 'yup';
 
 export default function UserInfo(){
 
-  const [additionalInfo, setAdditionalInfo] = useState<any>({id: "", name: "", secName: "", tel: "", bornDate: ""})
+  const [additionalInfo, setAdditionalInfo] = useState<any>({id: "", name: "", secName: "", tel: "", bornDate: "", cep: ""})
   const [loading, setLoading] = useState<boolean>(false)
   const router = useRouter();
 
   useEffect(() => {
     setAdditionalInfo({...additionalInfo, id: localStorage.getItem('id')})
   }, []);
+
+  const SignupSchema = Yup.object().shape({
+    firstName: Yup.string()
+      .min(2, 'O nome precisa ter mais de 2 caracteres')
+      .max(50, 'Too Long!')
+      .required('Required'),
+    cep: Yup.string()
+      .min(8, 'Digite um cep válido')
+      .required('Required'),
+    tel: Yup.number().required('Required').max(2),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      cep: '',
+    },
+    validationSchema: SignupSchema,
+    onSubmit: (values) => {
+      console.log(formik.errors)
+    },
+  });
 
   const notify = (message: string) => toast.error(message, {
     position: "bottom-right",
@@ -67,6 +94,7 @@ export default function UserInfo(){
       localStorage.setItem('email', newUser.email);
       localStorage.setItem('bornDate', newUser.bornDate);
       localStorage.setItem('number', newUser.cellphone);
+      localStorage.setItem('cep', normalizeCepNumber(newUser.cep));
 
       notify2();
 
@@ -88,7 +116,7 @@ export default function UserInfo(){
       <h1 className="text-3xl font-bold mb-2 mt-[2.5rem] text-black dark:text-gray-900">Estamos quase lá!</h1>
 
       <span className='text-sm text-[#838383]'>Para podermos nos comunicar melhor informe nome e sobrenome</span>
-      <form onSubmit={(e) => { verifyUserData(e); } } className='mt-5'>
+      <form onSubmit={(e) => { verifyUserData(e) }} className='mt-5'>
         <div className="grid gap-6 md:grid-cols-2">
           <div>
             <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">Nome</label>
@@ -99,8 +127,17 @@ export default function UserInfo(){
             <input type="text" id="secName" onChange={(event) => { setAdditionalInfo({ ...additionalInfo, secName: event.target.value }); } } className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Digite seu sobrenome" required />
           </div>
           <div>
-            <label htmlFor="tel" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">Telefone</label>
-            <input type="tel" id="tel" onChange={(event) => { setAdditionalInfo({ ...additionalInfo, tel: event.target.value }); } } className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="(99) 9 9999-9999" minLength={9} required />
+            <label 
+              htmlFor="tel" 
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900"
+            >
+              Telefone
+            </label>
+            <input type="text" minLength={11} maxLength={11} id="tel" onChange={(event) => { setAdditionalInfo({ ...additionalInfo, tel: event.target.value }); } } className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="(99) 9 9999-9999" required />
+          </div>
+          <div>
+            <label htmlFor="cep" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">CEP</label>
+            <input type="text" minLength={8} maxLength={8} id="date" onChange={(event) => { setAdditionalInfo({ ...additionalInfo, bornDate: event.target.value }); } } className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="79300030" required />
           </div>
           <div>
             <label htmlFor="date" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 placeholder:text-black">Data de nascimento</label>
