@@ -50,7 +50,7 @@ export default function Home({setTabIndex, muted}: any){
 
   return(
     <>
-    <div className="w-full min-h-screen h-auto bg-white p-5 text-black dark:text-black xxs:mb-0 xs:mb-14">
+    <div className="w-full min-h-screen h-auto bg-white p-5 text-black dark:text-black xxs:mb-0 xs:mb-[4.5rem]">
       
       <div className="flex justify-between">
         <div className="flex flex-col justify-center">

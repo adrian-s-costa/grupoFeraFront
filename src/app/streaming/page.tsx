@@ -41,7 +41,7 @@ export default function Streaming({setTabIndex}: any){
 
 
   return (
-    <div className=" min-h-screen h-auto bg-white dark:bg-black overflow-y-hidden pb-[2.5rem]">
+    <div className=" min-h-screen h-auto bg-white dark:bg-black overflow-y-hidden pb-[4.5rem]">
     <div className=" flex px-1 h-16 justify-between items-center">
       <Image 
         className="xxs:w-[150px] xxs:h-[32.5px]"
