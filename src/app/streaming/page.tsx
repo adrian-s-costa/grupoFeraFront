@@ -83,7 +83,7 @@ export default function Streaming({setTabIndex}: any){
     {videos && videos
     .filter((video: any) => searchBar == '' ? video.tags.includes(activeTag) : video.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").includes(searchBar.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "")))
     .map((video: any, indice: number) => {
-      return <Thumbs props={video} key={indice} />;
+      return <Thumbs props={video} key={indice} setTabIndex={setTabIndex} />;
     })}
     </div>
   </div>

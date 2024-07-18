@@ -3,7 +3,10 @@
 import Image from "next/image"
 import Link from "next/link"
 
-export default function Thumbs({props}: any){
+export default function Thumbs({props, setTabIndex}: any){
+
+  setTabIndex(1);
+
   return (
     <Link href={`/video/${props.id}`}>
       <div className="flex flex-col cursor-pointer">

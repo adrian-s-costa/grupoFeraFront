@@ -30,13 +30,8 @@ export default function HomeTab(){
     setMuted(true)
   }
 
-  if (options) {
-    setTabIndex(Number(options))
-  }
-
-
   return(
-    <Tabs defaultIndex={options ? Number(options) : 0 } index={tabIndex} onChange={handleTabsChange}>
+    <Tabs defaultIndex={0} index={tabIndex} onChange={handleTabsChange}>
       <TabPanels>
         <TabPanel>
           <Home setTabIndex={setTabIndex} muted={muted} />
