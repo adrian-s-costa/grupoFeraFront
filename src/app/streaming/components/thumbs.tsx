@@ -6,7 +6,7 @@ import Link from "next/link"
 export default function Thumbs({props, setTabIndex}: any){
 
   return (
-    <Link href={`/video/${props.id}`} onClick={setTabIndex(1)}>
+    <Link href={`/video/${props.id}`} onClick={()=>setTabIndex(1)}>
       <div className="flex flex-col cursor-pointer">
         <Image
           priority={true}
