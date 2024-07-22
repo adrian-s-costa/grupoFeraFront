@@ -9,7 +9,7 @@ const ReadMore = ({ text, maxLength }: any) => {
 
   return (
     <div>
-      <pre className='text-lg text-black whitespace-pre-wrap break-words font-montserrat'>
+      <pre className='text-[1rem] text-black whitespace-pre-wrap break-words font-montserrat'>
         {isReadMore ? text.slice(0, maxLength) : text}
         {text.length > maxLength && (
           <h6 onClick={toggleReadMore} style={{ color: 'blue', cursor: 'pointer' }}>
