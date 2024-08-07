@@ -25,7 +25,7 @@ export default function Login(){
     router.push('/tab');
   }
 
-  const notify = () => toast.error('Credenciais inválidas tente novamente', {
+  const notify = (text: string) => toast.error(text , {
     position: "bottom-right",
     autoClose: 5000,
     hideProgressBar: false,
@@ -53,7 +53,9 @@ export default function Login(){
   
       if (!response.ok) {
         setLoading(false);
-        notify();
+        const teste = await response.json()
+        console.log(teste.error)
+        notify(teste.error)
         throw new Error('Failed to log in');
       }
   
@@ -91,7 +93,8 @@ export default function Login(){
   
       if (!response.ok) {
         setLoading(false);
-        notify()
+        const teste = await response.json()
+        notify(teste.error)
         throw new Error('Failed to log in');
       }
   
@@ -120,7 +123,8 @@ export default function Login(){
   
       if (!response.ok) {
         setLoading(false)
-        notify()
+        const teste = await response.json()
+        notify(await teste.error)
         throw new Error('Failed to log in');
       }
   

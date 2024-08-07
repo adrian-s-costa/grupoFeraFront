@@ -14,6 +14,9 @@ export default function Home({setTabIndex, muted}: any){
   const [ viewportWidth, setViewportWidth ] = useState<number>(0);
   const router = useRouter();
 
+  const fullName = typeof window !== "undefined" ? window.localStorage.getItem('user') : false;
+  const uf = typeof window !== "undefined" ? window.localStorage.getItem('uf') : false;
+
   useEffect(() => {
     try {
       getHomeCategories().then((res)=>{
@@ -24,12 +27,13 @@ export default function Home({setTabIndex, muted}: any){
     }
 
     try {
-      getCampaigns().then((res)=>{
+      getCampaigns().then((res) => {
         setCampaigns(res);
-      })
+      });
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
+    
 
     const handleResize = () => {
       setViewportWidth(window.innerWidth);
@@ -44,7 +48,7 @@ export default function Home({setTabIndex, muted}: any){
     };
   }, []); 
 
-  const fullName = typeof window !== "undefined" ? window.localStorage.getItem('user') : false;
+
   if (fullName == "Sem Nome") router.push(`/user-info`)
   const firstName = fullName ? fullName.split(' ')[0] : '';
 
@@ -101,7 +105,8 @@ export default function Home({setTabIndex, muted}: any){
       <div className="xs:mt-4 xxs:mt-2">
         <h1 className="xxs:text-sm xs:text-lg font-bold mb-4">Compre seu VE</h1>
         <div className="flex overflow-x-scroll gap-3">
-          {campaigns && campaigns.map((carro: any, index: number)=>{
+          {campaigns && campaigns.filter((carro: any) => carro.uf.includes(uf))
+          .map((carro: any, index: number)=>{
             return <Link
               href={{
                 pathname: '/offer',

@@ -128,6 +128,16 @@ export default function PinCode(){
             <PasswordInput setPasswordInfo={setPasswordInfo} passwordInfo={passwordInfo} specificVar={'second'} />
           </div>
         </div>
+
+        <div className="mt-4 flex flex-col">
+          <span className="text-xs text-[#838383]">
+            - A senha deve conter no mínimo 8 caracteres
+          </span>
+          <span className="text-xs text-[#838383]">
+            - As senhas devem ser iguais
+          </span>
+        </div>
+
         <button type="submit" className="text-white mt-5 h-10 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Entrar</button>
       </form>
 

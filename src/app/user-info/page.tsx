@@ -71,6 +71,30 @@ export default function UserInfo(){
 
     setLoading(true);
     e.preventDefault();
+
+    const cepResult = await fetch(`https://viacep.com.br/ws/${additionalInfo.cep}/json/`, {
+      method: "GET"
+    })
+
+    const cepResultJson = await cepResult.json() 
+
+    if (cepResultJson.erro) {
+      setLoading(false)
+      return notify("CEP inválido")
+    }
+
+    console.log(
+      JSON.stringify({
+        id: additionalInfo.id,
+        name: additionalInfo.name,
+        secName: additionalInfo.secName,
+        tel: additionalInfo.tel,
+        bornDate: additionalInfo.bornDate,
+        cep: additionalInfo.cep,
+        localidade: cepResultJson.localidade, 
+        uf: cepResultJson.uf
+      })
+    );
     
     try {
       const response = await fetch(`${config.API_URL}/auth/update-user`, {
@@ -79,15 +103,28 @@ export default function UserInfo(){
           'Content-Type': 'application/json',
           "ngrok-skip-browser-warning": "69420"
         },
-        body: JSON.stringify(additionalInfo)
+        body: JSON.stringify({
+          id: additionalInfo.id,
+          name: additionalInfo.name,
+          secName: additionalInfo.secName,
+          tel: additionalInfo.tel,
+          bornDate: additionalInfo.bornDate,
+          cep: additionalInfo.cep,
+          localidade: cepResultJson.localidade, 
+          uf: cepResultJson.uf
+        })
       });
   
       if (!response.ok) {
         setLoading(false)
+        const resp = await response.json()
+        notify(await resp.error)
         throw new Error('Failed to log in');
       }
 
       const newUser = await response.json()
+
+      console.log(await newUser)
 
       localStorage.setItem('user', newUser.name);
       localStorage.setItem('id', newUser.id);
@@ -95,6 +132,8 @@ export default function UserInfo(){
       localStorage.setItem('bornDate', newUser.bornDate);
       localStorage.setItem('number', newUser.cellphone);
       localStorage.setItem('cep', normalizeCepNumber(newUser.cep));
+      localStorage.setItem('localidade', newUser.localidade);
+      localStorage.setItem('uf', newUser.uf);
 
       notify2();
 
@@ -157,7 +196,8 @@ export default function UserInfo(){
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="light" />
+        theme="light" 
+      />
 
     </div></>
   );
