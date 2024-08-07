@@ -105,7 +105,8 @@ export default function Home({setTabIndex, muted}: any){
       <div className="xs:mt-4 xxs:mt-2">
         <h1 className="xxs:text-sm xs:text-lg font-bold mb-4">Compre seu VE</h1>
         <div className="flex overflow-x-scroll gap-3">
-          {campaigns && campaigns.filter((carro: any) => carro.uf.includes(uf))
+          {campaigns && campaigns
+          // .filter((carro: any) => carro.uf.includes(uf))
           .map((carro: any, index: number)=>{
             return <Link
               href={{
