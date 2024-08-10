@@ -74,7 +74,7 @@ export default function CategoryPage(){
     <>
       <div className="w-full min-h-screen h-full bg-white p-5 pb-20">
         <div className="w-full flex justify-center relative">
-          <MdArrowBackIos className='text-2xl left-0 cursor-pointer absolute text-black' onClick={() => {router.push('/tab')} } />
+          <MdArrowBackIos className='text-2xl left-0 cursor-pointer absolute text-black' onClick={() => {router.back()} } />
           
           <Image 
             src={"https://api.grupofera.app.br/profile/logo-1.png"} 
