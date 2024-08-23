@@ -116,6 +116,8 @@ export default function UserInfo(){
       awsResponse = await axios.post(`${config.API_URL}/upload-file`, formData, { headers: {'Content-Type': 'multipart/form-data'}})
     }
 
+    !awsResponse?.data.awsUrl
+
     !awsResponse?.data.awsUrl ? awsResponse = "" : null;
   
     const cepResult = await fetch(`https://viacep.com.br/ws/${additionalInfo.cep}/json/`, {
@@ -139,7 +141,7 @@ export default function UserInfo(){
         cep: additionalInfo.cep,
         localidade: cepResultJson.localidade, 
         uf: cepResultJson.uf,
-        pfpUrl: awsResponse!.data.awsUrl ? awsResponse!.data.awsUrl : '.'
+        pfpUrl:  !awsResponse!.data.awsUrl ? '.' : awsResponse!.data.awsUrl
       })
     );
     
@@ -159,7 +161,7 @@ export default function UserInfo(){
           cep: additionalInfo.cep,
           localidade: cepResultJson.localidade, 
           uf: cepResultJson.uf,
-          pfpUrl: awsResponse!.data.awsUrl ? awsResponse!.data.awsUrl : '.' 
+          pfpUrl: !awsResponse!.data.awsUrl ? '.' : awsResponse!.data.awsUrl
         })
       });
   
@@ -195,7 +197,7 @@ export default function UserInfo(){
   };
   
   return (
-    <>{ loading ? <Loader /> : null }<div className="w-full h-screen bg-white p-5">
+    <>{ loading ? <Loader /> : null }<div className="w-full h-full min-h-screen bg-white p-5">
 
       <MdArrowBackIos className='text-2xl cursor-pointer' onClick={() => { router.back(); } } />
 
