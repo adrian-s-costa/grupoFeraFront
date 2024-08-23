@@ -271,7 +271,7 @@ export default function Video({ params }: { params: { id: string } }) {
             {pfpUrl == "" || pfpUrl == "." || !pfpUrl ? 
               <FaUserCircle className="text-gray-400 mr-2"/>
             : <div
-                className={`rounded-full w-[1rem] h-[1rem] bg-cover mr-4`}
+                className={`rounded-full w-[1.3rem] h-[1.3rem] bg-cover mr-4`}
                 style={{ backgroundImage: `url(${pfpUrl})` }}
               ></div>}
 
@@ -321,7 +321,7 @@ export default function Video({ params }: { params: { id: string } }) {
           ></div>
         }
         
-        <input type="text" className=" bg-[#CECECE] rounded-full h-[2.15rem] pl-4 pr-10 w-full text-black" value={ comment! } placeholder="Adicione um comentário..." onChange={(e)=>{setComment(e.target.value)}}/>
+        <input type="text" className=" bg-[#CECECE] w-auto rounded-full h-[2.15rem] pl-4 pr-10 text-black" value={ comment! } placeholder="Adicione um comentário..." onChange={(e)=>{setComment(e.target.value)}}/>
         <IoSend className="text-2xl z-2 absolute right-[1.7rem] cursor-pointer dark:text-black text-black" onClick={()=>{postComment(); setComment('')}}/>
       </div>
       <ToastContainer
