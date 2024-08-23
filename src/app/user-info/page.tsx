@@ -112,10 +112,7 @@ export default function UserInfo(){
 
     let awsResponse: any = await axios.post(`${config.API_URL}/upload-file`, formData, { headers: {'Content-Type': 'multipart/form-data'}})
 
-    console.log(awsResponse);
-    console.log(awsResponse.awsUrl);
-
-    if (!awsResponse.awsUrl){
+    if (!awsResponse.data.awsUrl){
       awsResponse = "";
     }
 
@@ -140,7 +137,7 @@ export default function UserInfo(){
         cep: additionalInfo.cep,
         localidade: cepResultJson.localidade, 
         uf: cepResultJson.uf,
-        pfpUrl: awsResponse.awsUrl
+        pfpUrl: awsResponse.data.awsUrl
       })
     );
     
