@@ -109,7 +109,7 @@ export default function UserInfo(){
 
     const formData = new FormData();
 
-    let awsResponse;
+    let awsResponse: any;
 
     if (file && file !== null && url && url !== null) {
       formData.append("image", file)
