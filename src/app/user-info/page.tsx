@@ -111,6 +111,7 @@ export default function UserInfo(){
     const formData = new FormData();
 
     let awsResponse: any;
+    let imageUrl = "";
 
     if (file && file !== null && url && url !== null) {
       formData.append("image", file)
@@ -118,7 +119,7 @@ export default function UserInfo(){
     }
 
     if (awsResponse && awsResponse.data && awsResponse.data.awsUrl){
-      setPfp(awsResponse.data.awsUrl)
+      imageUrl = awsResponse.data.awsUrl
     } else{
       setPfp(".")
     }
@@ -144,7 +145,7 @@ export default function UserInfo(){
         cep: additionalInfo.cep,
         localidade: cepResultJson.localidade, 
         uf: cepResultJson.uf,
-        pfpUrl:  pfp
+        pfpUrl:  imageUrl !== "" ? imageUrl : pfp
       })
     );
     
@@ -164,7 +165,7 @@ export default function UserInfo(){
           cep: additionalInfo.cep,
           localidade: cepResultJson.localidade, 
           uf: cepResultJson.uf,
-          pfpUrl: pfp
+          pfpUrl: imageUrl !== "" ? imageUrl : pfp
         })
       });
   
