@@ -39,7 +39,7 @@ export default function Profile (){
   return (
     <div className="w-full h-screen bg-white p-5 overflow-y-hidden">
       <div className="flex items-center">
-        {pfpUrl == "" ? 
+        {pfpUrl == "" || !pfpUrl ? 
         <FaUserCircle className="text-gray-400 mr-4 text-6xl"/>
         : <div
             className={`rounded-full w-[5rem] h-[5rem] bg-cover mr-4`}
