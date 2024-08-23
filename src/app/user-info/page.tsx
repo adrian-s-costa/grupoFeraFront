@@ -111,7 +111,7 @@ export default function UserInfo(){
 
     let awsResponse;
 
-    if (file) {
+    if (file && file !== null && url && url !== null) {
       formData.append("image", file)
       awsResponse = await axios.post(`${config.API_URL}/upload-file`, formData, { headers: {'Content-Type': 'multipart/form-data'}})
     }
@@ -171,8 +171,6 @@ export default function UserInfo(){
       }
 
       const newUser = await response.json()
-
-      console.log(await newUser)
 
       localStorage.setItem('user', newUser.name);
       localStorage.setItem('id', newUser.id);
