@@ -134,20 +134,6 @@ export default function UserInfo(){
       setLoading(false)
       return notify("CEP inválido")
     }
-
-    console.log(
-      JSON.stringify({
-        id: additionalInfo.id,
-        name: additionalInfo.name,
-        secName: additionalInfo.secName,
-        tel: additionalInfo.tel,
-        bornDate: additionalInfo.bornDate,
-        cep: additionalInfo.cep,
-        localidade: cepResultJson.localidade, 
-        uf: cepResultJson.uf,
-        pfpUrl:  imageUrl !== "" ? imageUrl : pfp
-      })
-    );
     
     try {
       const response = await fetch(`${config.API_URL}/auth/update-user`, {

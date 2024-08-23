@@ -55,6 +55,7 @@ export default function Video({ params }: { params: { id: string } }) {
 
   const userName = typeof window !== "undefined" ? window.localStorage.getItem('user') : false;
   const userId = typeof window !== "undefined" ? window.localStorage.getItem('id') : false;
+  const pfpUrl = typeof window !== "undefined" ? window.localStorage.getItem("pfpUrl") : false;
 
 
   const handleContact = async () => {
@@ -266,7 +267,14 @@ export default function Video({ params }: { params: { id: string } }) {
           {video && video.comments && video.comments.map((comment: any, indice: number)=>{
             return <div className="mb-5" key={indice}>
             <div className="flex items-center">
+
+            {pfpUrl == "" || pfpUrl == "." || !pfpUrl ? 
               <FaUserCircle className="text-gray-400 mr-2"/>
+            : <div
+                className={`rounded-full w-[1rem] h-[1rem] bg-cover mr-4`}
+                style={{ backgroundImage: `url(${pfpUrl})` }}
+              ></div>}
+
               <span className="text-xs mr-1 dark:text-black text-black">{comment.name}</span>
               <span className="text-xsv text-[#6C6C6C]"> • </span>
               <span className="text-xs ml-1 text-[#6C6C6C]">{comment.time}</span>
@@ -305,7 +313,14 @@ export default function Video({ params }: { params: { id: string } }) {
         </div>
       </div>
       <div className="fixed z-1 bottom-0 flex px-4 xxs:h-10 xs:h-16 w-full items-center bg-white">
-        <FaUserCircle className="text-gray-400 mr-4 text-4xl"/>
+        {pfpUrl == "" || pfpUrl == "." || !pfpUrl ? 
+          <FaUserCircle className="text-gray-400 mr-4 text-4xl"/>
+        : <div
+            className={`rounded-full w-[2.25rem] h-[2.25rem] bg-cover mr-4`}
+            style={{ backgroundImage: `url(${pfpUrl})` }}
+          ></div>
+        }
+        
         <input type="text" className=" bg-[#CECECE] rounded-full h-[2.15rem] pl-4 pr-10 w-full text-black" value={ comment! } placeholder="Adicione um comentário..." onChange={(e)=>{setComment(e.target.value)}}/>
         <IoSend className="text-2xl z-2 absolute right-[1.7rem] cursor-pointer dark:text-black text-black" onClick={()=>{postComment(); setComment('')}}/>
       </div>
