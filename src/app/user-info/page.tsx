@@ -108,14 +108,16 @@ export default function UserInfo(){
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append("image", file)
 
-    let awsResponse: any = await axios.post(`${config.API_URL}/upload-file`, formData, { headers: {'Content-Type': 'multipart/form-data'}})
+    let awsResponse;
 
-    if (!awsResponse.data.awsUrl){
-      awsResponse = "";
+    if (file) {
+      formData.append("image", file)
+      awsResponse = await axios.post(`${config.API_URL}/upload-file`, formData, { headers: {'Content-Type': 'multipart/form-data'}})
     }
 
+    !awsResponse?.data.awsUrl ? awsResponse = "" : null;
+  
     const cepResult = await fetch(`https://viacep.com.br/ws/${additionalInfo.cep}/json/`, {
       method: "GET"
     })
@@ -137,7 +139,7 @@ export default function UserInfo(){
         cep: additionalInfo.cep,
         localidade: cepResultJson.localidade, 
         uf: cepResultJson.uf,
-        pfpUrl: awsResponse.data.awsUrl
+        pfpUrl: awsResponse!.data.awsUrl ? awsResponse!.data.awsUrl : '.'
       })
     );
     
@@ -157,7 +159,7 @@ export default function UserInfo(){
           cep: additionalInfo.cep,
           localidade: cepResultJson.localidade, 
           uf: cepResultJson.uf,
-          pfpUrl: awsResponse.data.awsUrl
+          pfpUrl: awsResponse!.data.awsUrl ? awsResponse!.data.awsUrl : '.' 
         })
       });
   
@@ -211,7 +213,7 @@ export default function UserInfo(){
             className={`rounded-full w-[5rem] h-[5rem] bg-cover mr-4`}
             style={{ backgroundImage: `url(${url})` }}
           ></div>
-          <button onClick={()=>{setUrl(null)}} className="text-white mt-5 h-10 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Excluir</button>
+          <button onClick={()=>{setUrl(null); setFile(null)}} className="text-white mt-5 h-10 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Excluir</button>
         </div>
         :
           <div>
