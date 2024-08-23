@@ -23,7 +23,8 @@ export default function UserInfo(){
   const router = useRouter();
   const [file, setFile] = useState<any>(null);
   const [error, setError] = useState('');
-  const [url, setUrl] = useState<any>(null)
+  const [url, setUrl] = useState<any>(null);
+  const [pfp, setPfp] = useState<any>('.');
 
   useEffect(() => {
     setAdditionalInfo({...additionalInfo, id: localStorage.getItem('id')})
@@ -116,9 +117,11 @@ export default function UserInfo(){
       awsResponse = await axios.post(`${config.API_URL}/upload-file`, formData, { headers: {'Content-Type': 'multipart/form-data'}})
     }
 
-    !awsResponse?.data.awsUrl
-
-    !awsResponse?.data.awsUrl ? awsResponse = "" : null;
+    if (awsResponse && awsResponse.data && awsResponse.data.awsUrl){
+      setPfp(awsResponse.data.awsUrl)
+    } else{
+      setPfp(".")
+    }
   
     const cepResult = await fetch(`https://viacep.com.br/ws/${additionalInfo.cep}/json/`, {
       method: "GET"
@@ -141,7 +144,7 @@ export default function UserInfo(){
         cep: additionalInfo.cep,
         localidade: cepResultJson.localidade, 
         uf: cepResultJson.uf,
-        pfpUrl:  !awsResponse!.data.awsUrl ? '.' : awsResponse!.data.awsUrl
+        pfpUrl:  pfp
       })
     );
     
@@ -161,7 +164,7 @@ export default function UserInfo(){
           cep: additionalInfo.cep,
           localidade: cepResultJson.localidade, 
           uf: cepResultJson.uf,
-          pfpUrl: !awsResponse!.data.awsUrl ? '.' : awsResponse!.data.awsUrl
+          pfpUrl: pfp
         })
       });
   
