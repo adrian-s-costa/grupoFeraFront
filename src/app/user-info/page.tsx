@@ -157,7 +157,7 @@ export default function UserInfo(){
           cep: additionalInfo.cep,
           localidade: cepResultJson.localidade, 
           uf: cepResultJson.uf,
-          pfpUrl: awsResponse.awsUrl
+          pfpUrl: awsResponse.data.awsUrl
         })
       });
   
