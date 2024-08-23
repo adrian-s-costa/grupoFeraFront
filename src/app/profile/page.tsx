@@ -31,13 +31,20 @@ export default function Profile (){
   const userName = typeof window !== "undefined" ? window.localStorage.getItem("user") : false;
   const userMail = typeof window !== "undefined" ? window.localStorage.getItem("email") : false;
   const cep = typeof window !== "undefined" ? window.localStorage.getItem("cep") : false;
+  const pfpUrl = typeof window !== "undefined" ? window.localStorage.getItem("pfpUrl") : false;
+
 
   const router = useRouter();
 
   return (
     <div className="w-full h-screen bg-white p-5 overflow-y-hidden">
       <div className="flex items-center">
+        {pfpUrl == "" ? 
         <FaUserCircle className="text-gray-400 mr-4 text-6xl"/>
+        : <div
+            className={`rounded-full w-[5rem] h-[5rem] bg-cover mr-4`}
+            style={{ backgroundImage: `url(${pfpUrl})` }}
+          ></div>}
         <div className="flex flex-col">
           <p className="text-black dark:text-black font-bold">{userName}</p>
           <p className="text-black dark:text-black text-xs font">{userMail}</p>

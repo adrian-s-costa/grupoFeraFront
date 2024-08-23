@@ -12,16 +12,51 @@ import { normalizeCepNumber, normalizePhoneNumber } from '../../../utils/api/mas
 import InputMask from 'react-input-mask';
 import { Formik, Form, Field, useFormik } from 'formik';
 import * as Yup from 'yup';
+import { FileInput, Label } from "flowbite-react";
+import { FaUserCircle } from 'react-icons/fa';
+import axios from 'axios';
 
 export default function UserInfo(){
 
   const [additionalInfo, setAdditionalInfo] = useState<any>({id: "", name: "", secName: "", tel: "", bornDate: "", cep: ""})
   const [loading, setLoading] = useState<boolean>(false)
   const router = useRouter();
+  const [file, setFile] = useState<any>(null);
+  const [error, setError] = useState('');
+  const [url, setUrl] = useState<any>(null)
 
   useEffect(() => {
     setAdditionalInfo({...additionalInfo, id: localStorage.getItem('id')})
   }, []);
+
+  const handleFileChange = async (event: any) => {
+    const selectedFile = event.target.files[0];
+    setFile(event.target.files[0])
+
+    if (selectedFile) {
+      const fileType = selectedFile.type;
+      const allowedTypes = ['image/png', 'image/jpeg'];
+
+      if (allowedTypes.includes(fileType)) {
+
+        // const response = await fetch(`${config.API_URL}/upload-file`, {
+        //   method: 'POST',
+        //   headers: {
+        //     'Content-Type': 'multipart/form-data',
+        //     "ngrok-skip-browser-warning": "69420"
+        //   },
+        //   body: formData
+        // });
+
+        const fileURL = URL.createObjectURL(selectedFile);
+        setUrl(fileURL);
+        setError('');
+      } else {
+        setError('Por favor, envie um arquivo PNG ou JPEG.');
+        setFile(null);
+      }
+    }
+  };
 
   const SignupSchema = Yup.object().shape({
     firstName: Yup.string()
@@ -72,6 +107,15 @@ export default function UserInfo(){
     setLoading(true);
     e.preventDefault();
 
+    const formData = new FormData();
+    formData.append("image", file)
+
+    let awsResponse: any = await axios.post(`${config.API_URL}/upload-file`, formData, { headers: {'Content-Type': 'multipart/form-data'}})
+
+    if (!awsResponse.awsUrl){
+      awsResponse = "";
+    }
+
     const cepResult = await fetch(`https://viacep.com.br/ws/${additionalInfo.cep}/json/`, {
       method: "GET"
     })
@@ -92,7 +136,8 @@ export default function UserInfo(){
         bornDate: additionalInfo.bornDate,
         cep: additionalInfo.cep,
         localidade: cepResultJson.localidade, 
-        uf: cepResultJson.uf
+        uf: cepResultJson.uf,
+        pfpUrl: awsResponse.awsUrl
       })
     );
     
@@ -111,7 +156,8 @@ export default function UserInfo(){
           bornDate: additionalInfo.bornDate,
           cep: additionalInfo.cep,
           localidade: cepResultJson.localidade, 
-          uf: cepResultJson.uf
+          uf: cepResultJson.uf,
+          pfpUrl: awsResponse.awsUrl
         })
       });
   
@@ -134,6 +180,7 @@ export default function UserInfo(){
       localStorage.setItem('cep', normalizeCepNumber(newUser.cep));
       localStorage.setItem('localidade', newUser.localidade);
       localStorage.setItem('uf', newUser.uf);
+      localStorage.setItem('pfpUrl', newUser.pfpUrl);
 
       notify2();
 
@@ -155,8 +202,37 @@ export default function UserInfo(){
       <h1 className="text-3xl font-bold mb-2 mt-[2.5rem] text-black dark:text-gray-900">Estamos quase lá!</h1>
 
       <span className='text-sm text-[#838383]'>Para podermos nos comunicar melhor informe nome e sobrenome</span>
+
       <form onSubmit={(e) => { verifyUserData(e) }} className='mt-5'>
-        <div className="grid gap-6 md:grid-cols-2">
+
+        {url ?
+        <div className='w-full flex flex-col items-center'>
+          <div
+            className={`rounded-full w-[5rem] h-[5rem] bg-cover mr-4`}
+            style={{ backgroundImage: `url(${url})` }}
+          ></div>
+          <button onClick={()=>{setUrl(null)}} className="text-white mt-5 h-10 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Excluir</button>
+        </div>
+        :
+          <div>
+            <label htmlFor="dropzone-file" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">Foto de perfil</label>
+            <Label
+              htmlFor="dropzone-file"
+              className="flex h-32 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-300 dark:bg-gray-50 dark:hover:border-gray-300 dark:hover:bg-gray-100"
+            >
+              <div className="flex flex-col items-center justify-center pb-6 pt-5">
+                <FaUserCircle className="text-gray-400 mr-4 text-5xl"/>
+                <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                  <span className="font-semibold">Clique pra enviar</span> ou arraste e solte
+                </p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">PNG, JPG (MAX. 2MB)</p>
+              </div>
+              <FileInput id="dropzone-file" className="hidden" onChange={(e)=>{handleFileChange(e)}} accept=".png, .jpg, .jpeg"/>
+            </Label>
+          </div>
+        }
+        
+        <div className="grid gap-6 md:grid-cols-2 pt-5">
           <div>
             <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">Nome</label>
             <input type="text" id="name" onChange={(event) => { setAdditionalInfo({ ...additionalInfo, name: event.target.value }); } } className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Digite seu nome" required />
