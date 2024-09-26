@@ -1,5 +1,6 @@
 "use client"
 
+import { Badge } from "flowbite-react"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -7,7 +8,7 @@ export default function Thumbs({props, setTabIndex}: any){
 
   return (
     <Link href={`/video/${props.id}`} onClick={()=>setTabIndex(1)}>
-      <div className="flex flex-col cursor-pointer">
+      <div className="flex flex-col cursor-pointer relative">
         <Image
           priority={true}
           src={props.thumbnailUrl}
@@ -24,6 +25,9 @@ export default function Thumbs({props, setTabIndex}: any){
             <span className="text-black xs:text-base xxs:text-sm">{props.name}</span>
             <span className="text-xs text-[#6C6C6C]">{props.views} views</span>
           </div>
+        </div>
+        <div>
+          <Badge color="warning" size="sm" className={ props.tags.includes('Cursos') ? `block absolute right-4 bottom-7` : `hidden`}>Curso</Badge>
         </div>
       </div>
     </Link>

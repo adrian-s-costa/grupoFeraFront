@@ -7,7 +7,10 @@ import { IoCompassOutline } from "react-icons/io5";
 import { getVideos, getVideoById, getCategories } from "../../../utils/api/service";
 import Thumbs from "./components/thumbs";
 import { useEffect, useState } from "react";
-
+import { Button, Checkbox, Label, Modal, TextInput, Toast } from "flowbite-react";
+import { ToastContainer, toast } from 'react-toastify';
+import { HiX } from "react-icons/hi";
+import { Badge } from "flowbite-react";
 
 export default function Streaming({setTabIndex}: any){
 
@@ -16,6 +19,12 @@ export default function Streaming({setTabIndex}: any){
   const [activeTag, setActiveTag] = useState<string>('Todos')
   const [searchBar, setSearchBar] = useState<string>('')
   const [searchBarState, setSearchBarState] = useState<number>(1)
+  const [password, setPassword] = useState<string>('');
+  const [hidden, setHidden] = useState<string>('hidden');
+  const [hasAcess, setHasAcess] = useState<boolean>(false);
+
+
+  const hasAcessToCourses = typeof window !== "undefined" ? window.localStorage.getItem("hasAcess") : false;  
 
   const changeState = (n: number) => {
     return setSearchBarState( searchBarState * -1);
@@ -37,11 +46,65 @@ export default function Streaming({setTabIndex}: any){
     } catch (error){
       console.log(error)
     }
-  }, [])
+  }, [hasAcess])
+
+  function onCloseModal() {
+    setActiveTag("Todos");
+  }
+
+  function submitPassword(password: string) {
+    if (password == "teste"){
+      setHidden('hidden');
+      setHasAcess(true);
+      return localStorage.setItem('hasAcess', "true");  
+    }
+    setHidden('flex mb-5');
+  }
 
 
   return (
+    <>
     <div className=" min-h-screen h-auto bg-white dark:bg-black overflow-y-hidden pb-[4.5rem]">
+      <Modal show={activeTag == "Cursos" && !hasAcessToCourses} size="md" onClose={onCloseModal} popup>
+        <Modal.Header />
+          <Modal.Body>
+            <div className="space-y-6">
+              <h3 className="text-xl font-medium text-gray-900 dark:text-white">Acessar aba de cursos</h3>
+              <div>
+                <div className="mb-2 block">
+                  <Label htmlFor="password" value="Sua senha" />
+                </div>
+                <TextInput 
+                  id="password" 
+                  type="password"
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)} 
+                  required 
+                />
+              </div>
+              <div className="w-full">
+                <Button onClick={() => submitPassword(password)}>Entrar</Button>
+              </div>
+              <div className="flex justify-between text-sm font-medium text-gray-500 dark:text-gray-300">
+                Receber acesso&nbsp;
+                <a href="#" className="text-cyan-700 hover:underline dark:text-cyan-500">
+                  Mais informações
+                </a>
+              </div>
+            </div>
+          </Modal.Body>
+          <div className="w-full flex justify-center">
+            <Toast className={`${hidden}`}>
+              <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-red-100 text-red-500 dark:bg-red-800 dark:text-red-200">
+                <HiX className="h-5 w-5" />
+              </div>
+              <div className="ml-3 text-sm font-normal">Senha incorreta</div>
+              <Toast.Toggle onDismiss={()=>{setHidden('hidden');
+              }}/>
+            </Toast>
+          </div>
+      </Modal>
+
     <div className=" flex px-1 h-16 justify-between items-center">
       <Image 
         className="xxs:w-[150px] xxs:h-[32.5px]"
@@ -80,12 +143,20 @@ export default function Streaming({setTabIndex}: any){
     </div>
 
     <div className="w-full flex flex-col">
-    {videos && videos
-    .filter((video: any) => searchBar == '' ? video.tags.includes(activeTag) : video.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").includes(searchBar.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "")))
-    .map((video: any, indice: number) => {
-      return <Thumbs props={video} key={indice} setTabIndex={setTabIndex} />;
-    })}
+      {
+      videos && videos
+      .filter((video: any) => searchBar == '' ? video.tags.includes(activeTag) : video.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").includes(searchBar.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "")))
+      .map((video: any, indice: number) => {
+        
+        if (!hasAcessToCourses && video.tags.includes("Cursos")){
+          return null;
+        }
+
+        return <Thumbs props={video} key={indice} setTabIndex={setTabIndex} />;
+      
+      })}
     </div>
   </div>
+  </>
   )
 }

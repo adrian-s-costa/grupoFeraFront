@@ -164,7 +164,7 @@ export default function Video({ params }: { params: { id: string } }) {
           'Content-Type': 'application/json',
           "ngrok-skip-browser-warning": "69420"
         },
-        body: JSON.stringify({name: userName, time: 'notNull', comment})
+        body: JSON.stringify({name: userName, time: 'notNull', comment, pfpUrl})
       });
       if (!response.ok) {
         throw new Error('Failed to fetch video');
@@ -268,11 +268,11 @@ export default function Video({ params }: { params: { id: string } }) {
             return <div className="mb-5" key={indice}>
             <div className="flex items-center">
 
-            {pfpUrl == "" || pfpUrl == "." || !pfpUrl ? 
+            {comment.pfpUrl == "" || comment.pfpUrl == "." || !comment.pfpUrl ? 
               <FaUserCircle className="text-gray-400 mr-2"/>
             : <div
                 className={`rounded-full w-[1.3rem] h-[1.3rem] bg-cover mr-4`}
-                style={{ backgroundImage: `url(${pfpUrl})` }}
+                style={{ backgroundImage: `url(${comment.pfpUrl})` }}
               ></div>}
 
               <span className="text-xs mr-1 dark:text-black text-black">{comment.name}</span>
@@ -314,14 +314,14 @@ export default function Video({ params }: { params: { id: string } }) {
       </div>
       <div className="fixed z-1 bottom-0 flex px-4 xxs:h-10 xs:h-16 w-full items-center bg-white">
         {pfpUrl == "" || pfpUrl == "." || !pfpUrl ? 
-          <FaUserCircle className="text-gray-400 mr-4 text-4xl"/>
+          <FaUserCircle className="text-gray-400 text-4xl"/>
         : <div
-            className={`rounded-full w-[2.25rem] h-[2.25rem] bg-cover mr-4`}
+            className={`rounded-full w-[2.25rem] h-[2.25rem] bg-cover box-border`}
             style={{ backgroundImage: `url(${pfpUrl})` }}
           ></div>
         }
         
-        <input type="text" className=" bg-[#CECECE] w-auto rounded-full h-[2.15rem] pl-4 pr-10 text-black" value={ comment! } placeholder="Adicione um comentário..." onChange={(e)=>{setComment(e.target.value)}}/>
+        <input type="text" className=" bg-[#CECECE] w-full rounded-full h-[2.15rem] pl-4 pr-10 ml-4 text-black" value={ comment! } placeholder="Adicione um comentário..." onChange={(e)=>{setComment(e.target.value)}}/>
         <IoSend className="text-2xl z-2 absolute right-[1.7rem] cursor-pointer dark:text-black text-black" onClick={()=>{postComment(); setComment('')}}/>
       </div>
       <ToastContainer

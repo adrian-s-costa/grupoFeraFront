@@ -54,7 +54,6 @@ export default function Login(){
       if (!response.ok) {
         setLoading(false);
         const teste = await response.json()
-        console.log(teste.error)
         notify(teste.error)
         throw new Error('Failed to log in');
       }
