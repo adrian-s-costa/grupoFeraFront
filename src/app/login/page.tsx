@@ -57,7 +57,9 @@ export default function Login(){
         notify(teste.error)
         throw new Error('Failed to log in');
       }
-  
+
+      console.log(await response.json())
+
       const userData = await response.json();
 
       localStorage.setItem('user', userData.account.name)
