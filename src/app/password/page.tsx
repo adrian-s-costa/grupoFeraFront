@@ -98,6 +98,8 @@ export default function PinCode(){
         localStorage.setItem('id', userData.account.id)
         localStorage.setItem('email', userData.account.email)
         localStorage.setItem('number', userData.account.cellphone)
+        localStorage.setItem('cep', userData.account.cep)
+        localStorage.setItem('pfpUrl', userData.account.pfpUrl)
   
         setLoading(false);
         router.push(userData.account.name == "Sem Nome" ? '/user-info' : '/tab')
