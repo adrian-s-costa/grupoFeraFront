@@ -75,7 +75,7 @@ export default function Home({setTabIndex, muted}: any){
         <video className="rounded-lg" width={viewportWidth} autoPlay={true} muted={true} loop={true} controls={true} playsInline>
           <source src={`https://res.cloudinary.com/dmo7nzytn/video/upload/v1715727314/fera_hv10wj.mp4`} type="video/mp4"/>  
         </video>
-        <div className="absolute bg-gray-400/50 p-2 rounded-md bottom-4 left-4 z-10 cursor-pointer" onClick={()=>{localStorage.setItem('page', "1")}}>
+        <div className="absolute bg-gray-400/50 p-2 rounded-md bottom-4 left-4 z-10 cursor-pointer" onClick={()=>{localStorage.setItem('page', "1"); setTabIndex(1)}}>
           <span className="opacity-100 text-white">Mais videos</span>
         </div>
       </div>
