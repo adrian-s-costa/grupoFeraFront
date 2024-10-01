@@ -66,6 +66,7 @@ export default function Login(){
       localStorage.setItem('email', userData.account.email)
       localStorage.setItem('number', userData.account.cellphone)
       localStorage.setItem('cep', userData.account.cep)
+      localStorage.setItem('pfpUrl', userData.account.pfpUrl)
 
       setUserData(userData);
       setLoading(false);

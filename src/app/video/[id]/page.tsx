@@ -249,7 +249,7 @@ export default function Video({ params }: { params: { id: string } }) {
             <FaWhatsapp  className="text-2xl mb-1 mt-5 cursor-pointer"/>
             <span className="xxs:text-sm xs:text-base">Tenho interesse</span>
           </div>
-          <Link href={'/tab?options=1'}>
+          <Link href={'/tab?options=1'} onClick={() => localStorage.setItem('page', "1")}>
             <div className="flex items-center flex-col">
               <IoArrowUndoOutline  className="text-2xl mb-1 mt-5 cursor-pointer text-black dark:text-black"/>
               <span className="text-black dark:text-black xxs:text-sm xs:text-base">Voltar</span>
