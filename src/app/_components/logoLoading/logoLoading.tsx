@@ -10,7 +10,7 @@ export default function LogoLoading(){
           width={261}
           height={446} 
           alt={"fera flix logo"}
-          className="z-[11] h-[446px] w-[261px]"></Image>
+          className="z-[11] h-auto w-auto"></Image>
         </div>
     </>
 }
