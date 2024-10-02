@@ -72,7 +72,7 @@ export default function Profile (){
         <div className="flex items-center h-10 w-full justify-between cursor-pointer" onClick={()=>{router.push(`/dashboard?id=${id}`)}}>
           <div className="flex items-center ">
             <IoAnalytics className="text-2xl text-slate-400 mr-2"/>
-            <span className="text-black dark:text-black">Dashboard</span>
+            <span className="text-black dark:text-black">Fera Ads</span>
           </div>
           <IoIosArrowForward className="text-2xl"/>
         </div>

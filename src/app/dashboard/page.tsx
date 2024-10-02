@@ -32,7 +32,7 @@ export default function SpecificOffer(){
       <div className="w-full min-h-screen h-full bg-white p-5 pb-20">
         <div className="w-full flex justify-center relative">
           <MdArrowBackIos className='text-2xl left-0 cursor-pointer absolute text-black' onClick={() => {router.back()} } />
-          <h1 className="xs:text-xl xxs:text-md font-bold text-black dark:text-black">Dashboard</h1>          
+          <h1 className="xs:text-xl xxs:text-md font-bold text-black dark:text-black">Fera Ads</h1>          
         </div>
 
         <div className="flex flex-col pt-5 gap-5">
