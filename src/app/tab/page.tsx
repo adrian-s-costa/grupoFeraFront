@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from 'next/navigation'
 import { PiAirplayFill } from "react-icons/pi";
+import LogoLoading from "../_components/logoLoading/logoLoading";
 
 
 
@@ -19,6 +20,7 @@ export default function HomeTab(){
   const searchParams = useSearchParams()
   const options = searchParams.get('options')
   const [muted, setMuted] = useState<any>(null);
+  const [logo, setLogo] = useState<boolean>(false);
   const [tabIndex, setTabIndex] = useState(0)
 
   // if (options){
@@ -35,15 +37,22 @@ export default function HomeTab(){
     localStorage.setItem('page', index.toString());
     setTabIndex(index);
     setMuted(true);
+    if (index == 1) {
+      setLogo(true);
+      setTimeout(()=>{
+        setLogo(false);
+      }, 1500)
+    }
   }
 
   return(
-    <Tabs defaultIndex={0} index={Number(activePage)} onChange={handleTabsChange}>
+    <Tabs defaultIndex={0} index={Number(activePage)} onChange={handleTabsChange} >
       <TabPanels>
         <TabPanel>
           <Home setTabIndex={setTabIndex} muted={muted} />
         </TabPanel>
         <TabPanel>
+          {logo ? <LogoLoading/> : null}
           <Streaming setTabIndex={setTabIndex}/>
         </TabPanel>
         <TabPanel>
@@ -51,7 +60,7 @@ export default function HomeTab(){
         </TabPanel>
       </TabPanels>
 
-      <TabList className="fixed z-10 h-[4.5rem] bg-white bottom-0 w-full justify-around">
+      <TabList className={`fixed z-10 h-[4.5rem] bg-white bottom-0 w-full justify-around`}>
         <Tab className="flex flex-col">{activePage == "0" ? 
           <RiHome5Fill className="text-2xl text-black dark:text-black"/> 
           : <RiHome5Line className="text-2xl text-black dark:text-black"/>}
