@@ -107,7 +107,7 @@ export default function Streaming({setTabIndex}: any){
 
     <div className=" flex px-1 h-16 justify-between items-center bg-black">
       <Image 
-        className="xxs:w-[140px] xxs:h-[32.5px]"
+        className="xxs:w-[130px] xxs:h-[32.5px]"
         src={'https://res.cloudinary.com/dmo7nzytn/image/upload/v1727832524/n1_1_1_wo6k0x.png'}
         alt="Logo"
         width={160}
