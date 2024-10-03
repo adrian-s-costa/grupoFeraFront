@@ -39,9 +39,9 @@ export default function HomeTab(){
     setMuted(true);
     if (index == 1) {
       setLogo(true);
-      setTimeout(()=>{
-        setLogo(false);
-      }, 1500)
+      // setTimeout(()=>{
+      //   setLogo(false);
+      // }, 1500)
     }
   }
 
