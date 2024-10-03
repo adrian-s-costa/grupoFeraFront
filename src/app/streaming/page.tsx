@@ -105,10 +105,10 @@ export default function Streaming({setTabIndex}: any){
           </div>
       </Modal>
 
-    <div className=" flex px-1 h-16 justify-between items-center">
+    <div className=" flex px-1 h-16 justify-between items-center bg-black">
       <Image 
-        className="xxs:w-[150px] xxs:h-[32.5px]"
-        src={'https://api.grupofera.app.br/profile/logo-2.png'}
+        className="xxs:w-[130px] xxs:h-[32.5px]"
+        src={'https://res.cloudinary.com/dmo7nzytn/image/upload/v1727832524/n1_1_1_wo6k0x.png'}
         alt="Logo"
         width={160}
         height={40}
@@ -116,16 +116,16 @@ export default function Streaming({setTabIndex}: any){
       ></Image>
 
       <div className="flex gap-4 items-center">
-        <GoBell className="xs:text-2xl xxs:text-lg text-black dark:text-black"/>
-        <GoSearch className="xs:text-2xl xxs:text-lg text-black dark:text-black cursor-pointer" onClick={()=>{changeState(searchBarState)}} />
+        <GoBell className="xs:text-2xl xxs:text-lg text-white dark:text-white"/>
+        <GoSearch className="xs:text-2xl xxs:text-lg text-white dark:text-white cursor-pointer" onClick={()=>{changeState(searchBarState)}} />
         <div
           className={`rounded-full w-[1.875rem] h-[1.875rem] bg-cover`}
           style={{ backgroundImage: `url(https://res.cloudinary.com/dmo7nzytn/image/upload/v1715983820/grupo-fera/images/felipe_fera_to4xne.jpg)` }}
         ></div>
       </div>
     </div>
-    <div className="px-2">
-      <input type="text" className={`bg-[#CECECE] rounded-full h-[2.15rem] w-full text-black mb-4 ${searchBarState > 0 ? 'hidden' : 'block'} `} value={ searchBar! } placeholder="Pesquise um video pelo título..." onChange={(e)=>{setSearchBar(e.target.value)}}/>
+    <div className={`px-2 bg-black ${searchBarState > 0 ? null : 'py-4'}`}>
+      <input type="text" className={`bg-[#CECECE] rounded-full h-[2.15rem] w-full text-black mb-2 ${searchBarState > 0 ? 'hidden' : 'block'} `} value={ searchBar! } placeholder="Pesquise um video pelo título..." onChange={(e)=>{setSearchBar(e.target.value)}}/>
     </div>
     <div className="h-[40px] bg-[#ECECEC] flex items-center px-2">
       <div className="flex items-center overflow-x-scroll w-auto">

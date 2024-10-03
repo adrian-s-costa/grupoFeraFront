@@ -7,7 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { useState, Suspense, useEffect } from "react";
 import { Carousel } from "flowbite-react";
-import { getOneCategoryContent } from "../../../utils/api/service";
+import { getOneCategoryContent, handleView } from "../../../utils/api/service";
 import ReadMore from "../_components/readMore/readMore";
 
 export default function CategoryPage(){
@@ -23,6 +23,9 @@ export default function CategoryPage(){
       getOneCategoryContent(id!).then((res)=>{
         setContent(res);
       })
+
+      handleView(id);
+    
     } catch (error) {
       console.error(error)
     }
