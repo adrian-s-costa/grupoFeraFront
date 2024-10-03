@@ -8,8 +8,8 @@ export default function LogoLoading(){
         className="pb-5"
         src={'https://res.cloudinary.com/dmo7nzytn/image/upload/v1727832524/n1_1_1_wo6k0x.png'}
         alt="Logo"
-        width={400}
-        height={280}
+        width={300}
+        height={180}
         priority={true}
       ></Image>
         </div>
