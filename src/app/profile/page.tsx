@@ -1,6 +1,6 @@
 "use client"
 
-import { IoExit, IoTrashOutline, IoPencil } from "react-icons/io5";
+import { IoExit, IoTrashOutline, IoPencil, IoBarChart } from "react-icons/io5";
 import { IoIosArrowForward } from "react-icons/io";
 import { FaUserCircle } from "react-icons/fa";
 import { useRouter } from "next/navigation";
@@ -64,6 +64,14 @@ export default function Profile (){
           <div className="flex items-center ">
             <IoPencil className="text-2xl text-slate-400 mr-2"/>
             <span className="text-black dark:text-black">Editar informações</span>
+          </div>
+          <IoIosArrowForward className="text-2xl"/>
+        </div>
+        <hr className="mx-5"/>
+        <div className="flex items-center h-10 w-full justify-between cursor-pointer" onClick={()=>{router.push('/dashboard')}}>
+          <div className="flex items-center ">
+            <IoBarChart className="text-2xl text-slate-400 mr-2"/>
+            <span className="text-black dark:text-black">Dashboard</span>
           </div>
           <IoIosArrowForward className="text-2xl"/>
         </div>
