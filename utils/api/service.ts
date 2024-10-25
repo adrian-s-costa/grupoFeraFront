@@ -116,6 +116,22 @@ const handleView = async (id: string) => {
   }
 }
 
+const handleClick = async (id: string) => {
+  try {
+    const response = await fetch(`${config.API_URL}/videos/${id}/campaign/click`,{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        "ngrok-skip-browser-warning": "69420"
+      }
+    });
+    if (!response.ok) {
+      throw new Error('Failed to fetch view');
+    }
+  } catch (error) {
+    console.error('Error fetching view:', error);
+  }
+}
 
 export {
   getVideos,
@@ -127,5 +143,6 @@ export {
   getCategoryContent,
   getOneCategoryContent,
   handleView,
-  getCategoryContentByUserId
+  getCategoryContentByUserId,
+  handleClick,
 }

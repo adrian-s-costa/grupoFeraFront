@@ -7,7 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { useState, Suspense, useEffect } from "react";
 import { Carousel } from "flowbite-react";
-import { getOneCategoryContent, handleView } from "../../../utils/api/service";
+import { getOneCategoryContent, handleClick, handleView } from "../../../utils/api/service";
 import ReadMore from "../_components/readMore/readMore";
 
 export default function CategoryPage(){
@@ -42,7 +42,10 @@ export default function CategoryPage(){
     theme: "light",
   });
 
-  const handleContact = async () => {
+  const handleContact = async (id: string) => {
+
+    handleClick(id);
+
     if (contact) return null;
     setContact(true);
     try {
@@ -103,7 +106,7 @@ export default function CategoryPage(){
         {!content ? null : 
         
         <div className="fixed left-0 bottom-0 w-full flex justify-end p-5 h-20 bg-white">
-          <button className="rounded-full xxs:text-[0.6rem] bg-blue-600 font-bold text-white xs:text-sm xs:py-[0.3rem] xs:px-[0.5rem] xxs:px-[0.5rem]" onClick={()=>{handleContact()}}>{content.btnText == "" ? "Teste" : content.btnText }</button>
+          <button className="rounded-full xxs:text-[0.6rem] bg-blue-600 font-bold text-white xs:text-sm xs:py-[0.3rem] xs:px-[0.5rem] xxs:px-[0.5rem]" onClick={()=>{handleContact(id)}}>{content.btnText == "" ? "Teste" : content.btnText }</button>
         </div>
 
         }
