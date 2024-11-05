@@ -154,8 +154,8 @@ export default function Courses({setTabIndex}: any){
           .map((carro: any, index: number)=>{
             return <Link
               href={{
-                pathname: '/offer',
-                query: { id: carro.id },
+                pathname: '/courses/6654e5708c775b907c0e79cd',
+                //query: { id: carro.id },
               }}
               key={index}
               className="relative"
@@ -179,8 +179,7 @@ export default function Courses({setTabIndex}: any){
           .map((carro: any, index: number)=>{
             return <Link
               href={{
-                pathname: '/offer',
-                query: { id: carro.id },
+                pathname: `/courses/6654e5708c775b907c0e79cd`,
               }}
               key={index}
               className="relative"
