@@ -4,16 +4,16 @@ import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import Home from "../home/page";
 import Streaming from "../streaming/page";
 import Profile from "../profile/page";
+import Courses from "../courses/page";
 import { LuAirplay } from "react-icons/lu";
 import { IoPersonOutline, IoPerson } from "react-icons/io5";
-import { RiHome5Fill, RiHome5Line } from "react-icons/ri";
+import { RiHome5Fill, RiHome5Line, RiGraduationCapFill, RiGraduationCapLine } from "react-icons/ri";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from 'next/navigation'
 import { PiAirplayFill } from "react-icons/pi";
 import LogoLoading from "../_components/logoLoading/logoLoading";
-
-
+import CoursesLandpage from "../coursesLanding/page";
 
 export default function HomeTab(){
   const router = useRouter();
@@ -56,6 +56,9 @@ export default function HomeTab(){
           <Streaming setTabIndex={setTabIndex}/>
         </TabPanel>
         <TabPanel>
+          <CoursesLandpage/>
+        </TabPanel>
+        <TabPanel>
           <Profile/>
         </TabPanel>
       </TabPanels>
@@ -67,7 +70,8 @@ export default function HomeTab(){
           <p className="text-black text-[0.5rem]">HOME</p>
         </Tab>
         <Tab className="flex flex-col">{activePage == "1" ? <PiAirplayFill className="text-2xl text-black dark:text-black"/> : <LuAirplay className="text-2xl text-black dark:text-black"/>} <p className="text-black text-[0.5rem]"> STREAMING </p> </Tab>
-        <Tab className="flex flex-col">{activePage == "2" ? <IoPerson className="text-2xl text-black dark:text-black"/> : <IoPersonOutline className="text-2xl text-black dark:text-black"/>} <p className="text-black text-[0.5rem]"> PERFIL </p> </Tab>
+        <Tab className="flex flex-col">{activePage == "2" ? <RiGraduationCapFill className="text-2xl text-black dark:text-black"/> : <RiGraduationCapLine className="text-2xl text-black dark:text-black"/>} <p className="text-black text-[0.5rem]"> CURSOS </p> </Tab>
+        <Tab className="flex flex-col">{activePage == "3" ? <IoPerson className="text-2xl text-black dark:text-black"/> : <IoPersonOutline className="text-2xl text-black dark:text-black"/>} <p className="text-black text-[0.5rem]"> PERFIL </p> </Tab>
       </TabList>
     </Tabs>
   )

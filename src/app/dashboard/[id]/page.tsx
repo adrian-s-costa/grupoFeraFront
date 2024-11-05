@@ -9,6 +9,7 @@ import { Carousel } from "flowbite-react";
 import { getOneCategoryContent } from "../../../../utils/api/service";
 import { Table, Tabs } from "flowbite-react";
 import Tables from "@/app/_components/table/table";
+import { ChartComponent } from "@/app/_components/chart/Chart";
 
 export default function Campaign({ params }: { params: { id: string } }){
   const searchParams = useSearchParams();
@@ -74,6 +75,7 @@ export default function Campaign({ params }: { params: { id: string } }){
             </Tabs.Item>
           </Tabs>
           </div>
+          <ChartComponent />
         </div>
     </>
   )   
