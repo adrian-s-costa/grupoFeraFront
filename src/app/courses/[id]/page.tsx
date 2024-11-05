@@ -236,12 +236,12 @@ export default function Video({ params }: { params: { id: string } }) {
         
             <Tabs aria-label="Tabs with icons" style="underline">
                 <Tabs.Item active title="Conteúdo das aulas">
-                    This is <span className="font-medium text-gray-800 dark:text-white">Profile tab's associated content</span>.
+                    This is <span className="font-medium text-gray-800 dark:text-white">Profile tabs associated content</span>.
                     Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to
                     control the content visibility and styling.
                 </Tabs.Item>
                 <Tabs.Item title="Suporte">
-                    This is <span className="font-medium text-gray-800 dark:text-white">Dashboard tab's associated content</span>.
+                    This is <span className="font-medium text-gray-800 dark:text-white">Dashboard tabs associated content</span>.
                     Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to
                     control the content visibility and styling.
                 </Tabs.Item>
