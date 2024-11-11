@@ -16,7 +16,7 @@ import { HiAdjustments, HiClipboardList, HiUserCircle } from "react-icons/hi";
 import { MdDashboard } from "react-icons/md";
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { RiPlayCircleFill, RiStopCircleFill } from "react-icons/ri";
-import { share } from '@tef-novum/webview-bridge';
+import { downloadBase64, share } from '@tef-novum/webview-bridge';
 import { FaPaperclip } from "react-icons/fa6";
 
 type Course = {
@@ -292,7 +292,12 @@ export default function Video({ params }: { params: { id: string } }) {
                           </div>
                         </div>
                         <div className="ml-4 shrink-0">
-                          <a href="#" className="font-medium text-[#1091b2] hover:text-[#5f94b2]" onClick={()=>share({url: module.documentUrl, fileName: module.documentName})}>
+                          <a className="font-medium text-[#1091b2] hover:text-[#5f94b2]" onClick={()=>{
+                            downloadBase64({
+                              contentInBase64: module.documentUrl,
+                              fileName: module.documentName,
+                          })
+                          }}>
                             Download
                           </a>
                         </div>
