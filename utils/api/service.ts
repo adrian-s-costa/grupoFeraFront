@@ -22,6 +22,17 @@ async function getCategories() {
   return res.json()
 }
 
+async function getCourses() {
+  const res = await fetch(config.API_URL + `/courses`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      "ngrok-skip-browser-warning": "69420"
+    },
+  })
+  return res.json()
+}
+
 async function getHomeCategories() {
   const res = await fetch(config.API_URL + `/texts/home/categories`, {
     method: 'GET',
@@ -145,4 +156,5 @@ export {
   handleView,
   getCategoryContentByUserId,
   handleClick,
+  getCourses,
 }

@@ -4,7 +4,7 @@ import Image from "next/image"
 import logo from './Logo.png'
 import { GoBell, GoSearch } from "react-icons/go";
 import { IoCompassOutline } from "react-icons/io5";
-import { getVideos, getVideoById, getCategories, getCampaigns } from "../../../utils/api/service";
+import { getVideos, getVideoById, getCategories, getCampaigns, getCourses } from "../../../utils/api/service";
 import { useEffect, useState } from "react";
 import { Button, Checkbox, Label, Modal, TextInput, Toast } from "flowbite-react";
 import { ToastContainer, toast } from 'react-toastify';
@@ -26,7 +26,7 @@ export default function Courses({setTabIndex}: any){
   const [password, setPassword] = useState<string>('');
   const [hidden, setHidden] = useState<string>('hidden');
   const [hasAcess, setHasAcess] = useState<boolean>(false);
-  const [ campaigns, setCampaigns ] = useState<any>()
+  const [courses, setCourses] = useState<any>()
 
   const hasAcessToCourses = typeof window !== "undefined" ? window.localStorage.getItem("hasAcess") : false;  
 
@@ -36,24 +36,8 @@ export default function Courses({setTabIndex}: any){
 
   useEffect(()=>{
     try {
-      getCategories().then((res)=>{
-        setCategories(res)
-      })
-    } catch (error){
-      console.log(error)
-    }
-
-    try {
-      getVideos().then((res)=>{
-        setVideos(res)
-      })
-    } catch (error){
-      console.log(error)
-    }
-
-    try {
-      getCampaigns().then((res) => {
-        setCampaigns(res);
+      getCourses().then((res) => {
+        setCourses(res);
       });
     } catch (error) {
       console.error(error);
@@ -146,56 +130,31 @@ export default function Courses({setTabIndex}: any){
           </div>
         </div>
         <div className="w-full flex flex-col">
-        <div className="xs:mt-1 xxs:mt-1">
-        <h1 className="xxs:text-sm xs:text-sm font-medium mb-2">Carros híbridos</h1>
-        <div className="flex overflow-x-scroll gap-3">
-          {campaigns && campaigns
-          // .filter((carro: any) => carro.uf.includes(uf))
-          .map((carro: any, index: number)=>{
-            return <Link
-              href={{
-                pathname: '/courses/6654e5708c775b907c0e79cd',
-                //query: { id: carro.id },
-              }}
-              key={index}
-              className="relative"
-            >
-              <Badge color="warning" size="sm" className={ carro.title.includes('Dolphin') ? `block absolute right-2 top-2` : `hidden`}>Dolphin Day!</Badge>
-              <Image quality={100} priority={true} className="xxs:w-[202px] xxs:h-[117px] xs:w-[232px] xs:h-[147px] rounded-lg mb-2 xs:min-w-[232px] xs:min-h-[117px] xxs:min-w-[202px] xxs:min-h-[117px] bg-cover" src={carro.imgSrc!} alt={""} width={230} height={125}/>
-              <div className="flex flex-col gap-1 xxs:w-[202px] xs:w-[232px]">
-                <span className="xs:text-base xxs:text-sm font-semibold">{carro.title}</span>
-                <RatingComponent/>
-                <ClockComponent/>
-              </div>
-            </Link>
-          })}
-        </div>
-      </div>
-      <div className="xs:mt-5 xxs:mt-5">
-        <h1 className="xxs:text-sm xs:text-sm font-medium mb-2">Mecânica</h1>
-        <div className="flex overflow-x-scroll gap-3">
-          {campaigns && campaigns
-          // .filter((carro: any) => carro.uf.includes(uf))
-          .map((carro: any, index: number)=>{
-            return <Link
-              href={{
-                pathname: `/courses/6654e5708c775b907c0e79cd`,
-              }}
-              key={index}
-              className="relative"
-            >
-              <Badge color="warning" size="sm" className={ carro.title.includes('Dolphin') ? `block absolute right-2 top-2` : `hidden`}>Dolphin Day!</Badge>
-              <Image quality={100} priority={true} className="xxs:w-[202px] xxs:h-[117px] xs:w-[232px] xs:h-[147px] rounded-lg mb-2 xs:min-w-[232px] xs:min-h-[117px] xxs:min-w-[202px] xxs:min-h-[117px] bg-cover" src={carro.imgSrc!} alt={""} width={230} height={125}/>
-              <div className="flex flex-col gap-1 xxs:w-[202px] xs:w-[232px]">
-                <span className="xs:text-base xxs:text-sm font-semibold">{carro.title}</span>
-                <span className="xs:text-sm xxs:text-xs">{carro.desc}</span>
-                <RatingComponent/>
-                <ClockComponent/>
-              </div>
-            </Link>
-          })}
-        </div>
-      </div>
+          <div className="xs:mt-1 xxs:mt-1">
+            <h1 className="xxs:text-sm xs:text-sm font-medium mb-2">Carros híbridos</h1>
+            <div className="flex overflow-x-scroll gap-3">
+              {courses && courses
+              // .filter((carro: any) => carro.uf.includes(uf))
+              .map((course: any, index: number)=>{
+                return <Link
+                  href={{
+                    pathname: `/courses/${course.id}`,
+                    // query: { id: course.id },
+                  }}
+                  key={index}
+                  className="relative"
+                >
+                  <Badge color="warning" size="sm" className={ course.title.includes('Dolphin') ? `block absolute right-2 top-2` : `hidden`}>Dolphin Day!</Badge>
+                  <Image quality={100} priority={true} className="xxs:w-[202px] xxs:h-[117px] xs:w-[232px] xs:h-[147px] rounded-lg mb-2 xs:min-w-[232px] xs:min-h-[117px] xxs:min-w-[202px] xxs:min-h-[117px] bg-cover" src={course.imageUrl!} alt={""} width={230} height={125}/>
+                  <div className="flex flex-col gap-1 xxs:w-[202px] xs:w-[232px]">
+                    <span className="xs:text-base xxs:text-sm font-semibold">{course.title}</span>
+                    <RatingComponent />
+                    <ClockComponent value={course.totalDuration}/>
+                  </div>
+                </Link>
+              })}
+            </div>
+          </div>
         </div>
       </div>
     </div>

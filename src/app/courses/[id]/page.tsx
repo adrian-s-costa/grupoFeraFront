@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FiThumbsUp, FiThumbsDown } from "react-icons/fi";
 import { FaWhatsapp, FaUserCircle, FaRegClock } from "react-icons/fa";
 import { IoArrowUndoOutline, IoSend } from "react-icons/io5";
@@ -11,33 +11,48 @@ import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { RatingComponent } from "@/app/_components/rating/rating";
 import ClockComponent from "@/app/_components/clock/clock";
-import { Tabs } from "flowbite-react";
+import { Tabs, TabsRef } from "flowbite-react";
 import { HiAdjustments, HiClipboardList, HiUserCircle } from "react-icons/hi";
 import { MdDashboard } from "react-icons/md";
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { RiPlayCircleFill, RiStopCircleFill } from "react-icons/ri";
+import { share } from '@tef-novum/webview-bridge';
+import { FaPaperclip } from "react-icons/fa6";
 
-type Video = {
+type Course = {
   comments: any;
   id: string;
-  views: number;
-  url: string;
-  name: string;
-  authorId: number;
+  title: string;
   description: string;
-  likes: number;
-  dislikes: number;
-  thumbnailUrl: string;
+  totalDuration: string;
+  imageUrl: string;
+  modules: Module[];
+  reviews: any;
 };
+
+type Module = {
+  documentUrl: string;
+  documentName: string;
+  id: string;
+  title: string;
+  duration: string;
+  videoUrl: string;
+  imageUrl: String;
+}
 
 export default function Video({ params }: { params: { id: string } }) {
   
   const [viewportWidth, setViewportWidth] = useState<number>(0);
-  const [video, setVideo] = useState<Video | null>(null);
+  const [course, setCourse] = useState<Course | null>(null);
   const [comment, setComment] = useState<string | null>(null);
   const [like, setLike] = useState<Boolean>(false);
   const [contact, setContact] = useState<Boolean>(false);
   const [activeCommentId, setActiveCommentId] = useState<any>(null);
   const [answer, setAnswer] = useState<string | null>(null);
+  const [activeVideo, setActiveVideo] = useState<Module | null>(null);
+  const [activeTab, setActiveTab] = useState(0);
 
+  const tabsRef = useRef<TabsRef>(null);
 
   const handleReplyClick = (id: any) => {
     if (activeCommentId === id) {
@@ -62,7 +77,6 @@ export default function Video({ params }: { params: { id: string } }) {
   const userId = typeof window !== "undefined" ? window.localStorage.getItem('id') : false;
   const pfpUrl = typeof window !== "undefined" ? window.localStorage.getItem("pfpUrl") : false;
 
-
   const handleContact = async () => {
     if (contact) return null;
     setContact(true);
@@ -80,10 +94,10 @@ export default function Video({ params }: { params: { id: string } }) {
                 fantasia: userName,
                 email_cliente: localStorage.getItem('email'), 
                 celular_cliente: localStorage.getItem('number'), 
-                produtos: `Streaming - ${video?.name}`,
+                produtos: `Streaming - ${course?.title}`,
                 valor: "0,00",
-                descricao: `Streaming - ${video?.name} - 
-                ${localStorage.getItem("user")} se interessou pelo vídeo: ${video?.name} Disponivel em: ${video?.url}`,
+                descricao: `Streaming - ${course?.title} - 
+                ${localStorage.getItem("user")} se interessou pelo curso: ${course?.title}`,
             })
         });
 
@@ -125,26 +139,26 @@ export default function Video({ params }: { params: { id: string } }) {
     }
   }
 
-  const handleView = async () => {
-    try {
-      const response = await fetch(`${config.API_URL}/videos/${params.id}/view`,{
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          "ngrok-skip-browser-warning": "69420"
-        }
-      });
-      if (!response.ok) {
-        throw new Error('Failed to fetch view');
-      }
-    } catch (error) {
-      console.error('Error fetching view:', error);
-    }
-  }
+  // const handleView = async () => {
+  //   try {
+  //     const response = await fetch(`${config.API_URL}/videos/${params.id}/view`,{
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         "ngrok-skip-browser-warning": "69420"
+  //       }
+  //     });
+  //     if (!response.ok) {
+  //       throw new Error('Failed to fetch view');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error fetching view:', error);
+  //   }
+  // }
 
-  const fetchVideoData = async () => {
+  const fetchCourseData = async () => {
     try {
-      const response = await fetch(`${config.API_URL}/videos/${params.id}`,{
+      const response = await fetch(`${config.API_URL}/courses/${params.id}`,{
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -155,7 +169,8 @@ export default function Video({ params }: { params: { id: string } }) {
         throw new Error('Failed to fetch video');
       }
       const videoData = await response.json();
-      setVideo(videoData);
+      setCourse(videoData);
+      setActiveVideo(videoData.modules[0]);
     } catch (error) {
       console.error('Error fetching video:', error);
     }
@@ -163,7 +178,7 @@ export default function Video({ params }: { params: { id: string } }) {
 
   const postComment = async () => {
     try {
-      const response = await fetch(`${config.API_URL}/videos/${params.id}/comment`,{
+      const response = await fetch(`${config.API_URL}/courses/${params.id}/comment`,{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -174,31 +189,31 @@ export default function Video({ params }: { params: { id: string } }) {
       if (!response.ok) {
         throw new Error('Failed to fetch video');
       }
-      fetchVideoData();
+      fetchCourseData();
     } catch (error) {
       console.error('Error fetching video:', error);
     }
   };
 
-  const postAnswer = async (commentId: any) => {
-    try {
-      const response = await fetch(`${config.API_URL}/videos/${params.id}/comment/${commentId}`,{
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          "ngrok-skip-browser-warning": "69420"
-        },
-        body: JSON.stringify({name: "Felipe Fera", time: 'notNull', answer})
-      });
-      if (!response.ok) {
-        throw new Error('Failed to fetch video');
-      }
-      setActiveCommentId(null);
-      fetchVideoData();
-    } catch (error) {
-      console.error('Error fetching video:', error);
-    }
-  };
+  // const postAnswer = async (commentId: any) => {
+  //   try {
+  //     const response = await fetch(`${config.API_URL}/videos/${params.id}/comment/${commentId}`,{
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         "ngrok-skip-browser-warning": "69420"
+  //       },
+  //       body: JSON.stringify({name: "Felipe Fera", time: 'notNull', answer})
+  //     });
+  //     if (!response.ok) {
+  //       throw new Error('Failed to fetch video');
+  //     }
+  //     setActiveCommentId(null);
+  //     fetchCourseData();
+  //   } catch (error) {
+  //     console.error('Error fetching video:', error);
+  //   }
+  // };
 
   useEffect(() => {
     const handleResize = () => {
@@ -209,46 +224,88 @@ export default function Video({ params }: { params: { id: string } }) {
 
     window.addEventListener('resize', handleResize);
     
-    fetchVideoData();
+    fetchCourseData();
 
-    handleView();
+    //handleView();
 
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []); 
+  }, []);
 
   return (
-    <div className="w-full h-screen bg-white dark:bg-black relative overflow-y-hidden">
-      <video width={viewportWidth} height={(viewportWidth / 16) * 9} controls={true} autoPlay={true} muted={true} playsInline poster={video?.thumbnailUrl}>
-        {video && <source src={video.url} type="video/mp4"/>}
+    <div className="w-full h-screen bg-white dark:bg-black relative ">
+      <video key={activeVideo?.videoUrl} width={viewportWidth} height={(viewportWidth / 16) * 9} controls={true} autoPlay={true} muted={true} playsInline poster={activeVideo?.videoUrl}>
+        {activeVideo && <source src={activeVideo.videoUrl} type="video/mp4"/>}
         Seu navegador não suporta o vídeo
       </video>
-      <div className="w-full p-5 min-h-full h-auto ">
+      <div className="w-full p-5">
         <div className="flex flex-col">
-          {video && <span className="font-semibold text-lg text-black dark:text-black mb-2">{video.name}</span>}
+          {course && <span className="font-semibold text-lg text-black dark:text-black mb-2">{course.title}</span>}
           <div className="w-full flex justify-between">
             <RatingComponent/>
-            <ClockComponent />
+            <ClockComponent value={course?.totalDuration}/>
           </div>
-          <span className="text-xs mt-2 text-black dark:text-black">{video && video.description}</span>
+          <span className="text-xs mt-2 text-black dark:text-black">{course && course.description}</span>
         </div>
-        
-            <Tabs aria-label="Tabs with icons" style="underline">
-                <Tabs.Item active title="Conteúdo das aulas">
-                    This is <span className="font-medium text-gray-800 dark:text-white">Profile tabs associated content</span>.
-                    Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to
-                    control the content visibility and styling.
+            <Tabs aria-label="Tabs with icons" style={"underline"} ref={tabsRef} onActiveTabChange={(tab) => setActiveTab(tab)}>
+                <Tabs.Item active title="Módulos">
+                <ScrollArea className="h-[100%] w-full">
+                  <ul role="list" className="divide-y divide-gray-100 rounded-md border border-gray-200">
+                    {
+                      course && course.modules && course.modules.map((module, index)=>{
+                        return <>
+                          <li className="flex items-center justify-between py-4 pl-4 pr-5 text-sm/6" onClick={()=>{setActiveVideo(module)}}>
+                            <div className="flex w-0 flex-1 items-center">
+                              {module.id === activeVideo?.id ?
+                                <RiStopCircleFill className="shrink-0 text-black text-[25px]"/>
+                                :
+                                <RiPlayCircleFill className="shrink-0 text-black text-[25px]"/>
+                              }
+
+                              <div className="ml-4 flex min-w-0 flex-1 gap-2">
+                                <span className="truncate font-medium">{module.title}</span>
+                              </div>
+                            </div>
+                            <div className="ml-4 shrink-0">
+                              <a href="#" className="font-bold text-gray-500">
+                                {module.duration}
+                              </a>
+                            </div>
+                          </li>
+                        </>
+                      })
+                    }
+                  </ul>
+                </ScrollArea>    
                 </Tabs.Item>
-                <Tabs.Item title="Suporte">
-                    This is <span className="font-medium text-gray-800 dark:text-white">Dashboard tabs associated content</span>.
-                    Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to
-                    control the content visibility and styling.
+                <Tabs.Item title="Material">
+                <ul role="list" className="divide-y divide-gray-100 rounded-md border border-gray-200">
+                {
+                  course && course.modules && course.modules.map((module, index)=>{
+                    return <>
+                      <li className="flex items-center justify-between py-4 pl-4 pr-5 text-sm/6">
+                        <div className="flex w-0 flex-1 items-center">
+                          <FaPaperclip aria-hidden="true" className="h-5 w-5 shrink-0 text-gray-400" />
+                          <div className="ml-4 flex min-w-0 flex-1 gap-2">
+                            <span className="truncate font-medium">{module.documentName}</span>
+                          </div>
+                        </div>
+                        <div className="ml-4 shrink-0">
+                          <a href="#" className="font-medium text-[#1091b2] hover:text-[#5f94b2]" onClick={()=>share({url: module.documentUrl, fileName: module.documentName})}>
+                            Download
+                          </a>
+                        </div>
+                      </li>
+                    </>
+                  })
+                }
+              </ul>
                 </Tabs.Item>
                 <Tabs.Item title="Comentários">
-                <div className=" h-[17rem] pb-14 pl-2 overflow-y-scroll">
-                    {video && video.comments && video.comments.map((comment: any, indice: number)=>{
-                        return <div className="mb-5" key={indice}>
+                  <ScrollArea className="h-[100%] w-full mb-8">
+                    {course && course.comments && course.comments.map((comment: any, indice: number)=>{
+                      return <div className="mb-5" key={indice}>
                         <div className="flex items-center">
 
                         {comment.pfpUrl == "" || comment.pfpUrl == "." || !comment.pfpUrl ? 
@@ -272,10 +329,10 @@ export default function Video({ params }: { params: { id: string } }) {
                         {activeCommentId === comment.id && (
                         <div className="flex relative items-center">
                         <input type="text" className="bg-[#CECECE] rounded-full pl-4 pr-10 h-8 w-full text-black" value={ answer! } placeholder="Adicione um comentário..." onChange={(e)=>{setAnswer(e.target.value)}}/>
-                        <IoSend className="text-2xl z-2 absolute right-[1rem]  cursor-pointer dark:text-black text-black" onClick={()=>{postAnswer(comment.id); setAnswer('')}}/>
+                        <IoSend className="text-2xl z-2 absolute right-[1rem]  cursor-pointer dark:text-black text-black" onClick={()=>{setAnswer('')}}/>
                         </div>
                     )}
-                        {comment.answers.map((answer: any, index: number)=>{
+                        {/* {comment.answers.map((answer: any, index: number)=>{
                         if (answer.commentId == comment.id) {
                             return <div className="mb-5 ml-5" key={indice}>
                             <div className="flex items-center mt-2">
@@ -290,10 +347,10 @@ export default function Video({ params }: { params: { id: string } }) {
                             <span className="text-sm dark:text-black text-black">{answer.answer}</span>
                             </div>
                         }
-                        })}
+                        })} */}
                     </div>
                     })}
-                    </div>
+                    </ScrollArea>
                 </Tabs.Item>
             </Tabs>
 
@@ -301,7 +358,7 @@ export default function Video({ params }: { params: { id: string } }) {
         
 
       </div>
-      <div className="fixed z-1 bottom-0 flex px-4 xxs:h-10 xs:h-16 w-full items-center bg-white">
+      <div className={` z-1 bottom-0 flex px-4 xxs:h-10 xs:h-16 w-full items-center bg-white ${activeTab == 2 ? 'fixed' : 'hidden'}`}>
         {pfpUrl == "" || pfpUrl == "." || !pfpUrl ? 
           <FaUserCircle className="text-gray-400 text-4xl"/>
         : <div
