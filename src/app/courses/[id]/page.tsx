@@ -18,6 +18,7 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { RiPlayCircleFill, RiStopCircleFill } from "react-icons/ri";
 import { downloadBase64, share } from '@tef-novum/webview-bridge';
 import { FaPaperclip } from "react-icons/fa6";
+import { useRouter } from "next/navigation";
 
 type Course = {
   comments: any;
@@ -51,7 +52,8 @@ export default function Video({ params }: { params: { id: string } }) {
   const [answer, setAnswer] = useState<string | null>(null);
   const [activeVideo, setActiveVideo] = useState<Module | null>(null);
   const [activeTab, setActiveTab] = useState(0);
-
+  
+  const router = useRouter();
   const tabsRef = useRef<TabsRef>(null);
 
   const handleReplyClick = (id: any) => {
@@ -292,7 +294,7 @@ export default function Video({ params }: { params: { id: string } }) {
                           </div>
                         </div>
                         <div className="ml-4 shrink-0">
-                          <a href={module.documentUrl} className="font-medium text-[#1091b2] hover:text-[#5f94b2]">
+                          <a target="_blank" className="font-medium text-[#1091b2] hover:text-[#5f94b2]" onClick={()=>{router.push(module.documentUrl)}}>
                             Download
                           </a>
                         </div>
