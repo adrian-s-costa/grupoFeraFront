@@ -292,12 +292,7 @@ export default function Video({ params }: { params: { id: string } }) {
                           </div>
                         </div>
                         <div className="ml-4 shrink-0">
-                          <a className="font-medium text-[#1091b2] hover:text-[#5f94b2]" onClick={()=>{
-                            downloadBase64({
-                              contentInBase64: module.documentUrl,
-                              fileName: module.documentName,
-                          })
-                          }}>
+                          <a href={module.documentUrl} className="font-medium text-[#1091b2] hover:text-[#5f94b2]">
                             Download
                           </a>
                         </div>
