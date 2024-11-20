@@ -12,14 +12,14 @@ export default function Tables ({ impressions, clicks, CTR }: any){
     </Table.Head>
     <Table.Body className="divide-y flex-wrap">
     <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800 flex-wrap">
-        <Table.Cell className={`whitespace-nowrap font-medium ${impressions > 0 ? "text-green-500 dark:text-green-500" : "text-red-500 dark: text-red-500"}`}>
-            {impressions + "%"}
+        <Table.Cell className={`whitespace-nowrap font-medium ${impressions > 0 ? "text-green-500 dark:text-green-500" : "text-red-500 dark:text-red-500"}`}>
+            {impressions}
         </Table.Cell>
-        <Table.Cell className={`whitespace-nowrap font-medium ${clicks > 0 ? "text-green-500 dark:text-green-500" : "text-red-500 dark: text-red-500"}`}>
-            {clicks + "%"}
+        <Table.Cell className={`whitespace-nowrap font-medium ${clicks > 0 ? "text-green-500 dark:text-green-500" : "text-red-500 dark:text-red-500"}`}>
+            {clicks}
         </Table.Cell>
-        <Table.Cell className={`whitespace-nowrap font-medium ${CTR > 0 ? "text-green-500 dark:text-green-500" : "text-red-500 dark: text-red-500"}`}>
-            {CTR + "%"}
+        <Table.Cell className={`whitespace-nowrap font-medium ${CTR > 0 ? "text-green-500 dark:text-green-500" : "text-red-500 dark:text-red-500"}`}>
+            {CTR}
         </Table.Cell>
     </Table.Row>
     </Table.Body>

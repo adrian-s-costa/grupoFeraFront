@@ -21,32 +21,32 @@ import {
 export const description = "A stacked area chart with expand stacking"
 
 const chartData = [
-  { month: "January", desktop: 186, mobile: 80, other: 45 },
-  { month: "February", desktop: 305, mobile: 200, other: 100 },
-  { month: "March", desktop: 237, mobile: 120, other: 150 },
-  { month: "April", desktop: 73, mobile: 190, other: 50 },
-  { month: "May", desktop: 209, mobile: 130, other: 100 },
-  { month: "June", desktop: 214, mobile: 140, other: 160 },
+  { month: "January", impression: 186, clicks: 80, ctr: 45 },
+  { month: "February", impression: 305, clicks: 200, ctr: 100 },
+  { month: "March", impression: 237, clicks: 120, ctr: 150 },
+  { month: "April", impression: 73, clicks: 190, ctr: 50 },
+  { month: "May", impression: 209, clicks: 130, ctr: 100 },
+  { month: "June", impression: 214, clicks: 140, ctr: 160 },
 ]
 
 const chartConfig = {
-  desktop: {
-    label: "Desktop",
+  impression: {
+    label: "Impressões",
     color: "hsl(var(--chart-1))",
   },
-  mobile: {
-    label: "Mobile",
+  clicks: {
+    label: "Cliques",
     color: "hsl(var(--chart-2))",
   },
-  other: {
-    label: "Other",
+  ctr: {
+    label: "CTR",
     color: "hsl(var(--chart-3))",
   },
 } satisfies ChartConfig
 
 export function ChartComponent() {
   return (
-    <Card>
+    <Card className="mt-5">
       <CardHeader>
         <CardTitle>Area Chart - Stacked Expanded</CardTitle>
         <CardDescription>
@@ -78,27 +78,27 @@ export function ChartComponent() {
               content={<ChartTooltipContent indicator="line" />}
             />
             <Area
-              dataKey="other"
+              dataKey="ctr"
               type="natural"
-              fill="var(--color-other)"
+              fill="var(--color-ctr)"
               fillOpacity={0.1}
-              stroke="var(--color-other)"
+              stroke="var(--color-ctr)"
               stackId="a"
             />
             <Area
-              dataKey="mobile"
+              dataKey="clicks"
               type="natural"
-              fill="var(--color-mobile)"
+              fill="var(--color-clicks)"
               fillOpacity={0.4}
-              stroke="var(--color-mobile)"
+              stroke="var(--color-clicks)"
               stackId="a"
             />
             <Area
-              dataKey="desktop"
+              dataKey="impression"
               type="natural"
-              fill="var(--color-desktop)"
+              fill="var(--color-impression)"
               fillOpacity={0.4}
-              stroke="var(--color-desktop)"
+              stroke="var(--color-impression)"
               stackId="a"
             />
           </AreaChart>

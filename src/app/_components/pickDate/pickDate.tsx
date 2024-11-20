@@ -22,7 +22,7 @@ export function PickDate({date, setDate}: any) {
         <Button
           variant={"outline"}
           className={cn(
-            "w-full justify-start text-left font-normal mb-5 bg-white",
+            "w-full justify-start text-left font-normal mb-5",
             !date && "text-muted-foreground"
           )}
         >

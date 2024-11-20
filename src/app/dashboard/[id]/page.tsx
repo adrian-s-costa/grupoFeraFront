@@ -23,6 +23,7 @@ import { SelectComponent } from "@/app/_components/select/select";
 import FixedDate from "@/app/_components/fixedDate/fixedDate";
 import { PickDate } from "@/app/_components/pickDate/pickDate";
 import React from "react";
+import { ChartBarComponent } from "@/app/_components/chart/ChartBar";
 
 export default function Campaign({ params }: { params: { id: string } }){
   const searchParams = useSearchParams();
@@ -31,6 +32,15 @@ export default function Campaign({ params }: { params: { id: string } }){
   const [loading, setLoading] = useState<boolean>(true);
   const [modoDash, setModoDash] = useState<string>("fixo");
   const [date, setDate] = React.useState<Date>()
+  const [ activeValues, setActiveValues ] = useState<any>(
+  [
+    {
+      valores: "Valores",
+      impressions: 0,
+      click: 0,
+      ctr: 0
+    }
+  ])
 
   const router = useRouter();
 
@@ -85,14 +95,22 @@ export default function Campaign({ params }: { params: { id: string } }){
         
         {
           modoDash === "fixo" ? 
-            <FixedDate loading={loading} content={content}/>
+            <>
+              <FixedDate loading={loading} content={content} setActiveValues={setActiveValues}/>
+              <ChartBarComponent activeValues={activeValues}/>
+            </>
           :
-          <PickDate date={date} setDate={setDate}/>
+          <>
+            <PickDate date={date} setDate={setDate}/>
+            <Tables
+              impressions={"-"}
+              CTR={"-"}
+              clicks={"-"}
+              
+            />
+            <ChartComponent />
+          </>
         }
-        
-
-        <ChartComponent />
-      
       </div>
     </div>
   )}
