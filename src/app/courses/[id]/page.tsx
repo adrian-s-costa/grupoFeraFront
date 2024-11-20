@@ -270,7 +270,7 @@ export default function Video({ params }: { params: { id: string } }) {
                               </div>
                             </div>
                             <div className="ml-4 shrink-0">
-                              <a href="#" className="font-bold text-gray-500">
+                              <a className="font-bold text-gray-500">
                                 {module.duration}
                               </a>
                             </div>
