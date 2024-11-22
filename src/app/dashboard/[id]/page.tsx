@@ -6,7 +6,7 @@ import Image from "next/image";
 import 'react-toastify/dist/ReactToastify.css';
 import { useState, useEffect } from "react";
 import { Carousel } from "flowbite-react";
-import { getOneCategoryContent } from "../../../../utils/api/service";
+import { getCategoryContent, getCategoryContentCustom, getOneCategoryContent } from "../../../../utils/api/service";
 import { Table, Tabs } from "flowbite-react";
 import Tables from "@/app/_components/table/table";
 import { ChartComponent } from "@/app/_components/chart/Chart";
@@ -31,7 +31,22 @@ export default function Campaign({ params }: { params: { id: string } }){
   const [content, setContent] = useState<any>()
   const [loading, setLoading] = useState<boolean>(true);
   const [modoDash, setModoDash] = useState<string>("fixo");
-  const [date, setDate] = React.useState<Date>()
+  const [initialDate, setInitialDate] = React.useState<Date>()
+  const [finalDate, setFinalDate] = React.useState<Date>()
+  const [customValues, setCustomValues] = useState<any>(
+    (
+      [
+        {
+          valores: "Valores",
+          impressions: 0,
+          click: 0,
+          ctr: 0
+        }
+      ]
+    )
+  )
+  const [altLoading, setAltLoading] = useState<boolean>(false);
+
   const [ activeValues, setActiveValues ] = useState<any>(
   [
     {
@@ -55,6 +70,25 @@ export default function Campaign({ params }: { params: { id: string } }){
       console.error(error)
     }
   }, [])
+
+  useEffect(()=>{
+
+    if (!initialDate || !finalDate) return
+
+    setAltLoading(true)
+
+    try {
+      getCategoryContentCustom(params.id, initialDate!, finalDate!).then((res)=>{
+        setCustomValues(res)
+        setActiveValues([{ valores: "Valores", impressions: res.viewCount, click: res.clickCount, ctr: res.CTRCount}])
+      })    
+    } catch (error) {
+      console.error(error);
+    }
+
+    setAltLoading(false)
+    
+  }, [initialDate, finalDate])
 
     
   return (
@@ -101,14 +135,19 @@ export default function Campaign({ params }: { params: { id: string } }){
             </>
           :
           <>
-            <PickDate date={date} setDate={setDate}/>
-            <Tables
-              impressions={"-"}
-              CTR={"-"}
-              clicks={"-"}
-              
+            <div className="mb-5 flex flex-col gap-2">
+              <PickDate date={initialDate} setDate={setInitialDate} title={"Escolha a data inicial"}/>
+              <PickDate date={finalDate} setDate={setFinalDate} title={"Escolha a data final"}/>
+            </div>
+            {!altLoading ? <Tables
+              impressions={customValues && customValues.viewCount}
+              clicks={customValues && customValues.clickCount}
+              CTR={customValues && customValues.CTRCount}
             />
-            <ChartComponent />
+            :
+            <Skeleton className="h-[92px] w-full rounded-xl bg-white mt-5 mb-3"/>
+          }
+            <ChartBarComponent activeValues={activeValues}/>
           </>
         }
       </div>

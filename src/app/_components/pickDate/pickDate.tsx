@@ -13,7 +13,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 
-export function PickDate({date, setDate}: any) {
+export function PickDate({date, setDate, title}: any) {
   
 
   return (
@@ -22,12 +22,12 @@ export function PickDate({date, setDate}: any) {
         <Button
           variant={"outline"}
           className={cn(
-            "w-full justify-start text-left font-normal mb-5",
+            "w-full justify-start text-left font-normal",
             !date && "text-muted-foreground"
           )}
         >
           <CalendarIcon />
-          {date ? format(date, "PPP") : <span className="text-black">Escolha a data</span>}
+          {date ? format(date, "PPP") : <span className="text-black">{title}</span>}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">

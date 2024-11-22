@@ -3,7 +3,7 @@
 import { Tabs, Table } from "flowbite-react";
 
 export default function Tables ({ impressions, clicks, CTR }: any){
-    return <Table className="flex-wrap">
+    return <Table className="flex-wrap mb-5">
     <Table.Head>
     <Table.HeadCell>Impressões</Table.HeadCell>
     <Table.HeadCell>Cliques</Table.HeadCell>

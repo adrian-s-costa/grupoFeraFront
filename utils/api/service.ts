@@ -77,6 +77,17 @@ async function getCategoryContent(filter: string) {
   return res.json()
 }
 
+async function getCategoryContentAlt(filter: string) {
+  const res = await fetch(config.API_URL + `/texts/home/category/${filter}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      "ngrok-skip-browser-warning": "69420"
+    },
+  })
+  return res.json()
+}
+
 async function getOneCategoryContent(id: any) {
   const res = await fetch(config.API_URL + `/texts/home/category/content/${id}`, {
     method: 'GET',
@@ -97,6 +108,31 @@ async function getCategoryContentByUserId(id: any) {
     },
   })
   return res.json()
+}
+
+async function getCategoryContentCustom(id: any, initialDate: Date, finalDate: Date) {
+  try {
+    const res = await fetch(config.API_URL + `/texts/home/category/content/${id}/dashboard/custom`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': '69420'
+      },
+      body: JSON.stringify({
+        initialDate,
+        finalDate
+      })
+    });
+
+    if (!res.ok) {
+      throw new Error(`Error: ${res.status} - ${res.statusText}`);
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.error('Failed to fetch category content:', error);
+    throw error; // Opcional: propaga o erro para quem chamar a função
+  }
 }
 
 async function getVideoById(videoId: string) {
@@ -157,4 +193,5 @@ export {
   getCategoryContentByUserId,
   handleClick,
   getCourses,
+  getCategoryContentCustom,
 }

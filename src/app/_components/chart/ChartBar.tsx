@@ -43,9 +43,9 @@ const chartConfig = {
 
 export function ChartBarComponent({activeValues}: any) {
 
-    useEffect(()=>{
-        console.log(activeValues)
-    }, [activeValues])
+  useEffect(()=>{
+      
+  }, [activeValues])
 
   return (
     <Card>
