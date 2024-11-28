@@ -9,12 +9,5 @@
           "1C:2F:31:7F:54:8E:27:13:BA:B1:48:0A:4B:6F:4C:82:46:75:21:2E:C8:FC:A5:C4:8E:FD:38:83:67:A8:21:9E"
         ]
       }
-    },
-    {
-      "web_apps": [
-        {
-          "web_app_identity": "https://pdfhost.io/"
-        }
-      ]
     }
   ]
