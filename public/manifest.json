@@ -59,5 +59,15 @@
         "application/pdf": [".pdf"]
       },
       "launch_type": "single-client"
-    }]
+    }
+  ],
+  "url_handlers": [
+    {
+      "origin": "https://pdfhost.io/"
+    }
+  ],
+  "scope_extensions": [
+    {"origin": "https://pdfhost.io/"},
+    {"origin": "https://pdfhost.io"}
+  ]
 }
