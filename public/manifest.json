@@ -50,5 +50,14 @@
       "type": "image/png"
     }
   ],
-  "lang": "pt"
+  "lang": "pt",
+  "handle_links": "preferred",
+  "file_handlers": [
+    {
+      "action": "/",
+      "accept": {
+        "application/pdf": [".pdf"]
+      },
+      "launch_type": "single-client"
+    }]
 }
