@@ -31,6 +31,7 @@ export default function CoursesLandpage() {
       .catch(err => console.error(err));
 
   }
+  
   const router = useRouter();
 
   return (
