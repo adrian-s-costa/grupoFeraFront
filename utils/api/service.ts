@@ -180,6 +180,34 @@ const handleClick = async (id: string) => {
   }
 }
 
+const teste2 = async () => {
+  try {
+    const response = await fetch('https://sandbox.asaas.com/api/v3/paymentLinks', {
+      method: 'POST',
+//      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/json',
+        'accept': 'application/json',
+        'content-type': 'application/json',
+        'access_token': '$aact_MzkwODA2MWY2OGM3MWRlMDU2NWM3MzJlNzZmNGZhZGY6OjRkNzhlNjgyLWY4YWItNGZhNC1hODQ5LWY4N2IwMTdhN2E0Zjo6JGFhY2hfZDBjMzQ5YjEtYTlmNy00M2UwLThlNzQtZmI4MmRiMTM5M2Q1',
+        'User-Agent': 'Grupo Fera',
+      },
+      body: JSON.stringify({
+        billingType: 'UNDEFINED',
+        chargeType: 'DETACHED',
+        name: 'alamo',
+        value: 5,
+        dueDateLimitDays: 1,
+      })
+    });
+
+    console.log(response);
+    
+  } catch (error) {
+    console.error('Error fetching view:', error);
+  }
+}
+
 export {
   getVideos,
   getVideoById,
@@ -194,4 +222,5 @@ export {
   handleClick,
   getCourses,
   getCategoryContentCustom,
+  teste2
 }
