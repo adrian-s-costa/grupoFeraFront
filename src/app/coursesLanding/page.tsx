@@ -7,7 +7,7 @@ import { useState, useRef } from "react";
 
 export default function CoursesLandpage() {
   const [isLoading, setIsLoading] = useState(false); // Estado para controle de carregamento
-  const linkRef = useRef(null); // Referência para a tag <a>
+  const linkRef = useRef<HTMLAnchorElement>(null); // Referência para a tag <a>
 
   const router = useRouter();
 
@@ -36,7 +36,7 @@ export default function CoursesLandpage() {
       const json = await response.json();
       console.log(json);
 
-      if (json && json.url) {
+      if (linkRef.current && json && json.url) {
         // Atualiza o atributo href da tag <a>
         linkRef.current.href = json.url;
 
