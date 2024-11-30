@@ -31,7 +31,9 @@ export default function HomeTab(){
 
   }, [])
 
-  const activePage = typeof window !== "undefined" ? window.localStorage.getItem("page") : undefined;
+  let activePage = typeof window !== "undefined" ? window.localStorage.getItem("page") : undefined;
+
+  typeof window !== "undefined" && window.localStorage.getItem("page") == '1' ? activePage = window.localStorage.getItem("page") : activePage = '0'
 
   const handleTabsChange = (index: number) => {
     localStorage.setItem('page', index.toString());

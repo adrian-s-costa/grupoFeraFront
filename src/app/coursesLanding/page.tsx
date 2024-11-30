@@ -6,6 +6,31 @@ import { useRouter } from "next/navigation";
 
 export default function CoursesLandpage() {
 
+  const createLink = () => {
+    const url = 'https://sandbox.asaas.com/api/v3/paymentLinks';
+    const options = {
+      method: 'POST',
+      headers: {
+        accept: 'application/json',
+        'content-type': 'application/json',
+        access_token: '$aact_MzkwODA2MWY2OGM3MWRlMDU2NWM3MzJlNzZmNGZhZGY6Ojg0MDg0MDk0LWNlYTgtNDM1Ni04NDUzLWIwMDRiMzdhZTdmMjo6JGFhY2hfNDNiMjNhZmMtMzIyOC00MzI4LWFmNjItMWJkZTNmMmQ1YTVl'
+      },
+      body: JSON.stringify({
+        billingType: 'UNDEFINED',
+        chargeType: 'DETACHED',
+        name: 'Assinatura Grupo Fera Cursos',
+        value: 5,
+        callback: {successUrl: 'https://grupo-fera-front.vercel.app/', autoRedirect: false},
+        dueDateLimitDays: 1
+      })
+    };
+
+    fetch(url, options)
+      .then(res => res.json())
+      .then(json => window.location.assign(json.url))
+      .catch(err => console.error(err));
+
+  }
   const router = useRouter();
 
   return (
@@ -26,7 +51,7 @@ export default function CoursesLandpage() {
 
             <button className="font-bold text-white bg-[#04377B] px-[32px] py-[12px] w-[234px] rounded-[30px] mt-[47px]" onClick={()=>{router.push('/courses')}}>Já tenho acesso!</button>
 
-            <p className="w-[240px] text-[16px] font-medium text-white text-center mt-3 mb-[47px]">Quer adquirir? <b className="text-[#EB4335]">Clique aqui!</b></p>
+            <a href="" className="w-[240px] text-[16px] font-medium text-white text-center mt-3 mb-[47px]">Quer adquirir? <b className="text-[#EB4335]" onClick={()=>{createLink()}}>Clique aqui!</b></a>
           </div>
         </div>
     </div>
