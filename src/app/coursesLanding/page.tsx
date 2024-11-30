@@ -17,6 +17,7 @@ export default function CoursesLandpage() {
     const options = {
       method: 'POST',
       headers: {
+        cors: 'no-cors',
         accept: 'application/json',
         'content-type': 'application/json',
         access_token: '$aact_MzkwODA2MWY2OGM3MWRlMDU2NWM3MzJlNzZmNGZhZGY6Ojg0MDg0MDk0LWNlYTgtNDM1Ni04NDUzLWIwMDRiMzdhZTdmMjo6JGFhY2hfNDNiMjNhZmMtMzIyOC00MzI4LWFmNjItMWJkZTNmMmQ1YTVl'
