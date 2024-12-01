@@ -9,11 +9,14 @@ initMercadoPago('APP_USR-8f6a300a-b0ba-4e33-a08a-87b0b8d6614c');
 
 export default function BrickTsx() {
 
+    const amount = 100 
+
     const [paymentResult, setPaymentResult] = useState<any>(null)
 
     const initialization = {
-        amount: 100,
+        amount: amount,
         preferenceId: "<PREFERENCE_ID>",
+        formTitle: `Compra Grupo Fera, Valor: ${amount}`
        };
        const customization = {
         paymentMethods: {
@@ -21,9 +24,10 @@ export default function BrickTsx() {
             debitCard: "all",
             ticket: "all",
             bankTransfer: "all",
-            mercadoPago: "all",
+            mercadoPago: ['all'],
             atm: "all",
-          },
+
+        },
        };
        const onSubmit = async (
         { selectedPaymentMethod, formData } : any
@@ -68,6 +72,8 @@ export default function BrickTsx() {
             onSubmit={onSubmit}
             onReady={onReady}
             onError={onError}
+            locale='us'
+            
         />
     )
 
