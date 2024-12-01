@@ -6,30 +6,8 @@ import { useRouter } from "next/navigation";
 import { teste2 } from "../../../utils/api/service";
 import axios from 'axios';
 
-export default function CoursesLandpage() {
 
-  const options = {
-    method: 'POST',
-    url: 'https://sandbox.asaas.com/api/v3/paymentLinks',
-    headers: {
-      accept: 'application/json',
-      'content-type': 'application/json',
-      access_token: '$aact_MzkwODA2MWY2OGM3MWRlMDU2NWM3MzJlNzZmNGZhZGY6OjRkNzhlNjgyLWY4YWItNGZhNC1hODQ5LWY4N2IwMTdhN2E0Zjo6JGFhY2hfZDBjMzQ5YjEtYTlmNy00M2UwLThlNzQtZmI4MmRiMTM5M2Q1'
-    },
-    data: {
-      billingType: 'UNDEFINED',
-      chargeType: 'DETACHED',
-      name: 'Venda',
-      value: 5,
-      dueDateLimitDays: 1,
-      callback: {autoRedirect: false, successUrl: 'https://grupo-fera-front.vercel.app/'}
-    }
-  };
-  
-  axios
-    .request(options)
-    .then(res => console.log(res.data))
-    .catch(err => console.error(err));
+export default function CoursesLandpage() {
 
   const router = useRouter();
 
@@ -51,7 +29,7 @@ export default function CoursesLandpage() {
 
             <button className="font-bold text-white bg-[#04377B] px-[32px] py-[12px] w-[234px] rounded-[30px] mt-[47px]" onClick={()=>{router.push('/courses')}}>Já tenho acesso!</button>
 
-            <a href="https://mpago.la/17Se5f2" className="w-[240px] text-[16px] font-medium text-white text-center mt-3 mb-[47px]">Quer adquirir? <b className="text-[#EB4335]">Clique aqui!</b></a>
+            <a onClick={()=>router.push("/checkout")} className="w-[240px] text-[16px] font-medium text-white text-center mt-3 mb-[47px]">Quer adquirir? <b className="text-[#EB4335]">Clique aqui!</b></a>
           </div>
         </div>
     </div>
