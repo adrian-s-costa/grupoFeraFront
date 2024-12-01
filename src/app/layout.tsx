@@ -64,7 +64,7 @@ export default function RootLayout({
     
     <html lang="pt-br" className="touch-pan-y">
       <body className={inter.className}>{children}
-        <script src="https://sdk.mercadopago.com/js/v2"></script>
+        <script src="https://sdk.mercadopago.com/js/v2" async/>
       </body>
     </html>
   );
