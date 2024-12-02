@@ -16,9 +16,9 @@ export default function BrickTsx() {
     const initialization = {
         amount: amount,
         preferenceId: "<PREFERENCE_ID>",
-        formTitle: `Compra Grupo Fera, Valor: ${amount}`
        };
        const customization = {
+        formTitle: `Compra Grupo Fera, Valor: ${amount}`,
         paymentMethods: {
             creditCard: "all",
             debitCard: "all",
@@ -72,7 +72,7 @@ export default function BrickTsx() {
             onSubmit={onSubmit}
             onReady={onReady}
             onError={onError}
-            locale='us'
+            locale='pt'
             
         />
     )

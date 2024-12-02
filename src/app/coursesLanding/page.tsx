@@ -29,7 +29,7 @@ export default function CoursesLandpage() {
 
             <button className="font-bold text-white bg-[#04377B] px-[32px] py-[12px] w-[234px] rounded-[30px] mt-[47px]" onClick={()=>{router.push('/courses')}}>Já tenho acesso!</button>
 
-            <a onClick={()=>router.push("/checkout")} className="w-[240px] text-[16px] font-medium text-white text-center mt-3 mb-[47px]">Quer adquirir? <b className="text-[#EB4335]">Clique aqui!</b></a>
+            <a href="https://mpago.la/17Se5f2" className="w-[240px] text-[16px] font-medium text-white text-center mt-3 mb-[47px]">Quer adquirir? <b className="text-[#EB4335]">Clique aqui!</b></a>
           </div>
         </div>
     </div>
