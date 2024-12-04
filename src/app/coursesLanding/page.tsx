@@ -98,9 +98,9 @@ export default function CoursesLandpage() {
             <p className="w-[270px] text-[24px] font-bold text-white text-center">Dominando o Mercado de Carros Híbridos</p>
             <p className="w-[240px] text-[16px] font-medium text-gray-400 text-center mt-3">Conhecendo a Tecnologia Híbrida para uma Venda Eficaz</p>
 
-            <button className="font-bold text-white bg-[#04377B] px-[32px] py-[12px] w-[234px] rounded-[30px] mt-[47px]" onClick={()=>{redirectLogic()}}>Já tenho acesso!</button>
+            <button className= {`font-bold text-white bg-[#04377B] px-[32px] py-[12px] w-[234px] rounded-[30px] mt-[47px] ${user && user.lastPaymentStaus == "approved" ? "mb-[75px]" : ""}`} onClick={()=>{redirectLogic()}}>Já tenho acesso!</button>
 
-            <a href={response && response.init_point} className="w-[240px] text-[16px] font-medium text-white text-center mt-3 mb-[47px]">Quer adquirir? <b className="text-[#EB4335]">Clique aqui!</b></a>
+            <a href={response && response.init_point} className={`w-[240px] text-[16px] font-medium text-white text-center mt-3 mb-[47px] ${user && user.lastPaymentStaus == "approved" ? "hidden" : ""}`}>Quer adquirir? <b className="text-[#EB4335]">Clique aqui!</b></a>
           </div>
         </div>
         <ToastContainer
