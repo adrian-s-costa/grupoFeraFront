@@ -14,6 +14,7 @@ export default function CoursesLandpage() {
   const [response, setResponse] = useState<any>();
   const [loading, setLoading] = useState<boolean>(true);
   const [user, setUser] = useState<any>();
+  const link = useRef<any>(null);
 
   const notify = (text: string) => toast.error(text , {
     position: "bottom-right",
@@ -33,7 +34,6 @@ export default function CoursesLandpage() {
     !userMail ? null :
     getUser(userMail)
     .then((res)=>{
-      console.log(res);
       setUser(res)
     })
     .catch((err)=>{
@@ -63,25 +63,30 @@ export default function CoursesLandpage() {
 
   const router = useRouter();
 
-  function redirectLogic() {
+  function redirectLogic(usermail: any) {
 
-    const link = document.querySelector('a');
-
-    if (!user.lastPaymentStaus) {
-      link!.click();
-    }
-
-    if (user.lastPaymentStatus == "reproved" || user.lastPaymentStaus == "pending") {
-      router.push(`status/${user.lastPaymentId}`)
-    }
-
-    if (user.lastPaymentStaus == "approved"){
-      router.push("/courses")
-    }
+    getUser(userMail)
+    .then((res)=>{
+      setUser(res)
+      if (!res.lastPaymentStaus) {
+        link.current.click();
+      }
+  
+      if (res.lastPaymentStatus == "reproved" || res.lastPaymentStaus == "pending") {
+        router.push(`status/${res.lastPaymentId}`)
+      }
+  
+      if (res.lastPaymentStaus == "approved"){
+        router.push("/courses")
+      }
+    })
+    .catch((err)=>{
+      console.error(err)
+    })
   }
 
   return (<>
-    { loading || typeof window == "undefined" || !user ? <Loader/> : null }
+    { loading || typeof window == "undefined" || !user || !response ? <Loader/> : null }
     <div className="w-full min-h-screen bg-white text-black dark:text-black xxs:mb-0  relative">
         <Image 
           quality={100}
@@ -98,9 +103,9 @@ export default function CoursesLandpage() {
             <p className="w-[270px] text-[24px] font-bold text-white text-center">Dominando o Mercado de Carros Híbridos</p>
             <p className="w-[240px] text-[16px] font-medium text-gray-400 text-center mt-3">Conhecendo a Tecnologia Híbrida para uma Venda Eficaz</p>
 
-            <button className= {`font-bold text-white bg-[#04377B] px-[32px] py-[12px] w-[234px] rounded-[30px] mt-[47px] ${user && user.lastPaymentStaus == "approved" ? "mb-[75px]" : ""}`} onClick={()=>{redirectLogic()}}>Já tenho acesso!</button>
+            <button className= {`font-bold text-white bg-[#04377B] px-[32px] py-[12px] w-[234px] rounded-[30px] mt-[47px] ${user && user.lastPaymentStaus == "approved" ? "mb-[75px]" : ""}`} onClick={()=>{redirectLogic(userMail)}}>Já tenho acesso!</button>
 
-            <a href={response && response.init_point} className={`w-[240px] text-[16px] font-medium text-white text-center mt-3 mb-[47px] ${user && user.lastPaymentStaus == "approved" ? "hidden" : ""}`}>Quer adquirir? <b className="text-[#EB4335]">Clique aqui!</b></a>
+            <a href={response && response.init_point} ref={link} className={`w-[240px] text-[16px] font-medium text-white text-center mt-3 mb-[47px] ${user && user.lastPaymentStaus == "approved" ? "hidden" : ""}`}>Quer adquirir? <b className="text-[#EB4335]">Clique aqui!</b></a>
           </div>
         </div>
         <ToastContainer

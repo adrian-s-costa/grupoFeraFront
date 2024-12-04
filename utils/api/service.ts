@@ -11,7 +11,7 @@ async function getVideos() {
   return res.json()
 }
 
-async function getUser(credential: string) {
+async function getUser(credential: any) {
   const res = await fetch(`${config.API_URL}/auth/get-user/${credential}`, {
     method: 'GET',
     headers: {
