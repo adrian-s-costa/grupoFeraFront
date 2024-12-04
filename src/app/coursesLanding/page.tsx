@@ -35,7 +35,6 @@ export default function CoursesLandpage() {
     .then((res)=>{
       console.log(res);
       setUser(res)
-      if (res.lastPaymentStaus == "approved") router.push("/courses")
     })
     .catch((err)=>{
       console.error(err)
