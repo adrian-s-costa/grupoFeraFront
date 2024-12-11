@@ -13,7 +13,7 @@ import { RatingComponent } from "@/app/_components/rating/rating";
 import ClockComponent from "@/app/_components/clock/clock";
 import { Tabs, TabsRef } from "flowbite-react";
 import { HiAdjustments, HiClipboardList, HiUserCircle } from "react-icons/hi";
-import { MdDashboard } from "react-icons/md";
+import { MdArrowBackIos, MdDashboard } from "react-icons/md";
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { RiPlayCircleFill, RiStopCircleFill } from "react-icons/ri";
 import { downloadBase64, share } from '@tef-novum/webview-bridge';
@@ -32,6 +32,9 @@ type Course = {
 };
 
 type Module = {
+  comments: any[];
+  description: string;
+  documents: any;
   documentUrl: string;
   documentName: string;
   id: string;
@@ -180,7 +183,7 @@ export default function Video({ params }: { params: { id: string } }) {
 
   const postComment = async () => {
     try {
-      const response = await fetch(`${config.API_URL}/courses/${params.id}/comment`,{
+      const response = await fetch(`${config.API_URL}/courses/${activeVideo?.id}/comment`,{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -237,6 +240,7 @@ export default function Video({ params }: { params: { id: string } }) {
 
   return (
     <div className="w-full h-screen bg-white dark:bg-black relative ">
+      <MdArrowBackIos className='text-3xl left-0 cursor-pointer absolute text-white ml-5 mt-5 z-10 ' onClick={() => {router.back()} } />
       <video key={activeVideo?.videoUrl} width={viewportWidth} height={(viewportWidth / 16) * 9} controls={true} autoPlay={true} muted={true} playsInline poster={activeVideo?.videoUrl}>
         {activeVideo && <source src={activeVideo.videoUrl} type="video/mp4"/>}
         Seu navegador não suporta o vídeo
@@ -248,7 +252,7 @@ export default function Video({ params }: { params: { id: string } }) {
             <RatingComponent/>
             <ClockComponent value={course?.totalDuration}/>
           </div>
-          <span className="text-xs mt-2 text-black dark:text-black">{course && course.description}</span>
+          <span className="text-sm mt-2 text-black dark:text-black">{activeVideo && activeVideo.description}</span>
         </div>
             <Tabs aria-label="Tabs with icons" style={"underline"} ref={tabsRef} onActiveTabChange={(tab) => setActiveTab(tab)}>
                 <Tabs.Item active title="Módulos">
@@ -283,30 +287,35 @@ export default function Video({ params }: { params: { id: string } }) {
                 </Tabs.Item>
                 <Tabs.Item title="Material">
                 <ul role="list" className="divide-y divide-gray-100 rounded-md border border-gray-200">
-                {
-                  course && course.modules && course.modules.map((module, index)=>{
-                    return <>
-                      <li className="flex items-center justify-between py-4 pl-4 pr-5 text-sm/6">
+                  {
+                    activeVideo && activeVideo.documents?.map((document: any) => (
+                      <li
+                        key={document.id} // Use uma chave única em vez do index
+                        className="flex items-center justify-between py-4 pl-4 pr-5 text-sm/6"
+                      >
                         <div className="flex w-0 flex-1 items-center">
                           <FaPaperclip aria-hidden="true" className="h-5 w-5 shrink-0 text-gray-400" />
                           <div className="ml-4 flex min-w-0 flex-1 gap-2">
-                            <span className="truncate font-medium">{module.documentName}</span>
+                            <span className="truncate font-medium">{document.documentName}</span>
                           </div>
                         </div>
                         <div className="ml-4 shrink-0">
-                          <a className="font-medium text-[#1091b2] hover:text-[#5f94b2]" href={module.documentUrl}>
+                          <a
+                            className="font-medium text-[#1091b2] hover:text-[#5f94b2]"
+                            href={document.documentUrl}
+                          >
                             Download
                           </a>
                         </div>
                       </li>
-                    </>
-                  })
-                }
-              </ul>
+                    )
+                  )}
+                </ul>
                 </Tabs.Item>
                 <Tabs.Item title="Comentários">
                   <ScrollArea className="h-[100%] w-full mb-8">
-                    {course && course.comments && course.comments.map((comment: any, indice: number)=>{
+                    {
+                    activeVideo && activeVideo.comments && activeVideo.comments.map((comment: any, indice: number)=>{
                       return <div className="mb-5" key={indice}>
                         <div className="flex items-center">
 
@@ -355,10 +364,6 @@ export default function Video({ params }: { params: { id: string } }) {
                     </ScrollArea>
                 </Tabs.Item>
             </Tabs>
-
-        
-        
-
       </div>
       <div className={` z-1 bottom-0 flex px-4 xxs:h-10 xs:h-16 w-full items-center bg-white ${activeTab == 2 ? 'fixed' : 'hidden'}`}>
         {pfpUrl == "" || pfpUrl == "." || !pfpUrl ? 
