@@ -4,6 +4,7 @@ import { Payment } from '@mercadopago/sdk-react';
 import { initMercadoPago } from '@mercadopago/sdk-react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { config } from '../../../../config';
 
 initMercadoPago('APP_USR-8f6a300a-b0ba-4e33-a08a-87b0b8d6614c');
 
@@ -34,7 +35,7 @@ export default function BrickTsx() {
        ) => {
         // callback chamado ao clicar no botão de submissão dos dados
         return new Promise<void>((resolve, reject) => {
-          fetch("https://delicate-sharing-fawn.ngrok-free.app/process_payment", {
+          fetch(config.API_URL + "/process_payment", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

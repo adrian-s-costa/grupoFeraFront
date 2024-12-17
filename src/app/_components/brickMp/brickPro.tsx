@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
+import { config } from '../../../../config';
 
 initMercadoPago('APP_USR-8f6a300a-b0ba-4e33-a08a-87b0b8d6614c', { locale: 'pt-BR' });
 
@@ -10,7 +11,7 @@ const CheckoutPro = () => {
     const [response, setResponse] = useState<any>();
     
     useEffect(()=>{
-        fetch("https://delicate-sharing-fawn.ngrok-free.app/process_payment/preference", {
+        fetch(config.API_URL + "/process_payment/preference", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

@@ -9,6 +9,7 @@ import { useEffect, useRef, useState } from "react";
 import Loader from "../loader/page";
 import { getUser } from "../../../utils/api/service";
 import { ToastContainer, toast } from 'react-toastify';
+import { config } from "../../../config";
 
 export default function CoursesLandpage() {
   const [response, setResponse] = useState<any>();
@@ -42,7 +43,7 @@ export default function CoursesLandpage() {
   }, [userMail])
   
   useEffect(()=>{
-    fetch("https://delicate-sharing-fawn.ngrok-free.app/process_payment/preference", {
+    fetch(config.API_URL + "/process_payment/preference", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
