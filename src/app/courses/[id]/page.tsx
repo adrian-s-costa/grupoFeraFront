@@ -247,7 +247,7 @@ export default function Video({ params }: { params: { id: string } }) {
       </video>
       <div className="w-full p-5">
         <div className="flex flex-col">
-          {course && <span className="font-semibold text-lg text-black dark:text-black mb-2">{course.title}</span>}
+          {course && <span className="font-semibold text-lg text-black dark:text-black mb-2">{activeVideo && activeVideo.title}</span>}
           <div className="w-full flex justify-between">
             <RatingComponent/>
             <ClockComponent value={course?.totalDuration}/>
