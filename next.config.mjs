@@ -23,6 +23,10 @@ export default withPWA({
       {
         protocol: 'https',
         hostname: 'api.grupofera.app.br',
+      },
+      {
+        protocol: 'https',
+        hostname: 'storage.cloud.google.com',
       }
     ],
   },
