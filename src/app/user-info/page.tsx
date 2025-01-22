@@ -124,8 +124,8 @@ export default function UserInfo(){
 
     } catch (error: any) {
       console.error('Erro durante o upload:', error.message);
-      notify("Erro durante upload do arquivo");
-      setLoading(false);
+      notify(error.message);
+      //setLoading(false);
     }
   }
   
