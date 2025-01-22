@@ -15,6 +15,8 @@ import * as Yup from 'yup';
 import { FileInput, Label } from "flowbite-react";
 import { FaUserCircle } from 'react-icons/fa';
 import axios from 'axios';
+//import fs from 'fs';
+import crypto from 'crypto'
 
 export default function UserInfo(){
 
@@ -36,7 +38,7 @@ export default function UserInfo(){
 
     if (selectedFile) {
       const fileType = selectedFile.type;
-      const allowedTypes = ['image/png', 'image/jpeg'];
+      const allowedTypes = ['image/png', 'image/jpeg' ];
 
       if (allowedTypes.includes(fileType)) {
 
@@ -103,6 +105,30 @@ export default function UserInfo(){
     theme: "light",
   });
 
+  async function uploadFileToSignedUrl(signedUrl: string, formData: FormData) {
+    try {
+      // Ler o arquivo local
+      //const fileData = fs.readFileSync(localFilePath);
+  
+      // Fazer upload via URL
+
+      console.log(signedUrl);
+
+      const response = await axios.put(signedUrl, formData, {
+        headers: {
+          'Content-Type': file.type,
+        },
+      });
+  
+      return {message: 'Upload realizado com sucesso:', data: response};
+
+    } catch (error: any) {
+      console.error('Erro durante o upload:', error.message);
+      notify("Erro durante upload do arquivo");
+      setLoading(false);
+    }
+  }
+  
   const verifyUserData = async (e: any) => {
 
     setLoading(true);
@@ -113,13 +139,29 @@ export default function UserInfo(){
     let awsResponse: any;
     let imageUrl = "";
 
+    
+    const mimeToExtension: { [key: string]: string } = {
+      'image/jpeg': '.jpg',
+      'image/png': '.png',
+      'image/heic': '.heic',
+      'image/heif': '.heif',
+    };
+
+    const mimeType = file.type; // Obtém o tipo MIME do arquivo
+  
+    const fileExtension = mimeToExtension[mimeType];
+    const uniqueFileName = `profile-pictures/${crypto.randomBytes(16).toString('hex')}${fileExtension}`;
+    
+    const res = await axios.get(`${config.API_URL}/upload-file/teste/${encodeURIComponent(uniqueFileName)}/${encodeURIComponent(file.type)}`, { headers: {"ngrok-skip-browser-warning": "69420"} })
+
     if (file && file !== null && url && url !== null) {
-      formData.append("image", file)
-      awsResponse = await axios.post(`${config.API_URL}/upload-file`, formData, { headers: {'Content-Type': 'multipart/form-data'}})
+      awsResponse = await uploadFileToSignedUrl(res.data, file)
+      
+      //awsResponse = await axios.post(`${config.API_URL}/upload-file`, formData, { headers: {'Content-Type': 'multipart/form-data'}})
     }
 
-    if (awsResponse && awsResponse.data && awsResponse.data.publicUrl){
-      imageUrl = awsResponse.data.publicUrl
+    if (awsResponse && awsResponse.data){
+      imageUrl = `https://storage.googleapis.com/videos-grupo-fera/profile-pictures/${uniqueFileName}`
     } else{
       setPfp(".")
     }
