@@ -113,16 +113,16 @@ export default function UserInfo(){
     let awsResponse: any;
     let imageUrl = "";
 
-    // if (file && file !== null && url && url !== null) {
-    //   formData.append("image", file)
-    //   awsResponse = await axios.post(`${config.API_URL}/upload-file`, formData, { headers: {'Content-Type': 'multipart/form-data'}})
-    // }
+    if (file && file !== null && url && url !== null) {
+      formData.append("image", file)
+      awsResponse = await axios.post(`${config.API_URL}/upload-file`, formData, { headers: {'Content-Type': 'multipart/form-data'}})
+    }
 
-    // if (awsResponse && awsResponse.data && awsResponse.data.awsUrl){
-    //   imageUrl = awsResponse.data.awsUrl
-    // } else{
-    //   setPfp(".")
-    // }
+    if (awsResponse && awsResponse.data && awsResponse.data.publicUrl){
+      imageUrl = awsResponse.data.publicUrl
+    } else{
+      setPfp(".")
+    }
   
     const cepResult = await fetch(`https://viacep.com.br/ws/${additionalInfo.cep}/json/`, {
       method: "GET"
