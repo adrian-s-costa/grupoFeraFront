@@ -123,6 +123,7 @@ export default function UserInfo(){
       return {message: 'Upload realizado com sucesso:', data: response};
 
     } catch (error: any) {
+      console.log(error)
       console.error('Erro durante o upload:', error.message);
       notify(error.message);
       //setLoading(false);

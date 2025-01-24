@@ -63,6 +63,11 @@ export default function RootLayout({
   return (
     
     <html lang="pt-br" className="touch-pan-y">
+      <head>
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+        <meta http-equiv="Pragma" content="no-cache"/>
+        <meta http-equiv="Expires" content="0"/>
+      </head>
       <body className={inter.className}>{children}
         <script src="https://sdk.mercadopago.com/js/v2" async/>
       </body>
