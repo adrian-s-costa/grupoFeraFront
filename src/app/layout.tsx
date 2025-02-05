@@ -70,6 +70,7 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>{children}
         <script src="https://sdk.mercadopago.com/js/v2" async/>
+        <script src="https://player.pandavideo.com.br/api.v2.js" async />
       </body>
     </html>
   );

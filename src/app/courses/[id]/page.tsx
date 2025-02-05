@@ -19,6 +19,7 @@ import { RiPlayCircleFill, RiStopCircleFill } from "react-icons/ri";
 import { downloadBase64, share } from '@tef-novum/webview-bridge';
 import { FaPaperclip } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
+import VideoPlayer from "@/app/_components/hlsComponent/hlsComponent";
 
 type Course = {
   comments: any;
@@ -238,13 +239,36 @@ export default function Video({ params }: { params: { id: string } }) {
     };
   }, []);
 
+  const videoUrl = "https://b-vz-95c1cd3f-0b8.tv.pandavideo.com.br/addd54b1-6011-4f2c-9f73-c4571dd11e9d/playlist.m3u8";
+
+  const a = "https://player-vz-95c1cd3f-0b8.tv.pandavideo.com.br/embed/?v=008589b5-97b0-458c-8414-1113cfafba5d"
+  const b = "https://player-vz-95c1cd3f-0b8.tv.pandavideo.com.br/embed/?v=addd54b1-6011-4f2c-9f73-c4571dd11e9d"
+
   return (
+    
+    // <div>
+    // <h1>Meu Vídeo HLS</h1>
+    //   <VideoPlayer videoUrl={videoUrl} />
+    // </div>
+
+
     <div className="w-full h-screen bg-white dark:bg-black relative ">
       <MdArrowBackIos className='text-3xl left-0 cursor-pointer absolute text-white ml-5 mt-5 z-10 ' onClick={() => {router.back()} } />
-      <video key={activeVideo?.videoUrl} width={viewportWidth} height={(viewportWidth / 16) * 9} controls={true} autoPlay={true} muted={true} playsInline poster={activeVideo?.videoUrl}>
+   
+   
+      {/* <video key={activeVideo?.videoUrl} width={viewportWidth} height={(viewportWidth / 16) * 9} controls={true} autoPlay={true} muted={true} playsInline poster={activeVideo?.videoUrl}>
         {activeVideo && <source src={activeVideo.videoUrl} type="video/mp4"/>}
         Seu navegador não suporta o vídeo
-      </video>
+      </video> */}
+
+      <>
+        <iframe id="panda-addd54b1-6011-4f2c-9f73-c4571dd11e9d"
+        src={activeVideo?.videoUrl}
+        allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture"
+        allowfullscreen='true' width={viewportWidth} height={(viewportWidth / 16) * 9} fetchpriority="high"/>
+      </>
+        
+    
       <div className="w-full p-5">
         <div className="flex flex-col">
           {course && <span className="font-semibold text-lg text-black dark:text-black mb-2">{activeVideo && activeVideo.title}</span>}
