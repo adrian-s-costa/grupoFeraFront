@@ -16,10 +16,8 @@ import { HiAdjustments, HiClipboardList, HiUserCircle } from "react-icons/hi";
 import { MdArrowBackIos, MdDashboard } from "react-icons/md";
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { RiPlayCircleFill, RiStopCircleFill } from "react-icons/ri";
-import { downloadBase64, share } from '@tef-novum/webview-bridge';
 import { FaPaperclip } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
-import VideoPlayer from "@/app/_components/hlsComponent/hlsComponent";
 
 type Course = {
   comments: any;
@@ -264,8 +262,8 @@ export default function Video({ params }: { params: { id: string } }) {
       <>
         <iframe id="panda-addd54b1-6011-4f2c-9f73-c4571dd11e9d"
         src={activeVideo?.videoUrl}
-        allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture"
-        allowfullscreen='true' width={viewportWidth} height={(viewportWidth / 16) * 9} fetchpriority="high"/>
+        allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen"
+        width={viewportWidth} height={(viewportWidth / 16) * 9} loading="eager"/>
       </>
         
     
