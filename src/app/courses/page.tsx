@@ -10,7 +10,7 @@ import { Button, Checkbox, Label, Modal, TextInput, Toast } from "flowbite-react
 import { ToastContainer, toast } from 'react-toastify';
 import { HiX } from "react-icons/hi";
 import { Badge } from "flowbite-react";
-import router from "next/router";
+import { useRouter } from "next/navigation";
 import { MdArrowBackIos } from "react-icons/md";
 import Link from "next/link";
 import ClockComponent from "../_components/clock/clock";
@@ -29,6 +29,8 @@ export default function Courses({setTabIndex}: any){
   const [courses, setCourses] = useState<any>()
 
   const hasAcessToCourses = typeof window !== "undefined" ? window.localStorage.getItem("hasAcess") : false;  
+
+  const router = useRouter();
 
   const changeState = (n: number) => {
     return setSearchBarState( searchBarState * -1);
@@ -102,7 +104,9 @@ export default function Courses({setTabIndex}: any){
       </Modal>
       <div className="w-full min-h-screen h-full bg-gray-100 p-5">
         <div className="w-full flex justify-center relative">
-          <MdArrowBackIos className='text-2xl left-0 cursor-pointer absolute text-black' onClick={() => {router.back()} } />
+          <Link href="/tab">
+            <MdArrowBackIos className='text-2xl left-0 cursor-pointer absolute text-black' onClick={() => {localStorage.setItem('page', "2")}} />
+          </Link>
           
           <Image 
             src={"https://api.grupofera.app.br/profile/logo-1.png"} 
