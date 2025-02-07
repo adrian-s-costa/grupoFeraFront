@@ -20,7 +20,8 @@ const config: Config = {
   		},
   		fontFamily: {
   			inter: ['__Inter_aaf875'],
-  			montserrat: ['__Montserrat_b1da2a']
+  			montserrat: ['__Montserrat_b1da2a'],
+			custom: ['__Inter_aaf875']
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
