@@ -237,11 +237,6 @@ export default function Video({ params }: { params: { id: string } }) {
     };
   }, []);
 
-  const videoUrl = "https://b-vz-95c1cd3f-0b8.tv.pandavideo.com.br/addd54b1-6011-4f2c-9f73-c4571dd11e9d/playlist.m3u8";
-
-  const a = "https://player-vz-95c1cd3f-0b8.tv.pandavideo.com.br/embed/?v=008589b5-97b0-458c-8414-1113cfafba5d"
-  const b = "https://player-vz-95c1cd3f-0b8.tv.pandavideo.com.br/embed/?v=addd54b1-6011-4f2c-9f73-c4571dd11e9d"
-
   return (
     
     // <div>
@@ -251,7 +246,7 @@ export default function Video({ params }: { params: { id: string } }) {
 
 
     <div className="w-full h-screen bg-white dark:bg-black relative ">
-      <MdArrowBackIos className='text-3xl left-0 cursor-pointer absolute text-white ml-5 mt-5 z-10 ' onClick={() => {router.back()} } />
+      <MdArrowBackIos className='text-3xl left-0 cursor-pointer absolute text-white ml-5 mt-5 z-10 ' onClick={() => {router.push("/courses")} } />
    
    
       {/* <video key={activeVideo?.videoUrl} width={viewportWidth} height={(viewportWidth / 16) * 9} controls={true} autoPlay={true} muted={true} playsInline poster={activeVideo?.videoUrl}>
