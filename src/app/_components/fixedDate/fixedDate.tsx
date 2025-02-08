@@ -7,10 +7,10 @@ import { Skeleton } from "@/components/ui/skeleton"
 export default function FixedDate({ loading, content, setActiveValues }: any){
 
 const changeChartData = (activeTab: number) => {
-  if (activeTab === 0) setActiveValues([{ valores: "Valores", impressions: content.measures.day.view.currentDayCount, click: content.measures.day.click.clickCurrentDayCount, ctr: content.measures.day.ctr.currentDayCTR}])
-  if (activeTab === 1) setActiveValues([{ valores: "Valores", impressions: content.measures.week.view.currentWeekCount, click: content.measures.week.click.clickCurrentWeekCount, ctr: content.measures.week.ctr.currentWeekCTR}])
-  if (activeTab === 2) setActiveValues([{ valores: "Valores", impressions: content.measures.month.view.currentMonthCount, click: content.measures.month.click.clickCurrentMonthCount, ctr: content.measures.month.ctr.currentMonthCTR}])
-  if (activeTab === 3) setActiveValues([{ valores: "Valores", impressions: content.measures.year.view.currentYearCount, click: content.measures.year.click.clickCurrentYearCount, ctr: content.measures.year.ctr.currentYearCTR}])    
+  if (activeTab === 0) setActiveValues([{ activeTab, valores: "Valores", impressions: content.measures.day.view.currentDayCount, click: content.measures.day.click.clickCurrentDayCount, ctr: content.measures.day.ctr.currentDayCTR}])
+  if (activeTab === 1) setActiveValues([{ activeTab, valores: "Valores", impressions: content.measures.week.view.currentWeekCount, click: content.measures.week.click.clickCurrentWeekCount, ctr: content.measures.week.ctr.currentWeekCTR}])
+  if (activeTab === 2) setActiveValues([{ activeTab, valores: "Valores", impressions: content.measures.month.view.currentMonthCount, click: content.measures.month.click.clickCurrentMonthCount, ctr: content.measures.month.ctr.currentMonthCTR}])
+  if (activeTab === 3) setActiveValues([{ activeTab, valores: "Valores", impressions: content.measures.year.view.currentYearCount, click: content.measures.year.click.clickCurrentYearCount, ctr: content.measures.year.ctr.currentYearCTR}])    
 }
 
 

@@ -48,7 +48,7 @@ export function ChartComponent() {
   return (
     <Card className="mt-5">
       <CardHeader>
-        <CardTitle>Area Chart - Stacked Expanded</CardTitle>
+        <CardTitle>Grupo Fera - Gráfico de barras</CardTitle>
         <CardDescription>
           Showing total visitors for the last 6months
         </CardDescription>

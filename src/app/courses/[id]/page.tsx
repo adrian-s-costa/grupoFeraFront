@@ -382,7 +382,7 @@ export default function Video({ params }: { params: { id: string } }) {
                 </Tabs.Item>
             </Tabs>
       </div>
-      <div className={` z-1 bottom-0 flex px-4 xxs:h-10 xs:h-16 w-full items-center bg-white ${activeTab == 2 ? 'fixed' : 'hidden'}`}>
+      <div className={` z-1 bottom-0 flex px-4 xxs:h-12 xs:h-20 w-full items-center bg-white ${activeTab == 2 ? 'fixed' : 'hidden'}`}>
         {pfpUrl == "" || pfpUrl == "." || !pfpUrl ? 
           <FaUserCircle className="text-gray-400 text-4xl"/>
         : <div

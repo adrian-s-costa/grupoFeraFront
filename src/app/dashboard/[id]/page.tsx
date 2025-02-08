@@ -131,7 +131,7 @@ export default function Campaign({ params }: { params: { id: string } }){
           modoDash === "fixo" ? 
             <>
               <FixedDate loading={loading} content={content} setActiveValues={setActiveValues}/>
-              <ChartBarComponent activeValues={activeValues}/>
+              <ChartBarComponent activeValues={activeValues} mode={modoDash}/>
             </>
           :
           <>
@@ -147,7 +147,7 @@ export default function Campaign({ params }: { params: { id: string } }){
             :
             <Skeleton className="h-[92px] w-full rounded-xl bg-white mt-5 mb-3"/>
           }
-            <ChartBarComponent activeValues={activeValues}/>
+            <ChartBarComponent activeValues={activeValues} mode={modoDash} initialDate={initialDate} finalDate={finalDate}/>
           </>
         }
       </div>

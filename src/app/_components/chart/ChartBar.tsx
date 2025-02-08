@@ -41,17 +41,37 @@ const chartConfig = {
 
 
 
-export function ChartBarComponent({activeValues}: any) {
+export function ChartBarComponent({activeValues, mode, initialDate, finalDate}: any) {
 
   useEffect(()=>{
       
   }, [activeValues])
 
+  console.log(activeValues)
+
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Bar Chart - Label</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle>Gráfico de barras -  Grupo Fera</CardTitle>
+        {
+          mode === "fixo" ? 
+          <CardDescription>
+            {activeValues[0].activeTab == 0 ? "Dados do dia atual" :
+              activeValues[0].activeTab == 1 ? "Dados da semana atual" : 
+                activeValues[0].activeTab == 2 ? "Dados do mês atual" :
+                  activeValues[0].activeTab == 3 ? "Dados do ano atual" : 
+                  ""}
+          </CardDescription>
+          :
+          <CardDescription>
+            { initialDate === undefined || finalDate === undefined 
+              ? ""
+              : initialDate + " - " + finalDate}
+          </CardDescription>
+        }
+        
+      
+        
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
@@ -101,14 +121,14 @@ export function ChartBarComponent({activeValues}: any) {
           </BarChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="flex-col items-start gap-2 text-sm">
+      {/* <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="flex gap-2 font-medium leading-none">
           Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
         </div>
         <div className="leading-none text-muted-foreground">
           Showing total visitors for the last 6 months
         </div>
-      </CardFooter>
+      </CardFooter> */}
     </Card>
   )
 }
