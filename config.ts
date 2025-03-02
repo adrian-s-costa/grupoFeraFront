@@ -1,3 +1,3 @@
 export const config = {
-  API_URL: "https://feraapi.grupofera.app.br"
+  API_URL: "https://34.67.183.125"
 }
