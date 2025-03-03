@@ -66,8 +66,8 @@ export default function Home({setTabIndex, muted}: any){
           src={"https://storage.googleapis.com/videos-grupo-fera/static/logos/logo.webp"}
           className="xxs:w-[5rem] xs:w-[7rem]"
           alt={""}
-          width={90}
-          height={1160}          
+          width={242}
+          height={256}          
         />
       </div>  
 
