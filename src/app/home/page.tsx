@@ -63,7 +63,7 @@ export default function Home({setTabIndex, muted}: any){
         </div>
 
         <Image 
-          src={"https://api.grupofera.app.br/PhotoAdditional/logo.png"}
+          src={"https://storage.googleapis.com/videos-grupo-fera/static/logos/logo.webp"}
           className="xxs:w-[5rem] xs:w-[7rem]"
           alt={""}
           width={90}
