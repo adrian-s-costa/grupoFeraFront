@@ -27,6 +27,10 @@ export default withPWA({
       {
         protocol: 'https',
         hostname: 'storage.cloud.google.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'storage.googleapis.com',
       }
     ],
   },
