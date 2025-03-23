@@ -105,7 +105,7 @@ export default function Courses({setTabIndex}: any){
       <div className="w-full min-h-screen h-full bg-gray-100 p-5">
         <div className="w-full flex justify-center relative">
           <Link href="/tab">
-            <MdArrowBackIos className='text-2xl left-0 cursor-pointer absolute text-black' onClick={() => {localStorage.setItem('page', "2")}} />
+            <MdArrowBackIos className='text-2xl left-0 top-[17px] cursor-pointer absolute text-black' onClick={() => {localStorage.setItem('page', "2")}} />
           </Link>
           
           <Image 
