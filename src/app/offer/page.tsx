@@ -76,7 +76,7 @@ export default function SpecificOffer(){
           <MdArrowBackIos className='text-2xl left-0 cursor-pointer absolute text-black' onClick={() => {router.push("/tab")} } />
           
           <Image 
-            src={"https://api.grupofera.app.br/profile/logo-1.png"} 
+            src={"https://storage.googleapis.com/videos-grupo-fera/static/logos/logo.webp"} 
             alt={""}
             width={70}
             height={1160}          

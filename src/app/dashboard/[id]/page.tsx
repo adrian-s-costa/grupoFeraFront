@@ -102,7 +102,7 @@ export default function Campaign({ params }: { params: { id: string } }){
         />
   
         <Image
-          src={"https://api.grupofera.app.br/profile/logo-1.png"}
+          src={"https://storage.googleapis.com/videos-grupo-fera/static/logos/logo.webp"}
           alt={""}
           width={70}
           height={1160}

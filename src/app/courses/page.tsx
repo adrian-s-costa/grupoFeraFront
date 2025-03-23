@@ -109,7 +109,7 @@ export default function Courses({setTabIndex}: any){
           </Link>
           
           <Image 
-            src={"https://api.grupofera.app.br/profile/logo-1.png"} 
+            src={"https://storage.googleapis.com/videos-grupo-fera/static/logos/logo.webp"} 
             alt={""}
             width={70}
             height={1160}          
