@@ -94,14 +94,12 @@ export default function Campaign({ params }: { params: { id: string } }){
   return (
     <div className="w-full min-h-screen h-full bg-gray-100 p-5 pb-20">
       <div className="w-full flex justify-center relative">
-        <div className="h-full flex items-center">
           <MdArrowBackIos
             className="text-2xl left-0 cursor-pointer absolute text-black"
             onClick={() => {
               router.back();
             }}
           />
-        </div>
   
         <Image
           src={"https://storage.googleapis.com/videos-grupo-fera/static/logos/logo.webp"}

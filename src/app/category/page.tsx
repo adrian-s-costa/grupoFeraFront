@@ -80,9 +80,7 @@ export default function CategoryPage(){
     <>
       <div className="w-full min-h-screen h-full bg-white p-5 pb-20">
         <div className="w-full flex justify-center relative">
-          <div className="h-full flex items-center">
-            <MdArrowBackIos className='text-2xl left-0 cursor-pointer absolute text-black' onClick={() => {router.back()} } />
-          </div>
+          <MdArrowBackIos className='text-2xl left-0 cursor-pointer absolute text-black' onClick={() => {router.back()} } />
           
           <Image 
             src={"https://storage.googleapis.com/videos-grupo-fera/static/logos/logo.webp"} 

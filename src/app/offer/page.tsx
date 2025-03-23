@@ -72,11 +72,9 @@ export default function SpecificOffer(){
 
   return (
       <div className="w-full min-h-screen h-full bg-white p-5 pb-20">
-        <div className="w-full flex justify-center relative">      
-          <div className="h-full flex items-center">
-            <MdArrowBackIos className='text-2xl left-0 cursor-pointer absolute text-black' onClick={() => {router.push("/tab")}} />
-          </div>
-
+        <div className="w-full flex justify-center relative">
+          <MdArrowBackIos className='text-2xl top-[17px] left-0 cursor-pointer absolute text-black' onClick={() => {router.push("/tab")} } />
+          
           <Image 
             src={"https://storage.googleapis.com/videos-grupo-fera/static/logos/logo.webp"} 
             alt={""}
