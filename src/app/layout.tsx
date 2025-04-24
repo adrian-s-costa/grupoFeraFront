@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Montserrat } from "next/font/google";
 import "./globals.css";
+import ServiceWorkerRegister from "@/components/ui/ServiceWorkerRegister";
 
 const inter = Inter({ subsets: ["latin"] });
 const mont = Montserrat({ subsets: ["latin"] });
@@ -64,6 +65,7 @@ export default function RootLayout({
     
     <html lang="pt-br" className="touch-pan-y">
       <body className={inter.className}>{children}
+        <ServiceWorkerRegister />
         <script src="https://sdk.mercadopago.com/js/v2" async/>
         <script src="https://player.pandavideo.com.br/api.v2.js" async />
       </body>

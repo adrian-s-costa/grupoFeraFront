@@ -3,7 +3,6 @@
 import { Rating } from "flowbite-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { teste2 } from "../../../utils/api/service";
 import axios from 'axios';
 import { useEffect, useRef, useState } from "react";
 import Loader from "../loader/page";

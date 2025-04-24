@@ -142,7 +142,7 @@ async function getCategoryContentCustom(id: any, initialDate: Date, finalDate: D
     return await res.json();
   } catch (error) {
     console.error('Failed to fetch category content:', error);
-    throw error; // Opcional: propaga o erro para quem chamar a função
+    throw error;
   }
 }
 
@@ -191,29 +191,19 @@ const handleClick = async (id: string) => {
   }
 }
 
-const teste2 = async () => {
+const handleSub = async (data: any) => {
   try {
-    const response = await fetch('https://sandbox.asaas.com/api/v3/paymentLinks', {
+    const response = await fetch(`${config.API_URL}/process_payment/save-sub`,{
       method: 'POST',
-//      mode: 'no-cors',
       headers: {
         'Content-Type': 'application/json',
-        'accept': 'application/json',
-        'content-type': 'application/json',
-        'access_token': '$aact_MzkwODA2MWY2OGM3MWRlMDU2NWM3MzJlNzZmNGZhZGY6OjRkNzhlNjgyLWY4YWItNGZhNC1hODQ5LWY4N2IwMTdhN2E0Zjo6JGFhY2hfZDBjMzQ5YjEtYTlmNy00M2UwLThlNzQtZmI4MmRiMTM5M2Q1',
-        'User-Agent': 'Grupo Fera',
+        "ngrok-skip-browser-warning": "69420"
       },
-      body: JSON.stringify({
-        billingType: 'UNDEFINED',
-        chargeType: 'DETACHED',
-        name: 'alamo',
-        value: 5,
-        dueDateLimitDays: 1,
-      })
+      body: data
     });
-
-    console.log(response);
-    
+    if (!response.ok) {
+      throw new Error('Failed to fetch view');
+    }
   } catch (error) {
     console.error('Error fetching view:', error);
   }
@@ -233,6 +223,6 @@ export {
   handleClick,
   getCourses,
   getCategoryContentCustom,
-  teste2,
+  handleSub,
   getUser
 }

@@ -5,8 +5,42 @@ import { IoIosArrowForward } from "react-icons/io";
 import { FaUserCircle } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { config } from "../../../config";
+import { handleSub } from "../../../utils/api/service";
 
 export default function Profile (){
+
+  async function requestNotificationPermission() {
+    const permission = await Notification.requestPermission();
+    if (permission === 'granted') {
+      console.log('Permissão concedida 🎉');
+      subscribeUser();
+    } else {
+      console.log('Permissão negada ❌');
+    }
+  }
+  
+
+  function urlBase64ToUint8Array(base64String: string): Uint8Array {
+    const padding = '='.repeat((4 - base64String.length % 4) % 4);
+    const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
+    const rawData = atob(base64);
+    return new Uint8Array([...rawData].map((char) => char.charCodeAt(0)));
+  }
+  
+  async function subscribeUser() {
+    const registration = await navigator.serviceWorker.ready;
+  
+    const subscription = await registration.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey: urlBase64ToUint8Array('BHpMl9CJn9ZlEDIImkKQv-QFlREKXnYlAqdCBxg_IElNRPth0FDGua819iSDLj9SZhXoOdHRJ9oBJIeliDeOYWo'),
+    });
+  
+    handleSub(JSON.stringify(subscription))
+  
+    console.log('🔔 Assinatura criada:', subscription);
+  }
+
+
   const deleteUser = async () => {
     try {
       const response = await fetch(`${config.API_URL}/auth/delete-user`, {
@@ -73,6 +107,14 @@ export default function Profile (){
           <div className="flex items-center ">
             <IoAnalytics className="text-2xl text-slate-400 mr-2"/>
             <span className="text-black dark:text-black">Fera Ads</span>
+          </div>
+          <IoIosArrowForward className="text-2xl"/>
+        </div>
+        <hr className="mx-5"/>
+        <div className="flex items-center h-10 w-full justify-between cursor-pointer" onClick={requestNotificationPermission}>
+          <div className="flex items-center ">
+            <IoAnalytics className="text-2xl text-slate-400 mr-2"/>
+            <span className="text-black dark:text-black">Notificação</span>
           </div>
           <IoIosArrowForward className="text-2xl"/>
         </div>

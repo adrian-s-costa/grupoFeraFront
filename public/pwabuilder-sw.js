@@ -13,6 +13,21 @@ self.addEventListener("message", (event) => {
   }
 });
 
+self.addEventListener('push', function (event) {
+  const data = event.data?.json();
+
+  const title = data.title || 'Notificação';
+  const options = {
+    body: data.body || 'Você tem uma nova mensagem',
+    icon: '/icon-192x192.png', // opcional
+  };
+
+  event.waitUntil(
+    self.registration.showNotification(title, options)
+  );
+});
+
+
 self.addEventListener('install', async (event) => {
   event.waitUntil(
     caches.open(CACHE)
