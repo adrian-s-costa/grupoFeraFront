@@ -36,6 +36,7 @@
     "hls.js": "^1.5.20",
     "lucide-react": "^0.454.0",
     "next": "14.2.3",
+    "next-pwa": "^5.6.0",
     "react": "^18",
     "react-chartjs-2": "^5.2.0",
     "react-day-picker": "^8.10.1",

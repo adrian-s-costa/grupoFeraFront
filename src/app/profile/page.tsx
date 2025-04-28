@@ -6,6 +6,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { config } from "../../../config";
 import { handleSub } from "../../../utils/api/service";
+import { urlB64ToUint8Array } from "@/lib/utils";
 
 export default function Profile (){
 
@@ -20,19 +21,13 @@ export default function Profile (){
   }
   
 
-  function urlBase64ToUint8Array(base64String: string): Uint8Array {
-    const padding = '='.repeat((4 - base64String.length % 4) % 4);
-    const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
-    const rawData = atob(base64);
-    return new Uint8Array([...rawData].map((char) => char.charCodeAt(0)));
-  }
-  
+ 
   async function subscribeUser() {
-    const registration = await navigator.serviceWorker.ready;
+    const registration = await navigator.serviceWorker.getRegistration();
   
-    const subscription = await registration.pushManager.subscribe({
+    const subscription = await registration!.pushManager.subscribe({
       userVisibleOnly: true,
-      applicationServerKey: urlBase64ToUint8Array('BHpMl9CJn9ZlEDIImkKQv-QFlREKXnYlAqdCBxg_IElNRPth0FDGua819iSDLj9SZhXoOdHRJ9oBJIeliDeOYWo'),
+      applicationServerKey: urlB64ToUint8Array('BHpMl9CJn9ZlEDIImkKQv-QFlREKXnYlAqdCBxg_IElNRPth0FDGua819iSDLj9SZhXoOdHRJ9oBJIeliDeOYWo'),
     });
   
     handleSub(JSON.stringify(subscription))
