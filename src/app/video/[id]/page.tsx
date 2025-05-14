@@ -66,10 +66,10 @@ export default function Video({ params }: { params: { id: string } }) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': '2047EFFE-4A85-BD7D-A918-E28C2AC780A8'
+                'Authorization': '64C6DF15-0A8E-6C41-8D09-DF3A8912CE70'
             },
             body: JSON.stringify({
-                id_usuario: 35185,
+                id_usuario: 37456,
                 id_origem: 313,
                 razao_cliente: userName,
                 fantasia: userName,
