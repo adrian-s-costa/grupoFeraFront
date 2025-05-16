@@ -105,7 +105,7 @@ export default function UserInfo(){
     theme: "light",
   });
 
-  async function uploadFileToSignedUrl(signedUrl: string, formData: FormData) {
+  async function uploadFileToSignedUrl(signedUrl: string, file: File) {
     try {
       // Ler o arquivo local
       //const fileData = fs.readFileSync(localFilePath);
@@ -114,7 +114,7 @@ export default function UserInfo(){
 
       console.log(signedUrl);
 
-      const response = await axios.put(signedUrl, formData, {
+      const response = await axios.put(signedUrl, file, {
         headers: {
           'Content-Type': file.type,
         },
@@ -135,8 +135,6 @@ export default function UserInfo(){
     setLoading(true);
     e.preventDefault();
 
-    const formData = new FormData();
-
     let awsResponse: any;
     let imageUrl = "";
 
@@ -148,23 +146,22 @@ export default function UserInfo(){
       'image/heif': '.heif',
     };
 
-    const mimeType = file.type; // Obtém o tipo MIME do arquivo
+    if (file) {
+      const mimeType = file.type;
+      const fileExtension = mimeToExtension[mimeType];
+      const uniqueFileName = `profile-pictures/${crypto.randomBytes(16).toString('hex')}${fileExtension}`;
+      const res = await axios.get(`${config.API_URL}/upload-file/teste/${encodeURIComponent(uniqueFileName)}/${encodeURIComponent(file.type)}`, { headers: {"ngrok-skip-browser-warning": "69420"} })
+      if (file && file !== null && url && url !== null) {
+        awsResponse = await uploadFileToSignedUrl(res.data, file)
+        
+        //awsResponse = await axios.post(`${config.API_URL}/upload-file`, formData, { headers: {'Content-Type': 'multipart/form-data'}})
+      }
   
-    const fileExtension = mimeToExtension[mimeType];
-    const uniqueFileName = `profile-pictures/${crypto.randomBytes(16).toString('hex')}${fileExtension}`;
-    
-    const res = await axios.get(`${config.API_URL}/upload-file/teste/${encodeURIComponent(uniqueFileName)}/${encodeURIComponent(file.type)}`, { headers: {"ngrok-skip-browser-warning": "69420"} })
-
-    if (file && file !== null && url && url !== null) {
-      awsResponse = await uploadFileToSignedUrl(res.data, file)
-      
-      //awsResponse = await axios.post(`${config.API_URL}/upload-file`, formData, { headers: {'Content-Type': 'multipart/form-data'}})
-    }
-
-    if (awsResponse && awsResponse.data){
-      imageUrl = `https://storage.googleapis.com/videos-grupo-fera/profile-pictures/${uniqueFileName}`
-    } else{
-      setPfp(".")
+      if (awsResponse && awsResponse.data){
+        imageUrl = `https://storage.googleapis.com/videos-grupo-fera/profile-pictures/${uniqueFileName}`
+      } else{
+        setPfp(".")
+      }
     }
   
     const cepResult = await fetch(`https://viacep.com.br/ws/${additionalInfo.cep}/json/`, {
