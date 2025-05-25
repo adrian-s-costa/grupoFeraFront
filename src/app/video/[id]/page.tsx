@@ -3,7 +3,7 @@
 'use client'
 
 import { useState, useEffect } from "react";
-import { FiThumbsUp, FiThumbsDown } from "react-icons/fi";
+import { FiThumbsUp, FiThumbsDown, FiCast } from "react-icons/fi";
 import { FaWhatsapp, FaUserCircle } from "react-icons/fa";
 import { IoArrowUndoOutline, IoSend } from "react-icons/io5";
 import { IoMdThumbsUp } from "react-icons/io";
@@ -248,11 +248,11 @@ export default function Video({ params }: { params: { id: string } }) {
     };
   }, []);
 
-  const startCasting = () => {
+  const startCasting = (videoUrl) => {
     const context = cast.framework.CastContext.getInstance();
     context.requestSession().then(() => {
       const castSession = context.getCurrentSession();
-      const mediaInfo = new chrome.cast.media.MediaInfo('https://www.html5rocks.com/en/tutorials/video/basics/devstories.webm', 'video/webm');
+      const mediaInfo = new chrome.cast.media.MediaInfo(videoUrl, 'video/mp4');
       const request = new chrome.cast.media.LoadRequest(mediaInfo);
       castSession.loadMedia(request);
     });
@@ -267,38 +267,48 @@ export default function Video({ params }: { params: { id: string } }) {
     }
   };
 
+  function getMobileOperatingSystem() {
+    const userAgent = typeof window !== 'undefined' ? window.navigator.userAgent || window.navigator.vendor || window.opera : '';
+
+    if (/android/i.test(userAgent)) {
+      return 'Android';
+    }
+
+    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+      return 'iOS';
+    }
+
+    if (/Macintosh/.test(userAgent) && 'ontouchend' in document) {
+      // iPadOS detectado como Mac
+      return 'iOS';
+    }
+
+    return 'unknown';
+  }
+
+  const [os, setOs] = useState<string>('unknown');
+
+  useEffect(() => {
+    const detectedOS = getMobileOperatingSystem();
+    setOs(detectedOS);
+    console.log('Sistema operacional detectado:', detectedOS);
+  }, []);
+
+
   return (
     <div className="w-full h-screen bg-white dark:bg-black relative overflow-y-hidden" suppressHydrationWarning>
 
-      <video
-        src="https://www.html5rocks.com/en/tutorials/video/basics/devstories.webm"
-        controls
-        width="640"
-        height="360"
-        className="mb-4"
-      />
-
+      <video width={viewportWidth} height={(viewportWidth / 16) * 9} controls={true} autoPlay={true} muted={true} playsInline={true} poster={video?.thumbnailUrl}>
+        {video && <source src={video.url} type="video/mp4"/>}
+        Seu navegador não suporta o vídeo
+      </video>
+      
       <div className="flex gap-4">
-        <button
-          onClick={openAirplay}
-          className="bg-blue-500 text-white px-4 py-2 rounded"
-        >
-          AirPlay
-        </button>
-
         {isCastReady && (
           <google-cast-launcher style={{ height: 48, width: 48 }} />
         )}
 
-        <button
-          onClick={startCasting}
-          disabled={!isCastReady}
-          className="bg-red-500 text-white px-4 py-2 rounded"
-        >
-          Chromecast
-        </button>
-      </div>  
-    
+      </div>
       <div className="w-full p-5 min-h-full h-auto ">
         <div className="flex flex-col">
           {video && <span className="font-semibold text-lg text-black dark:text-black">{video.name}</span>}
@@ -328,6 +338,10 @@ export default function Video({ params }: { params: { id: string } }) {
           <div className={`flex items-center flex-col ${contact ? 'text-green-500' : 'text-black'}`} onClick={()=>{handleContact();}}>
             <FaWhatsapp  className="text-2xl mb-1 mt-5 cursor-pointer"/>
             <span className="xxs:text-sm xs:text-base">Tenho interesse</span>
+          </div>
+          <div className="flex items-center flex-col" onClick={() => os === 'iOS' ? openAirplay() : startCasting(video?.url)}>
+            <FiCast className="text-2xl mb-1 mt-5 cursor-pointer dark:text-black text-black"/>
+            <span className="dark:text-black text-black xxs:text-sm xs:text-base">Espelhar</span>
           </div>
           <Link href={'/tab?options=1'} onClick={() => {localStorage.setItem('page', "1")}}>
             <div className="flex items-center flex-col">
