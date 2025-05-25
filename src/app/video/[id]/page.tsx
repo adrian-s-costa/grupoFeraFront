@@ -227,24 +227,19 @@ export default function Video({ params }: { params: { id: string } }) {
   const [isCastReady, setIsCastReady] = useState(false);
 
   useEffect(() => {
-    const script = document.createElement("script");
-    script.src =
-      "https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1";
+    const script = document.createElement('script');
+    script.src = 'https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1';
     script.async = true;
     document.body.appendChild(script);
 
-    window["__onGCastApiAvailable"] = function (isAvailable: boolean) {
+    window.__onGCastApiAvailable = function (isAvailable) {
       if (isAvailable) {
         const context = cast.framework.CastContext.getInstance();
         context.setOptions({
-          receiverApplicationId:
-            chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID,
+          receiverApplicationId: chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID,
           autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED,
         });
         setIsCastReady(true);
-        console.log("Cast API pronta");
-      } else {
-        console.error("Cast API não está disponível");
       }
     };
 
@@ -253,74 +248,57 @@ export default function Video({ params }: { params: { id: string } }) {
     };
   }, []);
 
-  function startCasting() {
+  const startCasting = () => {
     const context = cast.framework.CastContext.getInstance();
+    context.requestSession().then(() => {
+      const castSession = context.getCurrentSession();
+      const mediaInfo = new chrome.cast.media.MediaInfo('https://www.html5rocks.com/en/tutorials/video/basics/devstories.webm', 'video/webm');
+      const request = new chrome.cast.media.LoadRequest(mediaInfo);
+      castSession.loadMedia(request);
+    });
+  };
 
-    context
-      .requestSession()
-      .then(() => {
-        console.log("Sessão criada!");
-        castYouTubeVideo("W4ZXwVXWSwc");
-      })
-      .catch((error: any) => {
-        console.error("Erro ao criar sessão:", error);
-      });
-  }
-
-  function castYouTubeVideo(videoId: string) {
-    const castSession = cast.framework.CastContext.getInstance().getCurrentSession();
-
-    if (!castSession) {
-      alert("Nenhuma sessão ativa");
-      return;
+  const openAirplay = () => {
+    const video = document.querySelector('video') as any;
+    if (video && video.webkitShowPlaybackTargetPicker) {
+      video.webkitShowPlaybackTargetPicker();
+    } else {
+      alert('AirPlay não suportado');
     }
-
-    const mediaInfo = new chrome.cast.media.MediaInfo(
-      `https://www.youtube.com/watch?v=${videoId}`,
-      "x-youtube"
-    );
-
-    const request = new chrome.cast.media.LoadRequest(mediaInfo);
-
-    castSession
-      .loadMedia(request)
-      .then(() => {
-        console.log("Vídeo enviado com sucesso!");
-      })
-      .catch((errorCode: any) => {
-        console.error("Erro ao enviar vídeo:", errorCode);
-      });
-  }
+  };
 
   return (
     <div className="w-full h-screen bg-white dark:bg-black relative overflow-y-hidden" suppressHydrationWarning>
-      <iframe
-        width={viewportWidth}
-        height={(viewportWidth / 16) * 9}
-        src={`https://www.youtube.com/embed/W4ZXwVXWSwc?autoplay=1&mute=1&playsinline=1&enablejsapi=1`}
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; cast"
-        allowFullScreen
-        title="YouTube Video"
-      ></iframe>
 
-      <div className="mt-4 flex items-center gap-4" suppressHydrationWarning>
-          
-        <google-cast-launcher style={{ height: 48, width: 48 }} />
-      
+      <video
+        src="https://www.html5rocks.com/en/tutorials/video/basics/devstories.webm"
+        controls
+        width="640"
+        height="360"
+        className="mb-4"
+      />
 
-      <div className="w-full flex justify-center">
-          <button
-            onClick={startCasting}
-            disabled={!isCastReady}
-            className={`px-4 py-2 rounded ${
-              isCastReady ? "bg-blue-600 text-white" : "bg-gray-400 text-black"
-            }`}
-            >
-            {isCastReady ? "Enviar para Chromecast" : "Carregando..."}
-          </button> 
-        </div>
-      </div>
+      <div className="flex gap-4">
+        <button
+          onClick={openAirplay}
+          className="bg-blue-500 text-white px-4 py-2 rounded"
+        >
+          AirPlay
+        </button>
+
+        {isCastReady && (
+          <google-cast-launcher style={{ height: 48, width: 48 }} />
+        )}
+
+        <button
+          onClick={startCasting}
+          disabled={!isCastReady}
+          className="bg-red-500 text-white px-4 py-2 rounded"
+        >
+          Chromecast
+        </button>
+      </div>  
+    
       <div className="w-full p-5 min-h-full h-auto ">
         <div className="flex flex-col">
           {video && <span className="font-semibold text-lg text-black dark:text-black">{video.name}</span>}
