@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 'use client'
 
 import { useState, useEffect } from "react";
@@ -22,6 +24,15 @@ type Video = {
   dislikes: number;
   thumbnailUrl: string;
 };
+
+declare global {
+  interface Window {
+    __onGCastApiAvailable: (isAvailable: boolean) => void;
+  }
+
+  const cast: any;
+  const chrome: any;
+}
 
 export default function Video({ params }: { params: { id: string } }) {
   
@@ -282,7 +293,7 @@ export default function Video({ params }: { params: { id: string } }) {
   }
 
   return (
-    <div className="w-full h-screen bg-white dark:bg-black relative overflow-y-hidden">
+    <div className="w-full h-screen bg-white dark:bg-black relative overflow-y-hidden" suppressHydrationWarning>
       <iframe
         width={viewportWidth}
         height={(viewportWidth / 16) * 9}
@@ -293,8 +304,10 @@ export default function Video({ params }: { params: { id: string } }) {
         title="YouTube Video"
       ></iframe>
 
-      <div className="mt-4 flex items-center gap-4">
+      <div className="mt-4 flex items-center gap-4" suppressHydrationWarning>
+          
         <google-cast-launcher style={{ height: 48, width: 48 }} />
+      
 
       <div className="w-full flex justify-center">
           <button

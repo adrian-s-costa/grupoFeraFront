@@ -60,13 +60,12 @@
   }: Readonly<{
     children: React.ReactNode;
   }>) {
-
     return (
-      
       <html lang="pt-br" className="touch-pan-y">
         <body className={inter.className}>{children}
           <script src="https://sdk.mercadopago.com/js/v2" async/>
           <script src="https://player.pandavideo.com.br/api.v2.js" async />
+          <script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1" async />
           <ServiceWorkerRegister />
         </body>
       </html>
