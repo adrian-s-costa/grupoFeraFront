@@ -16,37 +16,12 @@ const Streaming = dynamic(() => import("../streaming/page"), { ssr: false });
 const CoursesLandpage = dynamic(() => import("../coursesLanding/page"), { ssr: false });
 const Profile = dynamic(() => import("../profile/page"), { ssr: false });
 
-declare global {
-  interface Window {
-    OneSignalDeferred: any[];
-  }
-}
-
-
 export default function HomeTab() {
   const searchParams = useSearchParams();
   const options = searchParams.get("options");
   const [muted, setMuted] = useState<boolean | null>(null);
   const [logo, setLogo] = useState<boolean>(false);
   const [tabIndex, setTabIndex] = useState<number>(0);
-
-    useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js';
-    script.defer = true;
-    document.body.appendChild(script);
-
-    window.OneSignalDeferred = window.OneSignalDeferred || [];
-    window.OneSignalDeferred.push(async function (OneSignal: any) {
-      await OneSignal.init({
-        appId: '333bc4c4-5d43-44ce-a64b-f2c7ee9bc934',
-      });
-    });
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
 
   useEffect(() => {
     const storedPage = typeof window !== "undefined" ? localStorage.getItem("page") : "0";
