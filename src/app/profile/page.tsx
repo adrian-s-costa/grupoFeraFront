@@ -10,14 +10,8 @@ import { urlB64ToUint8Array } from "@/lib/utils";
 
 export default function Profile (){
 
-  async function requestNotificationPermission() {
-    const permission = await Notification.requestPermission();
-    if (permission === 'granted') {
-      console.log('Permissão concedida 🎉');
-      subscribeUser();
-    } else {
-      console.log('Permissão negada ❌');
-    }
+  function requestNotificationPermission() {
+    Notification.requestPermission();
   }
   
 
@@ -106,7 +100,7 @@ export default function Profile (){
           <IoIosArrowForward className="text-2xl"/>
         </div>
         <hr className="mx-5"/>
-        <div className="flex items-center h-10 w-full justify-between cursor-pointer" onClick={requestNotificationPermission}>
+        <div className="flex items-center h-10 w-full justify-between cursor-pointer" onClick={()=>requestNotificationPermission()}>
           <div className="flex items-center ">
             <IoAnalytics className="text-2xl text-slate-400 mr-2"/>
             <span className="text-black dark:text-black">Notificação</span>
