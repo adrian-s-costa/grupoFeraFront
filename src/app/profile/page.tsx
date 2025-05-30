@@ -10,7 +10,7 @@ import { config } from "../../../config";
 import { handleSub } from "../../../utils/api/service";
 import { urlB64ToUint8Array } from "@/lib/utils";
 import { PushNotifications } from '@capacitor/push-notifications';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Profile (){
 
