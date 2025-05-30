@@ -1,3 +1,3 @@
 export const config = {
-  API_URL: "https://grupoferaapi.shop"
+  API_URL: "https://delicate-sharing-fawn.ngrok-free.app"
 }

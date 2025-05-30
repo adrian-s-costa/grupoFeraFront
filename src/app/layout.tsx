@@ -1,7 +1,7 @@
   import type { Metadata, Viewport } from "next";
   import { Inter, Montserrat } from "next/font/google";
   import "./globals.css";
-  import ServiceWorkerRegister from "@/components/ui/ServiceWorkerRegister";
+  import Pwa from "@/components/ui/ServiceWorkerRegister";
 
   const inter = Inter({ subsets: ["latin"] });
   const mont = Montserrat({ subsets: ["latin"] });
@@ -66,7 +66,10 @@
           <script src="https://sdk.mercadopago.com/js/v2" async/>
           <script src="https://player.pandavideo.com.br/api.v2.js" async />
           <script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1" async />
-          <ServiceWorkerRegister />
+          <meta name="apple-mobile-web-app-capable" content="yes"/>
+          <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+          <link rel="apple-touch-icon" href="/icons/icon-192.png"></link>
+          <Pwa />
         </body>
       </html>
     );

@@ -10,25 +10,62 @@ import { urlB64ToUint8Array } from "@/lib/utils";
 
 export default function Profile (){
 
-  function requestNotificationPermission() {
-    Notification.requestPermission();
+async function requestNotificationPermission() {
+  if (!('Notification' in window)) {
+    console.log('❌ Este navegador não suporta notificações');
+    return;
   }
   
+  Notification.requestPermission().then(permission => {
+  if (permission === 'granted') {
+    console.log('✅ Permissão concedida');
+    subscribeUser();
+  } else {
+    console.log('❌ Permissão negada');
+  }
+  });
+}
 
- 
-  async function subscribeUser() {
-    const registration = await navigator.serviceWorker.getRegistration();
-  
-    const subscription = await registration!.pushManager.subscribe({
+async function subscribeUser() {
+  if (!('serviceWorker' in navigator)) {
+    console.log('❌ Service Worker não suportado');
+    return;
+  }
+
+  try {
+    // Verificar se já existe um Service Worker registrado
+    let registration = await navigator.serviceWorker.getRegistration();
+
+    if (!registration) {
+      console.log('🆕 Registrando novo Service Worker');
+      registration = await navigator.serviceWorker.register('/sw.js');
+    } else {
+      console.log('✔️ Service Worker já registrado');
+    }
+
+    // Verificar se já existe uma subscription ativa
+    const existingSubscription = await registration.pushManager.getSubscription();
+    if (existingSubscription) {
+      console.log('🔔 Já existe uma subscription ativa:', existingSubscription);
+      handleSub(JSON.stringify(existingSubscription));
+      return;
+    }
+
+    // Criar uma nova subscription
+    const subscription = await registration.pushManager.subscribe({
       userVisibleOnly: true,
-      applicationServerKey: urlB64ToUint8Array('BHpMl9CJn9ZlEDIImkKQv-QFlREKXnYlAqdCBxg_IElNRPth0FDGua819iSDLj9SZhXoOdHRJ9oBJIeliDeOYWo'),
+      applicationServerKey: urlB64ToUint8Array(
+        'BHpMl9CJn9ZlEDIImkKQv-QFlREKXnYlAqdCBxg_IElNRPth0FDGua819iSDLj9SZhXoOdHRJ9oBJIeliDeOYWo'
+      ),
     });
-  
-    handleSub(JSON.stringify(subscription))
-  
-    console.log('🔔 Assinatura criada:', subscription);
-  }
 
+    console.log('✅ Subscription criada:', subscription);
+    handleSub(JSON.stringify(subscription));
+
+  } catch (error) {
+    console.error('❌ Erro ao criar subscription:', error);
+  }
+}
 
   const deleteUser = async () => {
     try {
@@ -100,7 +137,7 @@ export default function Profile (){
           <IoIosArrowForward className="text-2xl"/>
         </div>
         <hr className="mx-5"/>
-        <div className="flex items-center h-10 w-full justify-between cursor-pointer" onClick={()=>requestNotificationPermission()}>
+        <div className="flex items-center h-10 w-full justify-between cursor-pointer" onClick={requestNotificationPermission}>
           <div className="flex items-center ">
             <IoAnalytics className="text-2xl text-slate-400 mr-2"/>
             <span className="text-black dark:text-black">Notificação</span>
