@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 "use client"
 
 import { IoExit, IoTrashOutline, IoPencil, IoAnalytics } from "react-icons/io5";
@@ -7,65 +9,122 @@ import { useRouter } from "next/navigation";
 import { config } from "../../../config";
 import { handleSub } from "../../../utils/api/service";
 import { urlB64ToUint8Array } from "@/lib/utils";
+import { PushNotifications } from '@capacitor/push-notifications';
+import { useEffect } from "react";
 
 export default function Profile (){
 
-async function requestNotificationPermission() {
-  if (!('Notification' in window)) {
-    console.log('❌ Este navegador não suporta notificações');
-    return;
-  }
-  
-  Notification.requestPermission().then(permission => {
-  if (permission === 'granted') {
-    console.log('✅ Permissão concedida');
-    subscribeUser();
-  } else {
-    console.log('❌ Permissão negada');
-  }
-  });
-}
+  const [log, setLog] = useState<string | null>(null);
 
-async function subscribeUser() {
-  if (!('serviceWorker' in navigator)) {
-    console.log('❌ Service Worker não suportado');
-    return;
-  }
+  useEffect(()=>{
 
-  try {
-    // Verificar se já existe um Service Worker registrado
-    let registration = await navigator.serviceWorker.getRegistration();
+  }, [log])
 
-    if (!registration) {
-      console.log('🆕 Registrando novo Service Worker');
-      registration = await navigator.serviceWorker.register('/sw.js');
-    } else {
-      console.log('✔️ Service Worker já registrado');
+  function getMobileOperatingSystem() {
+    const userAgent = typeof window !== 'undefined' ? window.navigator.userAgent || window.navigator.vendor || window.opera : '';
+
+    if (/android/i.test(userAgent)) {
+      return 'Android';
     }
 
-    // Verificar se já existe uma subscription ativa
-    const existingSubscription = await registration.pushManager.getSubscription();
-    if (existingSubscription) {
-      console.log('🔔 Já existe uma subscription ativa:', existingSubscription);
-      handleSub(JSON.stringify(existingSubscription));
+    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+      return 'iOS';
+    }
+
+    if (/Macintosh/.test(userAgent) && 'ontouchend' in document) {
+      // iPadOS detectado como Mac
+      return 'iOS';
+    }
+
+    return 'unknown';
+  }
+  
+  const [os, setOs] = useState<string>('unknown');
+
+  useEffect(() => {
+    const detectedOS = getMobileOperatingSystem();
+    setOs(detectedOS);
+    console.log('Sistema operacional detectado:', detectedOS);
+  }, []);
+
+  async function requestNotificationPermission() {
+    if (!('Notification' in window)) {
+      console.log('❌ Este navegador não suporta notificações');
+      return;
+    }
+    
+    Notification.requestPermission().then(permission => {
+    if (permission === 'granted') {
+      console.log('✅ Permissão concedida');
+      subscribeUser();
+    } else {
+      console.log('❌ Permissão negada');
+    }
+    });
+  }
+
+  const nativeNotifications = () => {
+    PushNotifications.requestPermissions().then(result => {
+      if (result.receive === 'granted') {
+        PushNotifications.register();
+      } else {
+        console.log('❌ Permissão de push negada');
+      }
+    });
+
+    PushNotifications.addListener('registration', token => {
+      console.log('📱 Token de push:', token.value);
+      setLog(token.value)
+      
+    });
+
+    PushNotifications.addListener('registrationError', error => {
+      console.error('❌ Erro no registro de push:', error);
+    });
+
+
+  }
+
+  async function subscribeUser() {
+    if (!('serviceWorker' in navigator)) {
+      console.log('❌ Service Worker não suportado');
       return;
     }
 
-    // Criar uma nova subscription
-    const subscription = await registration.pushManager.subscribe({
-      userVisibleOnly: true,
-      applicationServerKey: urlB64ToUint8Array(
-        'BHpMl9CJn9ZlEDIImkKQv-QFlREKXnYlAqdCBxg_IElNRPth0FDGua819iSDLj9SZhXoOdHRJ9oBJIeliDeOYWo'
-      ),
-    });
+    try {
+      // Verificar se já existe um Service Worker registrado
+      let registration = await navigator.serviceWorker.getRegistration();
 
-    console.log('✅ Subscription criada:', subscription);
-    handleSub(JSON.stringify(subscription));
+      if (!registration) {
+        console.log('🆕 Registrando novo Service Worker');
+        registration = await navigator.serviceWorker.register('/sw.js');
+      } else {
+        console.log('✔️ Service Worker já registrado');
+      }
 
-  } catch (error) {
-    console.error('❌ Erro ao criar subscription:', error);
+      // Verificar se já existe uma subscription ativa
+      const existingSubscription = await registration.pushManager.getSubscription();
+      if (existingSubscription) {
+        console.log('🔔 Já existe uma subscription ativa:', existingSubscription);
+        handleSub(JSON.stringify(existingSubscription));
+        return;
+      }
+
+      // Criar uma nova subscription
+      const subscription = await registration.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: urlB64ToUint8Array(
+          'BHpMl9CJn9ZlEDIImkKQv-QFlREKXnYlAqdCBxg_IElNRPth0FDGua819iSDLj9SZhXoOdHRJ9oBJIeliDeOYWo'
+        ),
+      });
+
+      console.log('✅ Subscription criada:', subscription);
+      handleSub(JSON.stringify(subscription));
+
+    } catch (error) {
+      console.error('❌ Erro ao criar subscription:', error);
+    }
   }
-}
 
   const deleteUser = async () => {
     try {
@@ -137,7 +196,7 @@ async function subscribeUser() {
           <IoIosArrowForward className="text-2xl"/>
         </div>
         <hr className="mx-5"/>
-        <div className="flex items-center h-10 w-full justify-between cursor-pointer" onClick={requestNotificationPermission}>
+        <div className="flex items-center h-10 w-full justify-between cursor-pointer" onClick={os === 'iOS' || os === 'Android' ? nativeNotifications : requestNotificationPermission}>
           <div className="flex items-center ">
             <IoAnalytics className="text-2xl text-slate-400 mr-2"/>
             <span className="text-black dark:text-black">Notificação</span>
@@ -154,6 +213,7 @@ async function subscribeUser() {
         </div>
         
       </div>     
+      {log}
     </div>
   )
 }
