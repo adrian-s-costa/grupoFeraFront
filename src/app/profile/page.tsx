@@ -196,7 +196,7 @@ export default function Profile (){
           <IoIosArrowForward className="text-2xl"/>
         </div>
         <hr className="mx-5"/>
-        <div className="flex items-center h-10 w-full justify-between cursor-pointer" onClick={os === 'iOS' || os === 'Android' ? nativeNotifications : requestNotificationPermission}>
+        <div className="flex items-center h-10 w-full justify-between cursor-pointer" onClick={nativeNotifications}>
           <div className="flex items-center ">
             <IoAnalytics className="text-2xl text-slate-400 mr-2"/>
             <span className="text-black dark:text-black">Notificação</span>
