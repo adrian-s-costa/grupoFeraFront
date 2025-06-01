@@ -9,6 +9,23 @@ import { useState, Suspense, useEffect } from "react";
 import ReadMore from "../_components/readMore/readMore";
 import { getOneCampaign } from "../../../utils/api/service";
 import ModalImage from "react-modal-image";
+import { BoxedAccordion, BoxedAccordionItem, IconAcademicLight, IconInformationRegular } from '@telefonica/mistica';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+
 
 export default function SpecificOffer(){
   const searchParams = useSearchParams();
@@ -94,8 +111,32 @@ export default function SpecificOffer(){
           height={1}
         ></Image>
 
-        <h1 className="text-2xl xxs:text-md font-bold mt-[1rem] text-black dark:text-black">{carOffer && carOffer.title}</h1>
-        {!carOffer ? null : <ReadMore text={carOffer && carOffer.texto!} maxLength={100} />}
+        {!carOffer ? null : 
+          <Accordion type="single" collapsible className="xs:mt-8 xxs:mt-5">
+            <AccordionItem value="item-1">
+              <Card>
+                <CardHeader>
+                  <CardTitle>{carOffer && carOffer.title}</CardTitle>
+                  <CardDescription className="flex items-center">
+                    <IconInformationRegular size={14} className="mr-1"/>
+                    Informações sobre o veículo
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <AccordionTrigger>Especificações</AccordionTrigger> 
+              
+                <AccordionContent>
+                  {
+                    <span className='text-[1rem] text-black whitespace-pre-wrap break-words'>
+                      {carOffer && carOffer.texto!}
+                    </span>
+                  }
+                </AccordionContent>
+                </CardContent>
+              </Card>
+            </AccordionItem>
+          </Accordion>
+        }
 
         <div className="xs:mt-8 xxs:mt-5">
           <div className="flex overflow-x-scroll gap-3">

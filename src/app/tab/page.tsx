@@ -9,6 +9,8 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from 'next/navigation';
 import { PiAirplayFill } from "react-icons/pi";
 import LogoLoading from "../_components/logoLoading/logoLoading";
+import { ThemeContextProvider } from "@telefonica/mistica";
+import { theme } from "@/style/theme";
 
 // Carregamento dinâmico dos componentes
 const Home = dynamic(() => import("../home/page"), { ssr: false });
@@ -41,40 +43,42 @@ export default function HomeTab() {
   };
 
   return (
-    <Tabs index={tabIndex} onChange={handleTabsChange}>
-      <TabPanels>
-        <TabPanel>
-          <Home setTabIndex={setTabIndex} muted={muted} />
-        </TabPanel>
-        <TabPanel>
-          {logo ? <LogoLoading /> : <Streaming setTabIndex={setTabIndex} />}
-        </TabPanel>
-        <TabPanel>
-          <CoursesLandpage />
-        </TabPanel>
-        <TabPanel>
-          <Profile />
-        </TabPanel>
-      </TabPanels>
+    <ThemeContextProvider theme={theme}>
+      <Tabs index={tabIndex} onChange={handleTabsChange}>
+        <TabPanels>
+          <TabPanel>
+            <Home setTabIndex={setTabIndex} muted={muted} />
+          </TabPanel>
+          <TabPanel>
+            {logo ? <LogoLoading /> : <Streaming setTabIndex={setTabIndex} />}
+          </TabPanel>
+          <TabPanel>
+            <CoursesLandpage />
+          </TabPanel>
+          <TabPanel>
+            <Profile />
+          </TabPanel>
+        </TabPanels>
 
-      <TabList className="fixed z-10 h-[4.5rem] bg-white bottom-0 w-full justify-around">
-        <Tab className="flex flex-col">
-          {tabIndex === 0 ? <RiHome5Fill className="text-2xl text-black" /> : <RiHome5Line className="text-2xl text-black" />}
-          <p className="text-black text-[0.5rem]">HOME</p>
-        </Tab>
-        <Tab className="flex flex-col">
-          {tabIndex === 1 ? <PiAirplayFill className="text-2xl text-black" /> : <LuAirplay className="text-2xl text-black" />}
-          <p className="text-black text-[0.5rem]"> STREAMING </p>
-        </Tab>
-        <Tab className="flex flex-col">
-          {tabIndex === 2 ? <RiGraduationCapFill className="text-2xl text-black" /> : <RiGraduationCapLine className="text-2xl text-black" />}
-          <p className="text-black text-[0.5rem]"> CURSOS </p>
-        </Tab>
-        <Tab className="flex flex-col">
-          {tabIndex === 3 ? <IoPerson className="text-2xl text-black" /> : <IoPersonOutline className="text-2xl text-black" />}
-          <p className="text-black text-[0.5rem]"> PERFIL </p>
-        </Tab>
-      </TabList>
-    </Tabs>
+        <TabList className="fixed z-10 h-[4.5rem] bg-white bottom-0 w-full justify-around">
+          <Tab className="flex flex-col">
+            {tabIndex === 0 ? <RiHome5Fill className="text-2xl text-black" /> : <RiHome5Line className="text-2xl text-black" />}
+            <p className="text-black text-[0.5rem]">HOME</p>
+          </Tab>
+          <Tab className="flex flex-col">
+            {tabIndex === 1 ? <PiAirplayFill className="text-2xl text-black" /> : <LuAirplay className="text-2xl text-black" />}
+            <p className="text-black text-[0.5rem]"> STREAMING </p>
+          </Tab>
+          <Tab className="flex flex-col">
+            {tabIndex === 2 ? <RiGraduationCapFill className="text-2xl text-black" /> : <RiGraduationCapLine className="text-2xl text-black" />}
+            <p className="text-black text-[0.5rem]"> CURSOS </p>
+          </Tab>
+          <Tab className="flex flex-col">
+            {tabIndex === 3 ? <IoPerson className="text-2xl text-black" /> : <IoPersonOutline className="text-2xl text-black" />}
+            <p className="text-black text-[0.5rem]"> PERFIL </p>
+          </Tab>
+        </TabList>
+      </Tabs>
+    </ThemeContextProvider>
   );
 }

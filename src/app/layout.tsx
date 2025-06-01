@@ -2,6 +2,8 @@
   import { Inter, Montserrat } from "next/font/google";
   import "./globals.css";
   import Pwa from "@/components/ui/ServiceWorkerRegister";
+  import { ThemeContextProvider } from '@telefonica/mistica';
+  import { theme } from "../style/theme"
 
   const inter = Inter({ subsets: ["latin"] });
   const mont = Montserrat({ subsets: ["latin"] });
@@ -62,15 +64,17 @@
   }>) {
     return (
       <html lang="pt-br" className="touch-pan-y">
-        <body className={inter.className}>{children}
-          <script src="https://sdk.mercadopago.com/js/v2" async/>
-          <script src="https://player.pandavideo.com.br/api.v2.js" async />
-          <script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1" async />
-          <meta name="apple-mobile-web-app-capable" content="yes"/>
-          <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
-          <link rel="apple-touch-icon" href="/icons/icon-192.png"></link>
-          <Pwa />
-        </body>
+        <ThemeContextProvider theme={theme}>
+          <body className={inter.className}>{children}
+            <script src="https://sdk.mercadopago.com/js/v2" async/>
+            <script src="https://player.pandavideo.com.br/api.v2.js" async />
+            <script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1" async />
+            <meta name="apple-mobile-web-app-capable" content="yes"/>
+            <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+            <link rel="apple-touch-icon" href="/icons/icon-192.png"></link>
+            <Pwa />
+          </body>
+        </ThemeContextProvider>
       </html>
     );
   }
