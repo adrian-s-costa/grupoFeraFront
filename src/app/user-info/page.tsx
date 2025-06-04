@@ -129,7 +129,17 @@ export default function UserInfo(){
       //setLoading(false);
     }
   }
-  
+
+  function getInitials(name: string): string {
+    const words = name.trim().split(/\s+/); // separa as palavras por espaço
+
+    const firstLetter = words[0]?.charAt(0).toUpperCase() || "";
+
+    const secondLetter = words[1]?.charAt(0).toUpperCase() || "";
+
+    return firstLetter + secondLetter;
+  }
+
   const verifyUserData = async (e: any) => {
 
     setLoading(true);
@@ -176,6 +186,9 @@ export default function UserInfo(){
     }
     
     try {
+      const fullName = `${additionalInfo.name} ${additionalInfo.secName}`
+      const initials = getInitials(fullName)
+
       const response = await fetch(`${config.API_URL}/auth/update-user`, {
         method: 'POST',
         headers: {
@@ -191,7 +204,8 @@ export default function UserInfo(){
           cep: additionalInfo.cep,
           localidade: cepResultJson.localidade, 
           uf: cepResultJson.uf,
-          pfpUrl: imageUrl !== "" ? imageUrl : pfp
+          pfpUrl: imageUrl !== "" ? imageUrl : pfp,
+          initials: initials
         })
       });
   
@@ -213,6 +227,7 @@ export default function UserInfo(){
       localStorage.setItem('localidade', newUser.localidade);
       localStorage.setItem('uf', newUser.uf);
       localStorage.setItem('pfpUrl', newUser.pfpUrl);
+      localStorage.setItem('initials', newUser.initials);
 
       notify2();
 
