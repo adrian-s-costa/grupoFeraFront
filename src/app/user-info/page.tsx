@@ -42,10 +42,6 @@ export default function UserInfo(){
 
   }, []);
 
-  useEffect(() => {
-    console.log(additionalInfo)
-  }, [additionalInfo]);
-
   const handleFileChange = async (event: any) => {
     const selectedFile = event.target.files[0];
     setFile(event.target.files[0])
