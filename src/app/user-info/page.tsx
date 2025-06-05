@@ -29,7 +29,17 @@ export default function UserInfo(){
   const [pfp, setPfp] = useState<any>('.');
 
   useEffect(() => {
-    setAdditionalInfo({...additionalInfo, id: localStorage.getItem('id')})
+    setAdditionalInfo({...additionalInfo, 
+      id: localStorage.getItem('id'), 
+      name: localStorage.getItem("user"),
+      secName: localStorage.getItem("user")?.split(' ')[1],
+      tel: localStorage.getItem("number"),
+      bornDate: localStorage.getItem("bornDate"),
+      cep: localStorage.getItem("cep"),
+    })
+
+    setUrl(localStorage.getItem('pfpUrl'))
+
   }, []);
 
   const handleFileChange = async (event: any) => {
@@ -187,7 +197,6 @@ export default function UserInfo(){
     
     try {
       const fullName = `${additionalInfo.name} ${additionalInfo.secName}`
-      const initials = getInitials(fullName)
 
       const response = await fetch(`${config.API_URL}/auth/update-user`, {
         method: 'POST',
@@ -205,7 +214,6 @@ export default function UserInfo(){
           localidade: cepResultJson.localidade, 
           uf: cepResultJson.uf,
           pfpUrl: imageUrl !== "" ? imageUrl : pfp,
-          initials: initials
         })
       });
   
@@ -227,7 +235,6 @@ export default function UserInfo(){
       localStorage.setItem('localidade', newUser.localidade);
       localStorage.setItem('uf', newUser.uf);
       localStorage.setItem('pfpUrl', newUser.pfpUrl);
-      localStorage.setItem('initials', newUser.initials);
 
       notify2();
 
