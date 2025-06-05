@@ -31,7 +31,7 @@ export default function UserInfo(){
   useEffect(() => {
     setAdditionalInfo({...additionalInfo, 
       id: localStorage.getItem('id'), 
-      name: localStorage.getItem("user"),
+      name: localStorage.getItem("user")?.split(' ')[0],
       secName: localStorage.getItem("user")?.split(' ')[1],
       tel: localStorage.getItem("number"),
       bornDate: localStorage.getItem("bornDate"),
@@ -41,6 +41,10 @@ export default function UserInfo(){
     setUrl(localStorage.getItem('pfpUrl'))
 
   }, []);
+
+  useEffect(() => {
+    console.log(additionalInfo)
+  }, [additionalInfo]);
 
   const handleFileChange = async (event: any) => {
     const selectedFile = event.target.files[0];
@@ -289,11 +293,11 @@ export default function UserInfo(){
         <div className="grid gap-6 md:grid-cols-2 pt-5">
           <div>
             <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">Nome</label>
-            <input type="text" id="name" onChange={(event) => { setAdditionalInfo({ ...additionalInfo, name: event.target.value }); } } className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Digite seu nome" required />
+            <input type="text" id="name" onChange={(event) => { setAdditionalInfo({ ...additionalInfo, name: event.target.value }); } } value={additionalInfo.name} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Digite seu nome" required />
           </div>
           <div>
             <label htmlFor="secName" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">Sobrenome</label>
-            <input type="text" id="secName" onChange={(event) => { setAdditionalInfo({ ...additionalInfo, secName: event.target.value }); } } className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Digite seu sobrenome" required />
+            <input type="text" id="secName" onChange={(event) => { setAdditionalInfo({ ...additionalInfo, secName: event.target.value }); } } value={additionalInfo.secName} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Digite seu sobrenome" required />
           </div>
           <div>
             <label 
@@ -302,15 +306,15 @@ export default function UserInfo(){
             >
               Telefone
             </label>
-            <input type="text" minLength={11} maxLength={11} id="tel" onChange={(event) => { setAdditionalInfo({ ...additionalInfo, tel: event.target.value }); } } className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="(99) 9 9999-9999" required />
+            <input type="text" minLength={11} maxLength={11} id="tel" onChange={(event) => { setAdditionalInfo({ ...additionalInfo, tel: event.target.value }); } } value={additionalInfo.tel} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="(99) 9 9999-9999" required />
           </div>
           <div>
             <label htmlFor="cep" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">CEP</label>
-            <input type="text" minLength={8} maxLength={8} id="cep" onChange={(event) => { setAdditionalInfo({ ...additionalInfo, cep: event.target.value }); } } className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="79300030" required />
+            <input type="text" minLength={8} maxLength={8} id="cep" onChange={(event) => { setAdditionalInfo({ ...additionalInfo, cep: event.target.value }); } } value={additionalInfo.cep} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="79300030" required />
           </div>
           <div>
             <label htmlFor="date" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 placeholder:text-black">Data de nascimento</label>
-            <input type="date" id="date" onChange={(event) => { setAdditionalInfo({ ...additionalInfo, bornDate: event.target.value }); } } className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="DD/MM/AAAA" required />
+            <input type="date" id="date" onChange={(event) => { setAdditionalInfo({ ...additionalInfo, bornDate: event.target.value }); } } value={additionalInfo.bornDate} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="DD/MM/AAAA" required />
           </div>
         </div>
         <button type="submit" className="text-white mt-5 h-10 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Confirma</button>
