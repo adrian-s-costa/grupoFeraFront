@@ -213,7 +213,8 @@ export default function UserInfo(){
           cep: additionalInfo.cep,
           localidade: cepResultJson.localidade, 
           uf: cepResultJson.uf,
-          pfpUrl: imageUrl !== "" ? imageUrl : pfp,
+          pfpUrl: imageUrl !== "" ? imageUrl 
+          : url !== "." ? url : pfp,
         })
       });
   

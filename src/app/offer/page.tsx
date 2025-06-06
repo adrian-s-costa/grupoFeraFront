@@ -64,7 +64,7 @@ export default function SpecificOffer(){
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': '64C6DF15-0A8E-6C41-8D09-DF3A8912CE70'
+          'Authorization': '8C9DB575-0A8B-7CC5-4389-41D2CC6E9937'
         },
         body: JSON.stringify({
           id_usuario: 37456,
