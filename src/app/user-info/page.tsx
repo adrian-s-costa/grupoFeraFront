@@ -260,7 +260,7 @@ export default function UserInfo(){
 
       <form onSubmit={(e) => { verifyUserData(e) }} className='mt-5'>
 
-        {url ?
+        {(url) && (url !== " " || url !== "." || url !== "") ?
         <div className='w-full flex flex-col items-center'>
           <div
             className={`rounded-full w-[5rem] h-[5rem] bg-cover mr-4`}
