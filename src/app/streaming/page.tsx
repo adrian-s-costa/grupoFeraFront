@@ -64,7 +64,7 @@ export default function Streaming({setTabIndex}: any){
 
   return (
     <>
-    <div className=" min-h-screen h-auto bg-white dark:bg-black overflow-y-hidden pb-[4.5rem]">
+    <div className=" min-h-screen h-auto bg-white dark:bg-black overflow-y-hidden lg:overflow-auto pb-[4.5rem]">
       <Modal show={activeTag == "Cursos" && !hasAcessToCourses} size="md" onClose={onCloseModal} popup>
         <Modal.Header />
           <Modal.Body>
@@ -128,13 +128,13 @@ export default function Streaming({setTabIndex}: any){
       <input type="text" className={`bg-[#CECECE] rounded-full h-[2.15rem] w-full text-black mb-2 ${searchBarState > 0 ? 'hidden' : 'block'} `} value={ searchBar! } placeholder="Pesquise um video pelo título..." onChange={(e)=>{setSearchBar(e.target.value)}}/>
     </div>
     <div className="h-[40px] bg-[#ECECEC] flex items-center px-2">
-      <div className="flex items-center overflow-x-scroll w-auto">
+      <div className="flex items-center overflow-x-scroll w-auto lg:overflow-auto">
         <IoCompassOutline className="text-6xl text-black dark:text-black"></IoCompassOutline>
         <span className="ml-2 font-semibold xs:text-base xxs:text-sm text-black dark:text-black">Explorar</span>
 
         <div className="border-r-2 border-[#CECECE] mx-2"/>
 
-        <div className="overflow-x-scroll flex gap-4 w-auto items-center">
+        <div className="overflow-x-scroll flex gap-4 w-auto items-center lg:overflow-auto">
           {categories && categories.map((category: any, index: number)=>{
             return <button key={index} className="border-2 xs:text-base xxs:text-sm border-[#CECECE] rounded-full w-auto whitespace-nowrap px-5 text-black dark:text-black" onClick={()=>{setActiveTag(category.value)}}>{category.name}</button>          
           })}
@@ -142,7 +142,7 @@ export default function Streaming({setTabIndex}: any){
       </div>
     </div>
 
-    <div className="w-full flex flex-col">
+    <div className="w-full flex flex-col flex-wrap lg:flex-row lg:justify-between lg:pt-5 lg:px-10">
       {
       videos && videos
       .filter((video: any) => searchBar == '' ? video.tags.includes(activeTag) : video.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").includes(searchBar.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "")))

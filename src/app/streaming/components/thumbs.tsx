@@ -8,15 +8,15 @@ export default function Thumbs({props, setTabIndex}: any){
 
   return (
     <Link href={`/video/${props.id}`} onClick={()=>{localStorage.setItem('page', "1"); setTabIndex(1)}}>
-      <div className="flex flex-col cursor-pointer relative">
+      <div className="flex flex-col cursor-pointer relative lg:w-80 lg:pt-5">
         <Image
           priority={true}
           src={props.thumbnailUrl}
           width={1000}
           height={700} 
           alt={props.name}
-          className="w-full bg-slate-300 h-auto"></Image>
-        <div className="p-5 flex">
+          className="w-full bg-slate-300 h-auto lg:rounded-lg hover:scale-105"></Image>
+        <div className="p-5 lg:px-2 flex">
           <div
             className={`rounded-full w-[2.5rem] h-[2.5rem] bg-cover mr-4`}
             style={{ backgroundImage: `url(https://res.cloudinary.com/dmo7nzytn/image/upload/v1715983820/grupo-fera/images/felipe_fera_to4xne.jpg)` }}

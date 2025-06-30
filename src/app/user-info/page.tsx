@@ -250,7 +250,9 @@ export default function UserInfo(){
   };
   
   return (
-    <>{ loading ? <Loader /> : null }<div className="w-full h-full min-h-screen bg-white p-5">
+    <>{ loading ? <Loader /> : null }<div className="w-full h-full min-h-screen bg-white p-5 lg:flex lg:justify-center lg:items-center">
+
+      <div className='lg:w-[50vw] lg:border-solid lg:border-[1px] lg:rounded-xl p-10 lg:border-black'>
 
       <MdArrowBackIos className='text-2xl cursor-pointer' onClick={() => { router.back(); } } />
 
@@ -260,13 +262,14 @@ export default function UserInfo(){
 
       <form onSubmit={(e) => { verifyUserData(e) }} className='mt-5'>
 
-        {(url) && (url !== " " || url !== "." || url !== "") ?
+        {
+        (url !== 'null') ?
         <div className='w-full flex flex-col items-center'>
           <div
             className={`rounded-full w-[5rem] h-[5rem] bg-cover mr-4`}
             style={{ backgroundImage: `url(${url})` }}
           ></div>
-          <button onClick={()=>{setUrl(null); setFile(null)}} className="text-white mt-5 h-10 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Excluir</button>
+          <button type='button' onClick={()=>{setUrl('null'); setFile(null)}} className="text-white mt-5 h-10 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Excluir</button>
         </div>
         :
           <div>
@@ -290,11 +293,11 @@ export default function UserInfo(){
         <div className="grid gap-6 md:grid-cols-2 pt-5">
           <div>
             <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">Nome</label>
-            <input type="text" id="name" onChange={(event) => { setAdditionalInfo({ ...additionalInfo, name: event.target.value }); } } value={additionalInfo.name} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Digite seu nome" required />
+            <input type="text" id="name" onChange={(event) => { setAdditionalInfo({ ...additionalInfo, name: event.target.value }); } } value={additionalInfo.name == "Sem" ? '' : additionalInfo.name} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Digite seu nome" required />
           </div>
           <div>
             <label htmlFor="secName" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">Sobrenome</label>
-            <input type="text" id="secName" onChange={(event) => { setAdditionalInfo({ ...additionalInfo, secName: event.target.value }); } } value={additionalInfo.secName} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Digite seu sobrenome" required />
+            <input type="text" id="secName" onChange={(event) => { setAdditionalInfo({ ...additionalInfo, secName: event.target.value }); } } value={additionalInfo.secName == "Nome" ? '' : additionalInfo.secName} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Digite seu sobrenome" required />
           </div>
           <div>
             <label 
@@ -303,11 +306,11 @@ export default function UserInfo(){
             >
               Telefone
             </label>
-            <input type="text" minLength={11} maxLength={11} id="tel" onChange={(event) => { setAdditionalInfo({ ...additionalInfo, tel: event.target.value }); } } value={additionalInfo.tel} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="(99) 9 9999-9999" required />
+            <input type="text" minLength={11} maxLength={11} id="tel" onChange={(event) => { setAdditionalInfo({ ...additionalInfo, tel: event.target.value }); } } value={additionalInfo.tel === "null" ? '' : additionalInfo.tel } className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="(99) 9 9999-9999" required />
           </div>
           <div>
             <label htmlFor="cep" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">CEP</label>
-            <input type="text" minLength={8} maxLength={8} id="cep" onChange={(event) => { setAdditionalInfo({ ...additionalInfo, cep: event.target.value }); } } value={additionalInfo.cep} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="79300030" required />
+            <input type="text" minLength={8} maxLength={8} id="cep" onChange={(event) => { setAdditionalInfo({ ...additionalInfo, cep: event.target.value }); } } value={additionalInfo.cep === "null" ? '' : additionalInfo.cep} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="79300030" required />
           </div>
           <div>
             <label htmlFor="date" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 placeholder:text-black">Data de nascimento</label>
@@ -330,6 +333,7 @@ export default function UserInfo(){
         theme="light" 
       />
 
+    </div>
     </div></>
   );
 }  

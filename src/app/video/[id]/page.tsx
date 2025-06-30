@@ -11,6 +11,8 @@ import { config } from "../../../../config";
 import Link from "next/link";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 
 type Video = {
   comments: any;
@@ -296,9 +298,9 @@ export default function Video({ params }: { params: { id: string } }) {
 
 
   return (
-    <div className="w-full h-screen bg-white dark:bg-black relative overflow-y-hidden" suppressHydrationWarning>
+    <div className="w-full h-screen bg-white dark:bg-black relative lg:flex overflow-y-auto" suppressHydrationWarning>
 
-      <video width={viewportWidth} height={(viewportWidth / 16) * 9} controls={true} autoPlay={true} muted={true} playsInline={true} poster={video?.thumbnailUrl}>
+      <video width={viewportWidth > 1024 ? viewportWidth - 400 : viewportWidth} className="bg-black" height={(viewportWidth / 16) * 9} controls={true} autoPlay={true} muted={true} playsInline={true} poster={video?.thumbnailUrl}>
         {video && <source src={video.url} type="video/mp4"/>}
         Seu navegador não suporta o vídeo
       </video>
@@ -309,7 +311,7 @@ export default function Video({ params }: { params: { id: string } }) {
         )}
 
       </div>
-      <div className="w-full p-5 min-h-full h-auto ">
+      <div className="w-full p-5 h-auto">
         <div className="flex flex-col">
           {video && <span className="font-semibold text-lg text-black dark:text-black">{video.name}</span>}
           <span className="text-xs text-[#6C6C6C]">{video && video.views} views</span>
@@ -357,7 +359,7 @@ export default function Video({ params }: { params: { id: string } }) {
           ></div>
           <span className="font-semibold text-lg dark:text-black text-black">Felipe Fera</span>
         </div>
-        <div className=" h-[17rem] pb-14 pl-2 overflow-y-scroll">
+        <div className=" h-auto pb-14 pl-2">
           {video && video.comments && video.comments.map((comment: any, indice: number)=>{
             return <div className="mb-5" key={indice}>
             <div className="flex items-center">
@@ -405,18 +407,21 @@ export default function Video({ params }: { params: { id: string } }) {
           </div>
           })}
         </div>
-      </div>
-      <div className="fixed z-1 bottom-0 flex px-4 xxs:h-10 xs:h-16 w-full items-center bg-white">
+      <div className="fixed lg:relative z-1 w-full items-center lg:justify-center bottom-0 bg-white">
+        <div className="lg:fixed flex xxs:my-3 xxs:h-10 xs:h-16 w-auto items-center mr-5 lg:justify-center lg:bottom-0 bg-white">
         {pfpUrl == "" || pfpUrl == "." || !pfpUrl ? 
           <FaUserCircle className="text-gray-400 text-4xl"/>
         : <div
-            className={`rounded-full w-[2.25rem] h-[2.25rem] bg-cover box-border`}
+            className={`rounded-full w-[60px] h-[40px] bg-cover box-border`}
             style={{ backgroundImage: `url(${pfpUrl})` }}
           ></div>
         }
-        
-        <input type="text" className=" bg-[#CECECE] w-full rounded-full h-[2.15rem] pl-4 pr-10 ml-4 text-black" value={ comment! } placeholder="Adicione um comentário..." onChange={(e)=>{setComment(e.target.value)}}/>
-        <IoSend className="text-2xl z-2 absolute right-[1.7rem] cursor-pointer dark:text-black text-black" onClick={()=>{postComment(); setComment('')}}/>
+          
+            <Input type="email" className="mx-2" placeholder="Adicione um comentário..." value={ comment! } onChange={(e)=>{setComment(e.target.value)}}/>
+            <Button type="submit" variant="outline" className="w-auto" onClick={()=>{postComment(); setComment('')}}>
+              Comentar
+            </Button>
+          </div>
       </div>
       <ToastContainer
         position="top-center"
@@ -429,7 +434,8 @@ export default function Video({ params }: { params: { id: string } }) {
         draggable
         pauseOnHover
         theme="light"
-      />
+        />
+    </div>
     </div>
   );
 }

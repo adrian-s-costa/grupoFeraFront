@@ -140,12 +140,13 @@ export default function Login(){
   };
   
   return (
-    <>{ loading || typeof window == "undefined" ? <Loader/> : null }<div className="w-full h-screen bg-white p-5">
-      <h1 className="text-3xl font-bold mb-4 text-black">{isAnnual ? "Entrar" : "Registrar"}</h1>
-      <PricingToggle isAnnual={isAnnual} setIsAnnual={setIsAnnual} />
+    <>{ loading || typeof window == "undefined" ? <Loader/> : null }<div className="w-full lg:flex lg:flex-col lg:justify-center lg:items-center h-screen bg-white p-5 ">
+      <div>
+      <h1 className="text-3xl font-bold mb-4 text-black lg:hidden">{isAnnual ? "Entrar" : "Registrar"}</h1>
+      <PricingToggle isAnnual={isAnnual} setIsAnnual={setIsAnnual} className="" />
       {isAnnual ? (
         <form onSubmit={(e) => { postUser(e); } }>
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-6 lg:w-96">
             <div>
               <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
               <input type="mail" id="email" onChange={(event) => { setLoginInfo({ ...loginInfo, credential: event.target.value }); setRegisterInfo({ ...registerInfo, credential: event.target.value }); } } className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Digite seu email" required />
@@ -162,7 +163,7 @@ export default function Login(){
         </form>
       ) : (
         <form onSubmit={(e) => { sendEmailCode(e); } }>
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-6 lg:w-96">
             <div>
               <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
               <input type="mail" id="email" onChange={(event) => { setRegisterInfo({ ...registerInfo, credential: event.target.value }); setLoginInfo({ ...loginInfo, credential: event.target.value }); } } className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Digite seu email" required />
@@ -184,6 +185,7 @@ export default function Login(){
         pauseOnHover
         theme="light" />
 
+      </div>
     </div></>
   );
 }  

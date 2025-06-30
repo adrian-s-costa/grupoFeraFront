@@ -159,7 +159,7 @@ export default function Profile (){
   return (
     <div className="w-full h-screen bg-white p-5 overflow-y-hidden">
       <div className="flex items-center">
-        {pfpUrl == "" || pfpUrl == "." || !pfpUrl ? 
+        {pfpUrl == "" || pfpUrl == "." || !pfpUrl || pfpUrl === "null" || pfpUrl === null ? 
         <FaUserCircle className="text-gray-400 mr-4 text-6xl"/>
         : <div
             className={`rounded-full w-[5rem] h-[5rem] bg-cover mr-4`}
@@ -171,7 +171,7 @@ export default function Profile (){
           <p className="text-black dark:text-black text-xs font">{cep}</p>
         </div>
       </div>
-      <div className=" border-[1px] w-full h-36 mt-5 rounded-lg px-2 flex flex-col justify-around">
+      <div className=" border-[1px] w-full h-56 mt-5 rounded-lg px-2 flex flex-col justify-around">
         <div className="flex items-center h-10 w-full justify-between cursor-pointer" onClick={()=>{localStorage.clear(); router.push('/login')}}>
           <div className="flex items-center ">
             <IoExit className="text-2xl text-slate-400 mr-2"/>
@@ -196,14 +196,6 @@ export default function Profile (){
           <IoIosArrowForward className="text-2xl"/>
         </div>
         <hr className="mx-5"/>
-        <div className="flex items-center h-10 w-full justify-between cursor-pointer" onClick={nativeNotifications}>
-          <div className="flex items-center ">
-            <IoAnalytics className="text-2xl text-slate-400 mr-2"/>
-            <span className="text-black dark:text-black">Notificação</span>
-          </div>
-          <IoIosArrowForward className="text-2xl"/>
-        </div>
-        <hr className="mx-5"/>
         <div className="flex items-center h-10 w-full justify-between cursor-pointer" onClick={()=>{deleteUser()}}>
           <div className="flex items-center">
             <IoTrashOutline className="text-2xl text-red-600 mr-2"/>
@@ -211,7 +203,6 @@ export default function Profile (){
           </div>
           <IoIosArrowForward className="text-2xl"/>
         </div>
-        
       </div>     
       {log}
     </div>

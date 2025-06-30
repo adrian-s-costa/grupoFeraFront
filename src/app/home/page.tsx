@@ -54,8 +54,8 @@ export default function Home({setTabIndex, muted}: any){
 
   return(
     <>
-    <div className="w-full min-h-screen h-auto bg-white p-5 text-black dark:text-black xxs:mb-0 xs:mb-[4.5rem]">
-      
+    <div className="w-full min-h-screen h-auto bg-white p-5 text-black dark:text-black xxs:mb-0 xs:mb-[4.5rem] lg:flex lg:justify-center lg:items-center">
+    <div className="lg:w-[60vw]"> 
       <div className="flex justify-between">
         <div className="flex flex-col justify-center">
           <h1 className="xs:text-3xl xxs:text-2xl font-bold ">Fala, {!fullName ? '' : firstName}!</h1>
@@ -69,7 +69,7 @@ export default function Home({setTabIndex, muted}: any){
           width={242}
           height={256}          
         />
-      </div>  
+      </div>
 
       <div className="my-5 h-auto relative">
         <video className="rounded-lg" width={viewportWidth} autoPlay={true} muted={true} loop={true} controls={true} playsInline>
@@ -127,6 +127,8 @@ export default function Home({setTabIndex, muted}: any){
           })}
         </div>
       </div>
+    
+    </div>
     </div>
     </>
   )
