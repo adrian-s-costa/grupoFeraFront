@@ -245,24 +245,24 @@ export default function Video({ params }: { params: { id: string } }) {
     // </div>
 
 
-    <div className="w-full h-screen bg-white dark:bg-black relative ">
+    <div className="w-full h-screen bg-white dark:bg-black relative lg:flex">
       <MdArrowBackIos className='text-3xl left-0 cursor-pointer absolute text-white ml-5 mt-5 z-10 ' onClick={() => {router.push("/courses")} } />
    
    
-      {/* <video key={activeVideo?.videoUrl} width={viewportWidth} height={(viewportWidth / 16) * 9} controls={true} autoPlay={true} muted={true} playsInline poster={activeVideo?.videoUrl}>
+      {/* <video key={activeVideo?.videoUrl} width={viewportWidth > 1024 ? viewportWidth - 384 : viewportWidth} height={(viewportWidth / 16) * 9} controls={true} autoPlay={true} muted={true} playsInline poster={activeVideo?.videoUrl}>
         {activeVideo && <source src={activeVideo.videoUrl} type="video/mp4"/>}
         Seu navegador não suporta o vídeo
       </video> */}
 
-      <>
+      <div className="lg:h-screen bg-black lg:flex lg:justify-center lg:items-center">
         <iframe id="panda-addd54b1-6011-4f2c-9f73-c4571dd11e9d"
         src={activeVideo?.videoUrl}
         allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen"
-        width={viewportWidth} height={(viewportWidth / 16) * 9} loading="eager"/>
-      </>
-        
+        width={viewportWidth > 1024 ? viewportWidth - 384 : viewportWidth} height={viewportWidth > 1024 ? ((viewportWidth / 16) * 9) - 200 : (viewportWidth / 16) * 9} loading="eager"
+        />
+      </div>
     
-      <div className="w-full p-5">
+      <div className="w-full p-5 lg:w-96 lg:h-screen lg:overflow-y-auto">
         <div className="flex flex-col">
           {course && <span className="font-semibold text-lg text-black dark:text-black mb-2">{activeVideo && activeVideo.title}</span>}
           <div className="w-full flex justify-between">
@@ -273,7 +273,7 @@ export default function Video({ params }: { params: { id: string } }) {
         </div>
             <Tabs aria-label="Tabs with icons" style={"underline"} ref={tabsRef} onActiveTabChange={(tab) => setActiveTab(tab)}>
                 <Tabs.Item active title="Módulos">
-                <ScrollArea className="h-[100%] w-full">
+                <ScrollArea className="w-full">
                   <ul role="list" className="divide-y divide-gray-100 rounded-md border border-gray-200">
                     {
                       course && course.modules && course.modules.map((module, index)=>{

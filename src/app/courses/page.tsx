@@ -136,7 +136,7 @@ export default function Courses({setTabIndex}: any){
         <div className="w-full flex flex-col">
           <div className="xs:mt-1 xxs:mt-1">
             <h1 className="xxs:text-sm xs:text-sm font-medium mb-2">Carros híbridos</h1>
-            <div className="flex overflow-x-scroll gap-3">
+            <div className="flex overflow-x-scroll gap-3 w-full flex-col flex-wrap lg:flex-row lg:justify-between lg:pt-5">
               {courses && courses
               // .filter((carro: any) => carro.uf.includes(uf))
               .map((course: any, index: number)=>{
