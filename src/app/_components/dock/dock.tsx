@@ -11,7 +11,7 @@ import { IoPerson, IoPersonOutline } from "react-icons/io5";
 
 export type IconProps = React.HTMLAttributes<SVGElement>;
 
-export function DockDemo({ tabIndex }) {
+export function DockDemo({ tabIndex }: any) {
   return (
     <div className="fixed w-full z-20 bottom-5">
       <Dock direction="middle" className="bg-white">
