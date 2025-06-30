@@ -252,7 +252,7 @@ export default function UserInfo(){
   return (
     <>{ loading ? <Loader /> : null }<div className="w-full h-full min-h-screen bg-white p-5 lg:flex lg:justify-center lg:items-center">
 
-      <div className='lg:w-[50vw] lg:border-solid lg:border-[1px] lg:rounded-xl p-10 lg:border-black'>
+      <div className='lg:w-[50vw] w-full lg:border-solid lg:border-[1px] lg:rounded-xl lg:p-10 lg:border-black'>
 
       <MdArrowBackIos className='text-2xl cursor-pointer' onClick={() => { router.back(); } } />
 

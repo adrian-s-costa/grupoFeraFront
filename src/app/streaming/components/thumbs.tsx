@@ -8,14 +8,14 @@ export default function Thumbs({props, setTabIndex}: any){
 
   return (
     <Link href={`/video/${props.id}`} onClick={()=>{localStorage.setItem('page', "1"); setTabIndex(1)}}>
-      <div className="flex flex-col cursor-pointer relative lg:w-80 lg:pt-5">
+      <div className="flex flex-col cursor-pointer relative lg:w-80">
         <Image
           priority={true}
           src={props.thumbnailUrl}
           width={1000}
           height={700} 
           alt={props.name}
-          className="w-full bg-slate-300 h-auto lg:rounded-lg hover:scale-105"></Image>
+          className="w-full bg-slate-300 h-auto lg:rounded-lg lg:hover:scale-105 lg:duration-300"></Image>
         <div className="p-5 lg:px-2 flex">
           <div
             className={`rounded-full w-[2.5rem] h-[2.5rem] bg-cover mr-4`}
@@ -25,9 +25,6 @@ export default function Thumbs({props, setTabIndex}: any){
             <span className="text-black xs:text-base xxs:text-sm">{props.name}</span>
             <span className="text-xs text-[#6C6C6C]">{props.views} views</span>
           </div>
-        </div>
-        <div>
-          <Badge color="warning" size="sm" className={ props.tags.includes('Cursos') ? `block absolute right-4 bottom-7` : `hidden`}>Curso</Badge>
         </div>
       </div>
     </Link>

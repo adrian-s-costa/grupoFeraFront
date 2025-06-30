@@ -418,7 +418,7 @@ export default function Video({ params }: { params: { id: string } }) {
         }
           
             <Input type="email" className="mx-2" placeholder="Adicione um comentário..." value={ comment! } onChange={(e)=>{setComment(e.target.value)}}/>
-            <Button type="submit" variant="outline" className="w-auto" onClick={()=>{postComment(); setComment('')}}>
+            <Button type="submit" variant="outline" className="w-auto mr-5 lg:mr-0" disabled={ !comment } onClick={()=>{postComment(); setComment('')}}>
               Comentar
             </Button>
           </div>
