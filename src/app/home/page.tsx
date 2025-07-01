@@ -49,7 +49,9 @@ export default function Home({setTabIndex, muted}: any){
   }, []); 
 
 
-  if (fullName == "Sem Nome" || !fullName) router.push(`/user-info`)
+  if (fullName == "Sem Nome") router.push(`/user-info`)
+  if (!fullName) router.push(`/login`)
+  
   const firstName = fullName ? fullName.split(' ')[0] : '';
 
   return(
