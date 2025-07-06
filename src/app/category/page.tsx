@@ -78,7 +78,8 @@ export default function CategoryPage(){
 
   return (
     <>
-      <div className="w-full min-h-screen h-full bg-white p-5 pb-20">
+      <div className="w-full min-h-screen h-full bg-white p-5 pb-20 lg:flex lg:justify-center">
+        <div className="lg:w-[60vw]">
         <div className="w-full flex justify-center relative">
           <MdArrowBackIos className='text-2xl left-0 top-[17px] cursor-pointer absolute text-black' onClick={() => {router.back()} } />
           
@@ -124,6 +125,7 @@ export default function CategoryPage(){
           pauseOnHover
           theme="light"
         />
+        </div>
       </div>
       </>
   )   

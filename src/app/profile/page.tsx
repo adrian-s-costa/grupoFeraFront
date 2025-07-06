@@ -157,7 +157,8 @@ export default function Profile (){
   const router = useRouter();
 
   return (
-    <div className="w-full h-screen bg-white p-5 overflow-y-hidden">
+    <div className="w-full h-screen bg-white p-5 overflow-y-hidden lg:flex lg:justify-center lg:items-center lg:flex-col">
+      <div className="lg:w-[60vw]">
       <div className="flex items-center">
         {pfpUrl == "" || pfpUrl == "." || !pfpUrl || pfpUrl === "null" || pfpUrl === null ? 
         <FaUserCircle className="text-gray-400 mr-4 text-6xl"/>
@@ -205,6 +206,7 @@ export default function Profile (){
         </div>
       </div>     
       {log}
+      </div>
     </div>
   )
 }

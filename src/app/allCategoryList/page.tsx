@@ -26,7 +26,8 @@ export default function SpecificOffer(){
 
   return (
       
-      <div className="w-full min-h-screen h-full bg-white p-5 pb-20">
+      <div className="w-full min-h-screen h-full bg-white p-5 pb-20 lg:flex lg:justify-center">
+        <div className="lg:w-[60vw] lg:rounded-xl lg:border-black lg:border-2 lg:p-5 ">
         <div className="w-full flex justify-center relative">
           <MdArrowBackIos className='text-2xl left-0 cursor-pointer absolute text-black' onClick={() => {router.push("/tab")} } />
           <h1 className="xs:text-xl xxs:text-md font-bold text-black dark:text-black">Categorias</h1>        
@@ -34,7 +35,7 @@ export default function SpecificOffer(){
 
         <div className="flex flex-col pt-5 gap-5">
           {category && category.map((category: any, index: any)=>{
-            return <div className="flex items-center gap-2" onClick={()=>{router.push(`/categoryList?name=${category.name}`)}} key={index}>  
+            return <div className="flex items-center gap-2 lg:hover:bg-slate-200 lg:p-2 lg:hover:duration-300 lg:rounded-md lg:mb-1 hover:cursor-pointer" onClick={()=>{router.push(`/categoryList?name=${category.name}`)}} key={index}>  
             <div className="xs:w-20 xxs:w-[3.5rem] xxs:h-[3.5rem] xs:h-20 flex justify-center items-center max-w-20 bg-[#F3F5F7] rounded-lg">
               <Image
               src={category.imgSrc}
@@ -50,6 +51,7 @@ export default function SpecificOffer(){
           </div>
           })}
         </div>  
+        </div>
       </div>
   )   
 }

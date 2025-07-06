@@ -88,97 +88,98 @@ export default function SpecificOffer(){
   }
 
   return (
-      <div className="w-full min-h-screen h-full bg-white p-5 pb-20">
-        <div className="w-full flex justify-center relative">
-          <MdArrowBackIos className='text-2xl top-[17px] left-0 cursor-pointer absolute text-black' onClick={() => {router.push("/tab")} } />
-          
-          <Image 
-            src={"https://storage.googleapis.com/videos-grupo-fera/static/logos/logo.webp"} 
-            alt={""}
-            width={70}
-            height={1160}          
-          />  
-          
-        </div>
-        
-        <Image
-          quality={100}
-          priority={true}
-          className="rounded-md mt-5"
-          src={carOffer && carOffer.imgSrc}
-          alt={""}
-          width={1920}
-          height={1}
-        ></Image>
-
-        {!carOffer ? null : 
-          <Accordion type="single" collapsible className="xs:mt-8 xxs:mt-5">
-            <AccordionItem value="item-1">
-              <Card>
-                <CardHeader>
-                  <CardTitle>{carOffer && carOffer.title}</CardTitle>
-                  <CardDescription className="flex items-center">
-                    <IconInformationRegular size={14} className="mr-1"/>
-                    Informações sobre o veículo
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <AccordionTrigger>Especificações</AccordionTrigger> 
-              
-                <AccordionContent>
-                  {
-                    <span className='text-[1rem] text-black whitespace-pre-wrap break-words'>
-                      {carOffer && carOffer.texto!}
-                    </span>
-                  }
-                </AccordionContent>
-                </CardContent>
-              </Card>
-            </AccordionItem>
-          </Accordion>
-        }
-
-        <div className="xs:mt-8 xxs:mt-5">
-          <div className="flex overflow-x-scroll gap-3">
-            {carOffer && carOffer.secondaryImgs.map((carro: any, index: any)=>{
-              return <div
-                className="
-                  relative
-                "
-                key={carro.id}
-              >
-                {/* <Badge color="warning" size="sm">Dolphin Day!</Badge> */}
-                <ModalImage
-                  className="
-                  xxs:w-[202px] xxs:h-[117px] xs:w-[232px] xs:h-[147px]  xs:min-w-[232px] xs:min-h-[147px] xxs:min-w-[202px] xxs:min-h-[117px] rounded-lg mb-2 bg-cover
-                  "
-                  small={carro.imgSrc!}
-                  large={carro.imgSrc!}
-                />
-              
-              </div>
-            })}
+      <div className="w-full min-h-screen h-full bg-white p-5 pb-20 lg:flex lg:justify-center lg:items-center lg:flex-col">
+        <div className="lg:w-[60vw]">
+          <div className="w-full flex justify-center relative">
+            <MdArrowBackIos className='text-2xl top-[17px] left-0 cursor-pointer absolute text-black' onClick={() => {router.push("/tab")} } />
+            
+            <Image 
+              src={"https://storage.googleapis.com/videos-grupo-fera/static/logos/logo.webp"} 
+              alt={""}
+              width={70}
+              height={1160}          
+            />  
+            
           </div>
-        </div>
+          
+          <Image
+            quality={100}
+            priority={true}
+            className="rounded-md mt-5"
+            src={carOffer && carOffer.imgSrc}
+            alt={""}
+            width={1920}
+            height={1}
+          ></Image>
 
-        <div className="fixed left-0 bottom-0 w-full flex justify-between p-5 h-20 bg-white">
-          <h1 className="xs:text-lg font-bold text-black dark:text-black flex items-center xxs:text-sm">{carOffer && carOffer.price}</h1>
-          <button className="rounded-full xxs:text-[0.6rem] bg-blue-600 font-bold text-white xs:text-sm xs:py-[0.3rem] xs:px-[0.5rem] xxs:px-[0.5rem]" onClick={()=>{handleContact()}}>Comece uma negociação</button>
-        </div>
+          {!carOffer ? null : 
+            <Accordion type="single" collapsible className="xs:mt-8 xxs:mt-5">
+              <AccordionItem value="item-1">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>{carOffer && carOffer.title}</CardTitle>
+                    <CardDescription className="flex items-center">
+                      <IconInformationRegular size={14} className="mr-1"/>
+                      Informações sobre o veículo
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <AccordionTrigger>Especificações</AccordionTrigger> 
+                
+                  <AccordionContent>
+                    {
+                      <span className='text-[1rem] text-black whitespace-pre-wrap break-words'>
+                        {carOffer && carOffer.texto!}
+                      </span>
+                    }
+                  </AccordionContent>
+                  </CardContent>
+                </Card>
+              </AccordionItem>
+            </Accordion>
+          }
 
-        <ToastContainer
-          position="top-center"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-        />
-      
+          <div className="xs:mt-8 xxs:mt-5">
+            <div className="flex overflow-x-scroll gap-3">
+              {carOffer && carOffer.secondaryImgs.map((carro: any, index: any)=>{
+                return <div
+                  className="
+                    relative
+                  "
+                  key={carro.id}
+                >
+                  {/* <Badge color="warning" size="sm">Dolphin Day!</Badge> */}
+                  <ModalImage
+                    className="
+                    xxs:w-[202px] xxs:h-[117px] xs:w-[232px] xs:h-[147px]  xs:min-w-[232px] xs:min-h-[147px] xxs:min-w-[202px] xxs:min-h-[117px] rounded-lg mb-2 bg-cover
+                    "
+                    small={carro.imgSrc!}
+                    large={carro.imgSrc!}
+                  />
+                
+                </div>
+              })}
+            </div>
+          </div>
+
+          <div className="fixed left-0 bottom-0 w-full flex justify-between p-5 h-20 bg-white">
+            <h1 className="xs:text-lg font-bold text-black dark:text-black flex items-center xxs:text-sm">{carOffer && carOffer.price}</h1>
+            <button className="rounded-full xxs:text-[0.6rem] bg-blue-600 font-bold text-white xs:text-sm xs:py-[0.3rem] xs:px-[0.5rem] xxs:px-[0.5rem]" onClick={()=>{handleContact()}}>Comece uma negociação</button>
+          </div>
+
+          <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
+        </div>
       </div>
   )   
 }

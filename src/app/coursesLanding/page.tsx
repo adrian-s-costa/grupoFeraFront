@@ -15,6 +15,9 @@ export default function CoursesLandpage() {
   const [loading, setLoading] = useState<boolean>(true);
   const [user, setUser] = useState<any>();
   const link = useRef<any>(null);
+  const [viewportWidth, setViewportWidth] = useState<number>(0);
+
+  
 
   const notify = (text: string) => toast.error(text , {
     position: "bottom-right",
@@ -40,6 +43,20 @@ export default function CoursesLandpage() {
       console.error(err)
     })
   }, [userMail])
+
+  useEffect(() => {
+    const handleResize = () => {
+      setViewportWidth(window.innerWidth);
+    };
+
+    setViewportWidth(window.innerWidth);
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []); 
   
   useEffect(()=>{
     fetch(config.API_URL + "/process_payment/preference", {
@@ -87,25 +104,30 @@ export default function CoursesLandpage() {
 
   return (<>
     { loading || typeof window == "undefined" || !user || !response ? <Loader/> : null }
-    <div className="w-full min-h-screen bg-white text-black dark:text-black xxs:mb-0  relative">
+    <div className="w-full min-h-screen bg-white text-black dark:text-black xxs:mb-0 relative">
         <Image 
           quality={100}
-          src={"https://res.cloudinary.com/dmo7nzytn/image/upload/v1730779961/Pa%CC%81gina_curso_Fera_1_g9bxub.png"}
-          className="w-full h-screen z-0 absolute pb-[50px]"
+          src={ 
+            viewportWidth > 1024 
+            ? "https://storage.googleapis.com/videos-grupo-fera/images/Novo%20Projeto%20(1).png"
+            : "https://res.cloudinary.com/dmo7nzytn/image/upload/v1730779961/Pa%CC%81gina_curso_Fera_1_g9bxub.png"
+          }
+          className="w-full h-screen z-0 absolute pb-[50px] lg:pb-0 bg-cover bg-center"
           alt={""}
-          width={500}
-          height={900} 
+          width={1920}
+          height={1080}
           priority
           >
         </Image>
-        <div className="w-full flex justify-center z-10 absolute bottom-10">
-          <div className="w-full flex flex-col items-center">
-            <p className="w-[270px] text-[24px] font-bold text-white text-center">Dominando o Mercado de Carros Híbridos</p>
-            <p className="w-[240px] text-[16px] font-medium text-gray-400 text-center mt-3">Conhecendo a Tecnologia Híbrida para uma Venda Eficaz</p>
+        <div className="w-full flex justify-center z-10 absolute bottom-10 lg:bottom-[33%]">
+          <div className="bg-black/40 backdrop-blur-sm p-8 rounded-xl max-w-md text-white shadow-lg">
 
-            <button className= {`font-bold text-white bg-[#04377B] px-[32px] py-[12px] w-[234px] rounded-[30px] mt-[47px] ${user && user.lastPaymentStaus == "approved" ? "mb-[75px]" : ""}`} onClick={()=>{redirectLogic(userMail)}}>Já tenho acesso!</button>
-
-            <a href={response && response.init_point} ref={link} className={`w-[240px] text-[16px] font-medium text-white text-center mt-3 mb-[47px] ${user && user.lastPaymentStaus == "approved" ? "hidden" : ""}`}>Quer adquirir? <b className="text-[#EB4335]">Clique aqui!</b></a>
+            <div className="w-full flex flex-col items-center">
+              <p className="w-[270px] text-[24px] font-bold text-white text-center">Dominando o Mercado de Carros Híbridos</p>
+              <p className="w-[240px] text-[16px] font-medium text-gray-400 text-center mt-3">Conhecendo a Tecnologia Híbrida para uma Venda Eficaz</p>
+              <button className= {`font-bold text-white bg-[#04377B] px-[32px] py-[12px] w-[234px] rounded-[30px] mt-[47px] ${user && user.lastPaymentStaus == "approved" ? "mb-[75px]" : ""}`} onClick={()=>{redirectLogic(userMail)}}>Já tenho acesso!</button>
+              <a href={response && response.init_point} ref={link} className={`w-[240px] text-[16px] font-medium text-white text-center mt-3 mb-[47px] ${user && user.lastPaymentStaus == "approved" ? "hidden" : ""}`}>Quer adquirir? <b className="text-[#EB4335]">Clique aqui!</b></a>
+            </div>
           </div>
         </div>
         <ToastContainer

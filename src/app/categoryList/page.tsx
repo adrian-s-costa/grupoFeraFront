@@ -29,7 +29,8 @@ export default function SpecificOffer(){
 
   return (
       
-      <div className="w-full min-h-screen h-full bg-white p-5 pb-20">
+      <div className="w-full min-h-screen h-full bg-white p-5 pb-20 lg:flex lg:justify-center">
+        <div className="lg:w-[60vw] rounded-xl border-black border-2 p-5">
         <div className="w-full flex justify-center relative">
           <MdArrowBackIos className='text-2xl left-0 cursor-pointer absolute text-black' onClick={() => {router.push("/tab")} } />
           <h1 className="xs:text-xl xxs:text-md font-bold text-black dark:text-black">{name}</h1>          
@@ -37,7 +38,7 @@ export default function SpecificOffer(){
 
         <div className="flex flex-col pt-5 gap-5">
           {carOffer && carOffer.map((carro: any, index: any)=>{
-            return <div className="flex items-center" onClick={()=>{router.push(`/category?id=${carro.id}`)}} key={index}>
+            return <div className="flex items-center lg:cursor-pointer lg:hover:bg-slate-200 lg:p-2 lg:hover:duration-300 lg:rounded-md lg:mb-1" onClick={()=>{router.push(`/category?id=${carro.id}`)}} key={index}>
               <Image quality={100} priority={true} className="xxs:w-[126px] xxs:h-[81px] xs:w-[126px] xs:h-[81px] xs:min-w-[126px] xs:min-h-[81px] xxs:min-w-[126px] xxs:min-h-[81px] rounded-lg bg-cover" src={carro.imgSrc!} alt={""} width={126} height={81}/>
               <div className="flex flex-col ml-4">
                 <span className="text-black font-semibold text-[1rem]">{carro.title}</span>
@@ -46,6 +47,7 @@ export default function SpecificOffer(){
             </div>
           })}
         </div>  
+        </div>
       </div>
   )   
 }
