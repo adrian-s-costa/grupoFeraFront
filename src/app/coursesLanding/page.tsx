@@ -120,7 +120,7 @@ export default function CoursesLandpage() {
           >
         </Image>
         <div className="w-full flex justify-center z-10 absolute bottom-10 lg:bottom-[33%]">
-          <div className="bg-black/40 backdrop-blur-sm p-8 rounded-xl max-w-md text-white shadow-lg">
+          <div className=" lg:bg-black/40 lg:backdrop-blur-sm lg:p-8 lg:rounded-xl ls:max-w-md lg:text-white lg:shadow-lg">
 
             <div className="w-full flex flex-col items-center">
               <p className="w-[270px] text-[24px] font-bold text-white text-center">Dominando o Mercado de Carros Híbridos</p>
