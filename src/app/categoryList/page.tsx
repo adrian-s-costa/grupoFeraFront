@@ -30,7 +30,7 @@ export default function SpecificOffer(){
   return (
       
       <div className="w-full min-h-screen h-full bg-white p-5 pb-20 lg:flex lg:justify-center">
-        <div className="lg:w-[60vw] rounded-xl border-black border-2 p-5">
+        <div className="lg:w-[60vw] lg:rounded-xl lg:border-black lg:border-2 lg:p-5">
         <div className="w-full flex justify-center relative">
           <MdArrowBackIos className='text-2xl left-0 cursor-pointer absolute text-black' onClick={() => {router.push("/tab")} } />
           <h1 className="xs:text-xl xxs:text-md font-bold text-black dark:text-black">{name}</h1>          
