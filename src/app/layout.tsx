@@ -4,6 +4,7 @@
   import Pwa from "@/components/ui/ServiceWorkerRegister";
   import { ThemeContextProvider } from '@telefonica/mistica';
   import { theme } from "../style/theme"
+  import { GoogleOAuthProvider } from '@react-oauth/google';
 
   const inter = Inter({ subsets: ["latin"] });
   const mont = Montserrat({ subsets: ["latin"] });
@@ -65,6 +66,7 @@
     return (
       <html lang="pt-br" className="touch-pan-y">
         <ThemeContextProvider theme={theme}>
+        <GoogleOAuthProvider clientId="298281998851-srot2ljcl61gn4bnsja7g1850dr05v9g.apps.googleusercontent.com">
           <body className={inter.className}>{children}
             <script src="https://sdk.mercadopago.com/js/v2" async/>
             <script src="https://player.pandavideo.com.br/api.v2.js" async />
@@ -74,6 +76,7 @@
             <link rel="apple-touch-icon" href="/icons/icon-192.png"></link>
             <Pwa />
           </body>
+        </GoogleOAuthProvider>
         </ThemeContextProvider>
       </html>
     );

@@ -8,6 +8,8 @@ import { useRouter } from 'next/navigation';
 import PasswordInput from '../_components/passwordInput/passInput';
 import { config } from '../../../config';
 import Loader from '../loader/page';
+import { GoogleLogin } from '@react-oauth/google';
+import { register } from 'node:module';
 
 export default function Login(){
 
@@ -76,6 +78,29 @@ export default function Login(){
       console.error('Error logging in:', error);
     }
   };
+
+  const postUserGoogle = async (response: any) => {
+    if (!response.ok) {
+      setLoading(false);
+      const teste = await response.json()
+      notify(teste.error)
+      throw new Error('Failed to log in');
+    }
+
+    const userData = await response.json();
+
+    localStorage.setItem('user', userData.account.name)
+    localStorage.setItem('token', userData.token)
+    localStorage.setItem('id', userData.account.id)
+    localStorage.setItem('email', userData.account.email)
+    localStorage.setItem('number', userData.account.cellphone)
+    localStorage.setItem('cep', userData.account.cep)
+    localStorage.setItem('pfpUrl', userData.account.pfpUrl)
+
+    setUserData(userData);
+    setLoading(false);
+    router.push(userData.account.name == "Sem Nome" ? '/user-info' : '/tab')
+  }
   
   const sendEmailCode = async (e: any) => {
     setLoading(true)
@@ -138,6 +163,25 @@ export default function Login(){
       console.error('Error logging in:', error);
     }
   };
+
+  const sendEmailCodeGoogle = async (response: any) => {
+    setLoading(true)
+
+    if (!response.ok) {
+      setLoading(false);
+      const teste = await response.json()
+      notify(teste.error)
+      throw new Error('Failed to log in');
+    }
+
+    const userData = await response.json();
+
+    console.log(userData)
+
+    setUserData(userData);
+    setLoading(false);
+    router.push(`/code?email=${userData.email}`)
+  };
   
   return (
     <>{ loading || typeof window == "undefined" ? <Loader/> : null }<div className="w-full lg:flex lg:flex-col lg:justify-center lg:items-center h-screen bg-white p-5 ">
@@ -159,7 +203,21 @@ export default function Login(){
           <div className='w-full flex justify-end'>
             <span className="pt-2 text-sm cursor-pointer font-medium text-black dark:text-black" onClick={() => { forgotPassword(); } }>Esqueceu a senha?</span>
           </div>
-          <button type="submit" className="text-white mt-5 h-10 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Entrar</button>
+          <button type="submit" className="text-white mt-5 mb-5 h-10 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Entrar</button>
+          <GoogleLogin
+            text='signup_with'
+            onSuccess={ async (credentialResponse) => {
+              const response = await fetch(`${config.API_URL}/auth/google`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ credential: credentialResponse.credential, register: true }),
+              });
+              postUserGoogle(response)
+            }}
+            onError={() => {
+              console.log('Login Failed');
+            }}
+          />
         </form>
       ) : (
         <form onSubmit={(e) => { sendEmailCode(e); } }>
@@ -169,7 +227,21 @@ export default function Login(){
               <input type="mail" id="email" onChange={(event) => { setRegisterInfo({ ...registerInfo, credential: event.target.value }); setLoginInfo({ ...loginInfo, credential: event.target.value }); } } className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Digite seu email" required />
             </div>
           </div>
-          <button type="submit" className="text-white mt-5 h-10 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Registrar</button>
+          <button type="submit" className="text-white mt-5 mb-5 h-10 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Registrar</button>
+          <GoogleLogin
+            text='signup_with'
+            onSuccess={ async (credentialResponse) => {
+              const response = await fetch(`${config.API_URL}/auth/forgot-google`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ credential: credentialResponse.credential, register: true }),
+              });
+              sendEmailCodeGoogle(response)
+            }}
+            onError={() => {
+              console.log('Login Failed');
+            }}
+          />
         </form>
       )}
 
