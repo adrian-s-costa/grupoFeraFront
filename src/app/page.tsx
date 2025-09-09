@@ -15,9 +15,9 @@ export default function Carousel() {
 
   const localStorageLength = typeof window !== "undefined" ? window.localStorage.length : 0
 
-  if(localStorageLength > 0){
-    router.push('/tab');
-  }
+  // if(localStorageLength > 0){
+  //   router.push('/tab');
+  // }
 
   const handleChange = () =>{
     if (counter < 2 ) setCounter(counter + 1)
@@ -43,7 +43,7 @@ export default function Carousel() {
   
   return (
     <div className="w-full min-h-screen h-auto">
-      <iframe src="https://d2h8ge3gfrwdyi.cloudfront.net/" className="w-full h-full" />
+      <iframe src="https://d2h8ge3gfrwdyi.cloudfront.net/" className="w-full min-h-screen h-auto" />
     </div>
 
     // <div className="h-screen w-full bg-[#202226] relative">
