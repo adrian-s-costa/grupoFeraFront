@@ -2,7 +2,7 @@ import nextPwa from "next-pwa";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-   eslint: {
+  eslint: {
     ignoreDuringBuilds: true,
   },
   experimental: {
@@ -31,6 +31,21 @@ const nextConfig = {
         hostname: "storage.googleapis.com",
       },
     ],
+  },
+
+  async redirects() {
+    return [
+      {
+        source: "/" ,
+        destination: "https://d2h8ge3gfrwdyi.cloudfront.net/",
+        permanent: true,
+      },
+      {
+        source: "/tab" ,
+        destination: "https://d2h8ge3gfrwdyi.cloudfront.net/",
+        permanent: true,
+      },
+    ];
   },
 };
 
