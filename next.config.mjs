@@ -32,21 +32,6 @@ const nextConfig = {
       },
     ],
   },
-
-  async redirects() {
-    return [
-      {
-        source: "/" ,
-        destination: "https://d2h8ge3gfrwdyi.cloudfront.net/",
-        permanent: true,
-      },
-      {
-        source: "/tab" ,
-        destination: "https://d2h8ge3gfrwdyi.cloudfront.net/",
-        permanent: true,
-      },
-    ];
-  },
 };
 
 const withPWA = nextPwa({
