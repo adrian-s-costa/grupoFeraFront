@@ -106,6 +106,12 @@ export default function Home({setTabIndex, muted}: any){
       
       <div className="xs:mt-4 xxs:mt-2">
         <h1 className="xxs:text-sm xs:text-lg font-bold mb-4">Compre seu VE</h1>
+          <a
+            className="font-medium text-[#1091b2] hover:text-[#5f94b2]"
+            href={'https://d2h8ge3gfrwdyi.cloudfront.net/'}
+          >
+            Download
+          </a>
         <div className="flex overflow-x-scroll gap-3">
           {campaigns && campaigns
           // .filter((carro: any) => carro.uf.includes(uf))

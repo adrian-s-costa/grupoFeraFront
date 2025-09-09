@@ -49,7 +49,7 @@ export default function Video({ params }: { params: { id: string } }) {
 
   const handleReplyClick = (id: any) => {
     if (activeCommentId === id) {
-      setActiveCommentId(null); // Fechar se já estiver aberto
+      setActiveCommentId(null);
     } else {
       setActiveCommentId(id);
     }
