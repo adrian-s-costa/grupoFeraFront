@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 export default function Profile (){
 
   const [log, setLog] = useState<string | null>(null);
+  const cpf = typeof window !== "undefined" ? window.localStorage.getItem("cpf") : false;
 
   useEffect(()=>{
 
@@ -134,7 +135,7 @@ export default function Profile (){
           'Content-Type': 'application/json',
           "ngrok-skip-browser-warning": "69420"
         },
-        body: JSON.stringify({ credential: userMail })
+        body: JSON.stringify({ credential: userMail, initials: cpf})
       });
   
       if (!response.ok) {

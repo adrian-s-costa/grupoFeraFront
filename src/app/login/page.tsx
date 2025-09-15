@@ -70,6 +70,8 @@ export default function Login(){
       localStorage.setItem('pfpUrl', userData.account.pfpUrl)
       localStorage.setItem('toke_alloyal', userData)
       localStorage.setItem('pfpUrl', userData.account.pfpUrl)
+      localStorage.setItem('cpf', userData.account.initials)
+      localStorage.setItem('smartToken', userData.account.smart_token)
 
       setUserData(userData);
       setLoading(false);
