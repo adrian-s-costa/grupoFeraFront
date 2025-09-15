@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { LuAirplay } from "react-icons/lu";
 import { IoPersonOutline, IoPerson } from "react-icons/io5";
 import { RiHome5Fill, RiHome5Line, RiGraduationCapFill, RiGraduationCapLine } from "react-icons/ri";
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { useSearchParams } from 'next/navigation';
 import { PiAirplayFill } from "react-icons/pi";
 import LogoLoading from "../_components/logoLoading/logoLoading";
@@ -26,11 +26,12 @@ export default function HomeTab() {
   const [muted, setMuted] = useState<boolean | null>(null);
   const [logo, setLogo] = useState<boolean>(false);
   const [tabIndex, setTabIndex] = useState<number>(0);
-  
-  const smartToken = typeof window !== "undefined" ? window.localStorage.getItem("smartToken") : false;
+  const [smartToken, setsmartToken] = useState<string | false | null>('');
 
   useEffect(() => {
     const storedPage = typeof window !== "undefined" ? localStorage.getItem("page") : "0";
+    const smartToken = typeof window !== "undefined" ? window.localStorage.getItem("smartToken") : false;
+    setsmartToken(smartToken)
     setTabIndex(Number(storedPage));
   }, []);
 
