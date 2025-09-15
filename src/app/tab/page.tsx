@@ -18,6 +18,7 @@ const Home = dynamic(() => import("../home/page"), { ssr: false });
 const Streaming = dynamic(() => import("../streaming/page"), { ssr: false });
 const CoursesLandpage = dynamic(() => import("../coursesLanding/page"), { ssr: false });
 const Profile = dynamic(() => import("../profile/page"), { ssr: false });
+const Alloyal = dynamic(() => import("../alloyal/page"), { ssr: false });
 
 export default function HomeTab() {
   const searchParams = useSearchParams();
@@ -25,6 +26,8 @@ export default function HomeTab() {
   const [muted, setMuted] = useState<boolean | null>(null);
   const [logo, setLogo] = useState<boolean>(false);
   const [tabIndex, setTabIndex] = useState<number>(0);
+  
+  const smartToken = typeof window !== "undefined" ? window.localStorage.getItem("smartToken") : false;
 
   useEffect(() => {
     const storedPage = typeof window !== "undefined" ? localStorage.getItem("page") : "0";
@@ -58,6 +61,9 @@ export default function HomeTab() {
           </TabPanel>
           <TabPanel>
             <Profile />
+          </TabPanel>
+          <TabPanel>
+            <Alloyal token={smartToken}/>
           </TabPanel>
         </TabPanels>
 

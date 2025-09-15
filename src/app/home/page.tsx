@@ -65,11 +65,11 @@ export default function Home({setTabIndex, muted}: any){
         </div>
 
         <Image 
-          src={"https://storage.googleapis.com/videos-grupo-fera/static/logos/logo.webp"}
-          className="xxs:w-[5rem] xs:w-[7rem]"
+          src={"https://res.cloudinary.com/dmo7nzytn/image/upload/v1757886696/Logo_Horizontal_164x48_-_A_AGENCIA_logo_rvbbq5.svg"}
+          className="xxs:w-[3rem] xs:w-[5rem]"
           alt={""}
-          width={242}
-          height={256}          
+          width={200}
+          height={214}          
         />
       </div>
 

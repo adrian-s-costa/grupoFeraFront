@@ -8,12 +8,14 @@ import { RiGraduationCapFill, RiGraduationCapLine, RiHome5Fill, RiHome5Line } fr
 import { PiAirplayFill } from "react-icons/pi";
 import { LuAirplay } from "react-icons/lu";
 import { IoPerson, IoPersonOutline } from "react-icons/io5";
+import Draggable from "react-draggable";
 
 export type IconProps = React.HTMLAttributes<SVGElement>;
 
 export function DockDemo({ tabIndex }: any) {
   return (
-    <div className="fixed w-full z-20 bottom-5">
+    <Draggable>
+    <div className={`fixed w-full z-20 ${tabIndex === 4 ? 'bottom-20' : 'bottom-5'}`}>
       <Dock direction="middle" className="bg-white">
         <DockIcon>
             <Tab className="flex flex-col">
@@ -56,7 +58,19 @@ export function DockDemo({ tabIndex }: any) {
             <p className="text-black text-[0.5rem]"> PERFIL </p>
           </Tab>
         </DockIcon>
+        <DockIcon>
+          <Tab className="flex flex-col">
+                {
+                    tabIndex === 4 ? 
+                        <IoPerson className="text-2xl text-black" /> 
+                        :
+                        <IoPersonOutline className="text-2xl text-black" />
+                }
+            <p className="text-black text-[0.5rem]"> CLUBE </p>
+          </Tab>
+        </DockIcon>
       </Dock>
     </div>
+    </Draggable>
   );
 }

@@ -36,6 +36,7 @@ export default function UserInfo(){
       tel: localStorage.getItem("number"),
       bornDate: localStorage.getItem("bornDate"),
       cep: localStorage.getItem("cep"),
+      initials: localStorage.getItem("cpf"),
     })
 
     setUrl(localStorage.getItem('pfpUrl'))
@@ -236,6 +237,7 @@ export default function UserInfo(){
       localStorage.setItem('localidade', newUser.localidade);
       localStorage.setItem('uf', newUser.uf);
       localStorage.setItem('pfpUrl', newUser.pfpUrl);
+      localStorage.setItem('smartToken', newUser.smart_token);
 
       notify2();
 

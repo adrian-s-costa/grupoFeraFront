@@ -9,7 +9,6 @@ import PasswordInput from '../_components/passwordInput/passInput';
 import { config } from '../../../config';
 import Loader from '../loader/page';
 import { GoogleLogin } from '@react-oauth/google';
-import { register } from 'node:module';
 
 export default function Login(){
 
@@ -52,7 +51,7 @@ export default function Login(){
         },
         body: JSON.stringify(loginInfo)
       });
-  
+
       if (!response.ok) {
         setLoading(false);
         const teste = await response.json()
@@ -68,6 +67,8 @@ export default function Login(){
       localStorage.setItem('email', userData.account.email)
       localStorage.setItem('number', userData.account.cellphone)
       localStorage.setItem('cep', userData.account.cep)
+      localStorage.setItem('pfpUrl', userData.account.pfpUrl)
+      localStorage.setItem('toke_alloyal', userData)
       localStorage.setItem('pfpUrl', userData.account.pfpUrl)
 
       setUserData(userData);

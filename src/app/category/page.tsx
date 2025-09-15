@@ -84,7 +84,7 @@ export default function CategoryPage(){
           <MdArrowBackIos className='text-2xl left-0 top-[17px] cursor-pointer absolute text-black' onClick={() => {router.back()} } />
           
           <Image 
-            src={"https://storage.googleapis.com/videos-grupo-fera/static/logos/logo.webp"} 
+            src={"https://res.cloudinary.com/dmo7nzytn/image/upload/v1757886696/Logo_Horizontal_164x48_-_A_AGENCIA_logo_rvbbq5.svg"} 
             alt={""}
             width={70}
             height={1160}          
