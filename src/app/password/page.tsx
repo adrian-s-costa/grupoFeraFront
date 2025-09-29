@@ -175,7 +175,7 @@ export default function PinCode(){
       <div className='lg:w-96 lg:border-solid lg:border-[1px] lg:rounded-xl p-10 lg:border-gray-500 relative'>  
       <MdArrowBackIos className='text-2xl cursor-pointer absolute left-5 top-5' onClick={() => { router.back(); } } />
 
-      <h1 className="text-3xl font-bold mb-2 mt-[2.5rem] text-black dark:text-black">Criar uma senha</h1>
+      <h1 className="text-3xl font-bold mb-2 mt-[2.5rem] text-[#8609A3]">Criar uma senha</h1>
 
       <span className='text-sm text-[#838383]'>Para proteger melhor a segurança da sua conta, crie uma senha para {email}</span>
       <form onSubmit={(e) => { verifyPassword(e); } } className='mt-5'>
@@ -201,7 +201,7 @@ export default function PinCode(){
           </span>
         </div>
 
-        <button type="submit" className="text-white mt-5 h-10 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Entrar</button>
+        <button type="submit" className="text-white mt-5 h-10 bg-[#8609A3] focus:outline-none font-medium rounded-sm text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Entrar</button>
       </form>
 
       <ToastContainer
