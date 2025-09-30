@@ -93,6 +93,8 @@ export default function Login(){
 
     const userData = await response.json();
 
+    console.log(userData);
+
     localStorage.setItem('user', userData.account.name)
     localStorage.setItem('token', userData.token)
     localStorage.setItem('id', userData.account.id)
