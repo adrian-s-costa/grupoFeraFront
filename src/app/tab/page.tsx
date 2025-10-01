@@ -12,6 +12,8 @@ import LogoLoading from "../_components/logoLoading/logoLoading";
 import { ThemeContextProvider } from "@telefonica/mistica";
 import { theme } from "@/style/theme";
 import { DockDemo } from "../_components/dock/dock";
+import { config } from "../../../config";
+import { AnimatePresence, motion } from "framer-motion";
 
 // Carregamento dinâmico dos componentes
 const Home = dynamic(() => import("../home/page"), { ssr: false });
@@ -26,17 +28,16 @@ export default function HomeTab() {
   const [muted, setMuted] = useState<boolean | null>(null);
   const [logo, setLogo] = useState<boolean>(false);
   const [tabIndex, setTabIndex] = useState<number>(0);
-  const [smartToken, setsmartToken] = useState<string | false | null>('');
+  const [prevIndex, setPrevIndex] = useState<number>(0);
 
   useEffect(() => {
     const storedPage = typeof window !== "undefined" ? localStorage.getItem("page") : "0";
-    const smartToken = typeof window !== "undefined" ? window.localStorage.getItem("smartToken") : false;
-    setsmartToken(smartToken)
     setTabIndex(Number(storedPage));
   }, []);
 
   const handleTabsChange = (index: number) => {
     localStorage.setItem("page", index.toString());
+    setPrevIndex(tabIndex);
     setTabIndex(index);
     setMuted(true);
     if (index === 1) {
@@ -47,26 +48,46 @@ export default function HomeTab() {
     }
   };
 
+  const direction = tabIndex - prevIndex;
+
+  const renderPanel = () => {
+    if (tabIndex === 0) return <Home setTabIndex={setTabIndex} muted={muted} />;
+    if (tabIndex === 1) return (
+      <div className="min-h-screen">
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={logo ? 'logo' : 'stream'}
+            initial={{ opacity: 0, y: 12, scale: 0.99 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -12, scale: 0.99 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+          >
+            {logo ? <LogoLoading /> : <Streaming setTabIndex={setTabIndex} />}
+          </motion.div>
+        </AnimatePresence>
+      </div>
+    );
+    if (tabIndex === 2) return <CoursesLandpage />;
+    if (tabIndex === 3) return <Profile />;
+    return <Alloyal setTabIndex={setTabIndex}/>;
+  };
+
   return (
     <ThemeContextProvider theme={theme}>
       <Tabs index={tabIndex} onChange={handleTabsChange} className="relative">
-        <TabPanels>
-          <TabPanel>
-            <Home setTabIndex={setTabIndex} muted={muted} />
-          </TabPanel>
-          <TabPanel>
-            {logo ? <LogoLoading /> : <Streaming setTabIndex={setTabIndex} />}
-          </TabPanel>
-          <TabPanel>
-            <CoursesLandpage />
-          </TabPanel>
-          <TabPanel>
-            <Profile />
-          </TabPanel>
-          <TabPanel>
-            <Alloyal token={smartToken}/>
-          </TabPanel>
-        </TabPanels>
+        <div className="min-h-screen">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={`tab-${tabIndex}`}
+              initial={{ opacity: 0, x: direction >= 0 ? 40 : -40, scale: 0.98 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              exit={{ opacity: 0, x: direction >= 0 ? -40 : 40, scale: 0.98 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+            >
+              {renderPanel()}
+            </motion.div>
+          </AnimatePresence>
+        </div>
 
         <DockDemo tabIndex={tabIndex}/>
       </Tabs>

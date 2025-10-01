@@ -61,7 +61,7 @@ export default function Home({setTabIndex, muted}: any){
       <div className="flex justify-between">
         <div className="flex flex-col justify-center">
           <h1 className="xs:text-3xl xxs:text-2xl font-bold ">Fala, {!fullName ? '' : firstName}!</h1>
-          <span className="xxs:text-sm xs:text-base">ou devo te chamar de Fera?</span>
+          <span className="xxs:text-sm xs:text-base">tá no éppi, já sabe: tá no lucro!</span>
         </div>
 
         <Image 

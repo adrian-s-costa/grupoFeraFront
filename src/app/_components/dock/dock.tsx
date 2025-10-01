@@ -14,7 +14,7 @@ export type IconProps = React.HTMLAttributes<SVGElement>;
 
 export function DockDemo({ tabIndex }: any) {
   return (
-    <div className={`fixed w-full z-20 ${tabIndex === 4 ? 'bottom-20' : 'bottom-5'}`}>
+    <div className={`fixed w-full z-20 bottom-5`}>
       <Dock direction="middle" className="bg-white">
         <DockIcon>
             <Tab className="flex flex-col">

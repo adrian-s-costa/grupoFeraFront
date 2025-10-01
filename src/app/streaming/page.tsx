@@ -28,9 +28,6 @@ export default function Streaming({setTabIndex}: any){
   const hasAcessToCourses = typeof window !== "undefined" ? window.localStorage.getItem("hasAcess") : false; 
   const pfpUrl = typeof window !== "undefined" ? window.localStorage.getItem("pfpUrl") : false;
 
-  console.log(pfpUrl)
-
-
   const changeState = (n: number) => {
     return setSearchBarState( searchBarState * -1);
   }
